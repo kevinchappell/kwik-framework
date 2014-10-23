@@ -1,0 +1,5307 @@
+{
+ "items": [
+  {
+   "family": "Open Sans",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "600",
+    "600italic",
+    "700",
+    "700italic",
+    "800",
+    "800italic"
+   ]
+  },
+  {
+   "family": "Roboto",
+   "category": "sans-serif",
+   "variants": [
+    "100",
+    "100italic",
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "500",
+    "500italic",
+    "700",
+    "700italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Oswald",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Lato",
+   "category": "sans-serif",
+   "variants": [
+    "100",
+    "100italic",
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "700",
+    "700italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "PT Sans",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Droid Sans",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Roboto Condensed",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Source Sans Pro",
+   "category": "sans-serif",
+   "variants": [
+    "200",
+    "200italic",
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "600",
+    "600italic",
+    "700",
+    "700italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Open Sans Condensed",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "300italic",
+    "700"
+   ]
+  },
+  {
+   "family": "Droid Serif",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Raleway",
+   "category": "sans-serif",
+   "variants": [
+    "100",
+    "200",
+    "300",
+    "regular",
+    "500",
+    "600",
+    "700",
+    "800",
+    "900"
+   ]
+  },
+  {
+   "family": "Ubuntu",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "500",
+    "500italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Montserrat",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "PT Sans Narrow",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Roboto Slab",
+   "category": "serif",
+   "variants": [
+    "100",
+    "300",
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Arimo",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Lora",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Bitter",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700"
+   ]
+  },
+  {
+   "family": "Yanone Kaffeesatz",
+   "category": "sans-serif",
+   "variants": [
+    "200",
+    "300",
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Arvo",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Merriweather",
+   "category": "serif",
+   "variants": [
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "700",
+    "700italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Lobster",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Titillium Web",
+   "category": "sans-serif",
+   "variants": [
+    "200",
+    "200italic",
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "600",
+    "600italic",
+    "700",
+    "700italic",
+    "900"
+   ]
+  },
+  {
+   "family": "Oxygen",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Dosis",
+   "category": "sans-serif",
+   "variants": [
+    "200",
+    "300",
+    "regular",
+    "500",
+    "600",
+    "700",
+    "800"
+   ]
+  },
+  {
+   "family": "Indie Flower",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Noto Sans",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "PT Serif",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Fjalla One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Francois One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Shadows Into Light",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cabin",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "500",
+    "500italic",
+    "600",
+    "600italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Inconsolata",
+   "category": "monospace",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Playfair Display",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Nunito",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Signika",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "600",
+    "700"
+   ]
+  },
+  {
+   "family": "Abel",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Muli",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "300italic",
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Play",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Bree Serif",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Vollkorn",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Ubuntu Condensed",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Archivo Narrow",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Poiret One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rokkitt",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Josefin Sans",
+   "category": "sans-serif",
+   "variants": [
+    "100",
+    "100italic",
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "600",
+    "600italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Cuprum",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Varela Round",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Libre Baskerville",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700"
+   ]
+  },
+  {
+   "family": "Maven Pro",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "500",
+    "700",
+    "900"
+   ]
+  },
+  {
+   "family": "Pacifico",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Anton",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Exo 2",
+   "category": "sans-serif",
+   "variants": [
+    "100",
+    "100italic",
+    "200",
+    "200italic",
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "500",
+    "500italic",
+    "600",
+    "600italic",
+    "700",
+    "700italic",
+    "800",
+    "800italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Asap",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "News Cycle",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Gloria Hallelujah",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Karla",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Noto Serif",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Merriweather Sans",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "700",
+    "700italic",
+    "800",
+    "800italic"
+   ]
+  },
+  {
+   "family": "Questrial",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Pathway Gothic One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Droid Sans Mono",
+   "category": "monospace",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "PT Sans Caption",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Hammersmith One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Dancing Script",
+   "category": "handwriting",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Quattrocento Sans",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Alegreya",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Exo",
+   "category": "sans-serif",
+   "variants": [
+    "100",
+    "100italic",
+    "200",
+    "200italic",
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "500",
+    "500italic",
+    "600",
+    "600italic",
+    "700",
+    "700italic",
+    "800",
+    "800italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Istok Web",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Monda",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Quicksand",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Ubuntu Mono",
+   "category": "monospace",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Armata",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Gudea",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700"
+   ]
+  },
+  {
+   "family": "Coming Soon",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Crimson Text",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "600",
+    "600italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Rambla",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Noticia Text",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Ropa Sans",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Nobile",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Changa One",
+   "category": "display",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Pontano Sans",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cabin Condensed",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "500",
+    "600",
+    "700"
+   ]
+  },
+  {
+   "family": "Marvel",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Playball",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Architects Daughter",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Crete Round",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Sanchez",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Squada One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Josefin Slab",
+   "category": "serif",
+   "variants": [
+    "100",
+    "100italic",
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "600",
+    "600italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Kreon",
+   "category": "serif",
+   "variants": [
+    "300",
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Lobster Two",
+   "category": "display",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Amatic SC",
+   "category": "handwriting",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Cantarell",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Orbitron",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "500",
+    "700",
+    "900"
+   ]
+  },
+  {
+   "family": "Righteous",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Patua One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rajdhani",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "500",
+    "600",
+    "700"
+   ]
+  },
+  {
+   "family": "BenchNine",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Philosopher",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Permanent Marker",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Old Standard TT",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700"
+   ]
+  },
+  {
+   "family": "Courgette",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "EB Garamond",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Comfortaa",
+   "category": "display",
+   "variants": [
+    "300",
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Source Code Pro",
+   "category": "monospace",
+   "variants": [
+    "200",
+    "300",
+    "regular",
+    "500",
+    "600",
+    "700",
+    "900"
+   ]
+  },
+  {
+   "family": "Paytone One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Shadows Into Light Two",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Crafty Girls",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rock Salt",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Tinos",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Chewy",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Black Ops One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Bevan",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Varela",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Passion One",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700",
+    "900"
+   ]
+  },
+  {
+   "family": "Didact Gothic",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Yellowtail",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Economica",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Covered By Your Grace",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Kotta One",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Amaranth",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Pinyon Script",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Voltaire",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Special Elite",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Domine",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Sintony",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Montserrat Alternates",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Glegoo",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Bangers",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Satisfy",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cardo",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700"
+   ]
+  },
+  {
+   "family": "Fredoka One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Antic Slab",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cinzel",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700",
+    "900"
+   ]
+  },
+  {
+   "family": "Luckiest Guy",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Enriqueta",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Nixie One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Vidaloka",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Actor",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Abril Fatface",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Sigmar One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Quattrocento",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Molengo",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Calligraffitti",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Handlee",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cookie",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Kaushan Script",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Reenie Beanie",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Patrick Hand",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Gentium Book Basic",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Sorts Mill Goudy",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Jura",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "500",
+    "600"
+   ]
+  },
+  {
+   "family": "Waiting for the Sunrise",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Scada",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Bubblegum Sans",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Carme",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Carrois Gothic",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cantata One",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Tangerine",
+   "category": "handwriting",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Homemade Apple",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Niconne",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Viga",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cherry Cream Soda",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Archivo Black",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Alegreya Sans",
+   "category": "sans-serif",
+   "variants": [
+    "100",
+    "100italic",
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "500",
+    "500italic",
+    "700",
+    "700italic",
+    "800",
+    "800italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Alfa Slab One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Walter Turncoat",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Allerta",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Signika Negative",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "600",
+    "700"
+   ]
+  },
+  {
+   "family": "Syncopate",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Neuton",
+   "category": "serif",
+   "variants": [
+    "200",
+    "300",
+    "regular",
+    "italic",
+    "700",
+    "800"
+   ]
+  },
+  {
+   "family": "Chivo",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Marck Script",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Spinnaker",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Playfair Display SC",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Russo One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Doppio One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Denk One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cutive",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Goudy Bookletter 1911",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Copse",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "ABeeZee",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Neucha",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Lusitana",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Audiowide",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Jockey One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Nothing You Could Do",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Gochi Hand",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Coda",
+   "category": "display",
+   "variants": [
+    "regular",
+    "800"
+   ]
+  },
+  {
+   "family": "Arapey",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Great Vibes",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Michroma",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Oleo Script",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Strait",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Damion",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Fugaz One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Kameron",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Marmelad",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Bad Script",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Coustard",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "900"
+   ]
+  },
+  {
+   "family": "Monoton",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Mako",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Telex",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Volkhov",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Slabo 27px",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Unkempt",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Slabo 13px",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Allerta Stencil",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Electrolize",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Share",
+   "category": "display",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Julius Sans One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Fauna One",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Ruda",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700",
+    "900"
+   ]
+  },
+  {
+   "family": "Candal",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "PT Serif Caption",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Sacramento",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Gentium Basic",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Rochester",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rancho",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Ultra",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Racing Sans One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rosario",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Radley",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Aldrich",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Six Caps",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Hind",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "500",
+    "600",
+    "700"
+   ]
+  },
+  {
+   "family": "Schoolbell",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Berkshire Swash",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Lemon",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Limelight",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Advent Pro",
+   "category": "sans-serif",
+   "variants": [
+    "100",
+    "200",
+    "300",
+    "regular",
+    "500",
+    "600",
+    "700"
+   ]
+  },
+  {
+   "family": "Overlock",
+   "category": "display",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Sansita One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Arbutus Slab",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Love Ya Like A Sister",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Trocchi",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Just Another Hand",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Nova Square",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Alegreya Sans SC",
+   "category": "sans-serif",
+   "variants": [
+    "100",
+    "100italic",
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "500",
+    "500italic",
+    "700",
+    "700italic",
+    "800",
+    "800italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Basic",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Convergence",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Fredericka the Great",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Just Me Again Down Here",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Lily Script One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Judson",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700"
+   ]
+  },
+  {
+   "family": "Prata",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Belleza",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Inder",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Alice",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cabin Sketch",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Slackey",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Days One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Tauri",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Forum",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Caudex",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Fontdiner Swanky",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Puritan",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "IM Fell English",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Acme",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Gruppo",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Fira Sans",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "500",
+    "500italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Alef",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "The Girl Next Door",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Duru Sans",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Homenaje",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Adamina",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Anaheim",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Average Sans",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Aclonica",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Alex Brush",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Frijole",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Boogaloo",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Englebert",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Orienta",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Tenor Sans",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Crushed",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Leckerli One",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Montez",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Parisienne",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Allura",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Brawler",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Alike",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Oranienbaum",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Imprima",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Magra",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Metrophobic",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Anonymous Pro",
+   "category": "monospace",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Cousine",
+   "category": "monospace",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Pompiere",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Merienda One",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Give You Glory",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Petit Formal Script",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Poller One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Ovo",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Lekton",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700"
+   ]
+  },
+  {
+   "family": "Kranky",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Fanwood Text",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Lustria",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Bentham",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Grand Hotel",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Gafata",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Andika",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Loved by the King",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Patrick Hand SC",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Marcellus SC",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Tienne",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700",
+    "900"
+   ]
+  },
+  {
+   "family": "Headland One",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Shanti",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Contrail One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "La Belle Aurore",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Podkova",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Alegreya SC",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Quando",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Yeseva One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Yesteryear",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Delius",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Andada",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Creepster",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Port Lligat Slab",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Average",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Lilita One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Quantico",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Capriola",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Allan",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Sue Ellen Francisco",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Wire One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Short Stack",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Annie Use Your Telescope",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "IM Fell DW Pica",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Iceland",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Kelly Slab",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Federo",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Mountains of Christmas",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Nosifer",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Gilda Display",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Ceviche One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Corben",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Swanky and Moo Moo",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Fenix",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Kristi",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Chelsea Market",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Marcellus",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Graduate",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Freckle Face",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "UnifrakturMaguntia",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Nova Mono",
+   "category": "monospace",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Merienda",
+   "category": "handwriting",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Delius Swash Caps",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Carter One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Antic",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Over the Rainbow",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Hanuman",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Kavoon",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Megrim",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Geo",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Share Tech",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Dawning of a New Day",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Salsa",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Coda Caption",
+   "category": "sans-serif",
+   "variants": [
+    "800"
+   ]
+  },
+  {
+   "family": "IM Fell DW Pica SC",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Metamorphous",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Poly",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Italianno",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Maiden Orange",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Sancreek",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Sniglet",
+   "category": "display",
+   "variants": [
+    "regular",
+    "800"
+   ]
+  },
+  {
+   "family": "Cinzel Decorative",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700",
+    "900"
+   ]
+  },
+  {
+   "family": "PT Mono",
+   "category": "monospace",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Bowlby One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Averia Sans Libre",
+   "category": "display",
+   "variants": [
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "GFS Didot",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Stardos Stencil",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "IM Fell English SC",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Oregano",
+   "category": "display",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Donegal One",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Arizonia",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Expletus Sans",
+   "category": "display",
+   "variants": [
+    "regular",
+    "italic",
+    "500",
+    "500italic",
+    "600",
+    "600italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Baumans",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Norican",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Bowlby One SC",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Unna",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Carrois Gothic SC",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rationale",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cedarville Cursive",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Concert One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Dorsa",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Miltonian Tattoo",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Vibur",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Mate SC",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Happy Monkey",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Codystar",
+   "category": "display",
+   "variants": [
+    "300",
+    "regular"
+   ]
+  },
+  {
+   "family": "Skranji",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Zeyada",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Chau Philomene One",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Prosto One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Sunshiney",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Press Start 2P",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Henny Penny",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "IM Fell French Canon",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Fjord One",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Voces",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Simonetta",
+   "category": "display",
+   "variants": [
+    "regular",
+    "italic",
+    "900",
+    "900italic"
+   ]
+  },
+  {
+   "family": "Mr De Haviland",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Meddon",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Holtwood One SC",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Wendy One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Redressed",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Tulpen One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Nova Round",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Qwigley",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Clicker Script",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Mouse Memoirs",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Delius Unicase",
+   "category": "handwriting",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "IM Fell Double Pica",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Ek Mukta",
+   "category": "sans-serif",
+   "variants": [
+    "200",
+    "300",
+    "regular",
+    "500",
+    "600",
+    "700",
+    "800"
+   ]
+  },
+  {
+   "family": "VT323",
+   "category": "monospace",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Shojumaru",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Belgrano",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Vast Shadow",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cambo",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Londrina Solid",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Numans",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rammetto One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Galindo",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Sofia",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cantora One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Wallpoet",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "IM Fell Great Primer SC",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Finger Paint",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Ruslan Display",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "UnifrakturCook",
+   "category": "display",
+   "variants": [
+    "700"
+   ]
+  },
+  {
+   "family": "MedievalSharp",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Mr Dafoe",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Spirax",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Buda",
+   "category": "display",
+   "variants": [
+    "300"
+   ]
+  },
+  {
+   "family": "IM Fell French Canon SC",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rufina",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Life Savers",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Quintessential",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Artifika",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Unica One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Snippet",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Medula One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Amethysta",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Gravitas One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Linden Hill",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Gabriela",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Buenard",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Oleo Script Swash Caps",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "IM Fell Great Primer",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Balthazar",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Sail",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Kite One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Nova Slim",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Alike Angular",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Sofadi One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Mystery Quest",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "League Script",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cutive Mono",
+   "category": "monospace",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Oldenburg",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Kalam",
+   "category": "handwriting",
+   "variants": [
+    "300",
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Mate",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Astloch",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Milonga",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Ledger",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Inika",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Euphoria Script",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rum Raisin",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Revalia",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Junge",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Julee",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Dynalight",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Prociono",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Monofett",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Bigshot One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "IM Fell Double Pica SC",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Geostar Fill",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Esteban",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Goblin One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Irish Grover",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Kenia",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Paprika",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Nova Script",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Engagement",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Seaweed Script",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Nova Flat",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Modern Antiqua",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Trade Winds",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Bilbo Swash Caps",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Jacques Francois",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cherry Swash",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Smythe",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Flamenco",
+   "category": "display",
+   "variants": [
+    "300",
+    "regular"
+   ]
+  },
+  {
+   "family": "Iceberg",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Stint Ultra Condensed",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Overlock SC",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Petrona",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Knewave",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Smokum",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Asset",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Nova Oval",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Stoke",
+   "category": "serif",
+   "variants": [
+    "300",
+    "regular"
+   ]
+  },
+  {
+   "family": "Aladin",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rosarivo",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Lancelot",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Passero One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Geostar",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Amarante",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Fondamento",
+   "category": "handwriting",
+   "variants": [
+    "regular",
+    "italic"
+   ]
+  },
+  {
+   "family": "Atomic Age",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Raleway Dots",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Khmer",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Aubrey",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Miltonian",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Port Lligat Sans",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rye",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Cagliostro",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Sonsie One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "GFS Neohellenic",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Federant",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rouge Script",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Bilbo",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Condiment",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Nova Cut",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Ruluko",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Supermercado One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Oxygen Mono",
+   "category": "monospace",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Miniver",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Snowburst One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Montaga",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Ranchers",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Galdeano",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Trochut",
+   "category": "display",
+   "variants": [
+    "regular",
+    "italic",
+    "700"
+   ]
+  },
+  {
+   "family": "Suwannaphum",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Text Me One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Titan One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Aguafina Script",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Devonshire",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Pirata One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Offside",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Lovers Quarrel",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Trykker",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Habibi",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Wellfleet",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Averia Libre",
+   "category": "display",
+   "variants": [
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Londrina Outline",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Share Tech Mono",
+   "category": "monospace",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Della Respira",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Akronim",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Averia Serif Libre",
+   "category": "display",
+   "variants": [
+    "300",
+    "300italic",
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Caesar Dressing",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Chela One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "McLaren",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Keania One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Krona One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Nokora",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Molle",
+   "category": "handwriting",
+   "variants": [
+    "italic"
+   ]
+  },
+  {
+   "family": "Stint Ultra Expanded",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Jolly Lodger",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Ruthie",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Jacques Francois Shadow",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Teko",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "500",
+    "600",
+    "700"
+   ]
+  },
+  {
+   "family": "Ribeye Marrow",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Seymour One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Battambang",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Elsie Swash Caps",
+   "category": "display",
+   "variants": [
+    "regular",
+    "900"
+   ]
+  },
+  {
+   "family": "Fresca",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Antic Didone",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Griffy",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Autour One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Asul",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Herr Von Muellerhoff",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Chango",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Vampiro One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Montserrat Subrayada",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Mrs Saint Delafield",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Joti One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Spicy Rice",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Italiana",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Original Surfer",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Germania One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Angkor",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Glass Antiqua",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Peralta",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Stalemate",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Croissant One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Monsieur La Doulaise",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Piedra",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Londrina Shadow",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Freehand",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Sarina",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Marko One",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Eagle Lake",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Eater",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Emblema One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Miss Fajardose",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Romanesco",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Gorditas",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Odor Mean Chey",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Emilys Candy",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Almendra",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "italic",
+    "700",
+    "700italic"
+   ]
+  },
+  {
+   "family": "Ribeye",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Elsie",
+   "category": "display",
+   "variants": [
+    "regular",
+    "900"
+   ]
+  },
+  {
+   "family": "Mrs Sheppards",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Londrina Sketch",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Risque",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "New Rocker",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Ewert",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Mr Bedfort",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Combo",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Sevillana",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Purple Purse",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Sirin Stencil",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Moul",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Bigelow Rules",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Source Serif Pro",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "600",
+    "700"
+   ]
+  },
+  {
+   "family": "Bubbler One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Diplomata",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Content",
+   "category": "display",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Butterfly Kids",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Bokor",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Margarine",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Chicle",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Felipa",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Koulen",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Dr Sugiyama",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Siemreap",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Macondo Swash Caps",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Princess Sofia",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Meie Script",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Underdog",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Faster One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Averia Gruesa Libre",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Jim Nightshade",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Kdam Thmor",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Metal Mania",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Butcherman",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Sarpanch",
+   "category": "sans-serif",
+   "variants": [
+    "regular",
+    "500",
+    "600",
+    "700",
+    "800",
+    "900"
+   ]
+  },
+  {
+   "family": "Karma",
+   "category": "serif",
+   "variants": [
+    "300",
+    "regular",
+    "500",
+    "600",
+    "700"
+   ]
+  },
+  {
+   "family": "Fira Mono",
+   "category": "monospace",
+   "variants": [
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Dangrek",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Uncial Antiqua",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Fascinate",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Taprom",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Erica One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Bayon",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Unlock",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Stalinist One",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Arbutus",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Khand",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "500",
+    "600",
+    "700"
+   ]
+  },
+  {
+   "family": "Preahvihear",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Fasthand",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Metal",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Flavors",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Macondo",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Diplomata SC",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rubik One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Almendra SC",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Moulpali",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Ruge Boogie",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Bonbon",
+   "category": "handwriting",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Fascinate Inline",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Almendra Display",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Chenla",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Kantumruy",
+   "category": "sans-serif",
+   "variants": [
+    "300",
+    "regular",
+    "700"
+   ]
+  },
+  {
+   "family": "Halant",
+   "category": "serif",
+   "variants": [
+    "300",
+    "regular",
+    "500",
+    "600",
+    "700"
+   ]
+  },
+  {
+   "family": "Plaster",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Vesper Libre",
+   "category": "serif",
+   "variants": [
+    "regular",
+    "500",
+    "700",
+    "900"
+   ]
+  },
+  {
+   "family": "Hanalei",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Hanalei Fill",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Fruktur",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Laila",
+   "category": "serif",
+   "variants": [
+    "300",
+    "regular",
+    "500",
+    "600",
+    "700"
+   ]
+  },
+  {
+   "family": "Warnes",
+   "category": "display",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rubik Mono One",
+   "category": "sans-serif",
+   "variants": [
+    "regular"
+   ]
+  },
+  {
+   "family": "Rozha One",
+   "category": "serif",
+   "variants": [
+    "regular"
+   ]
+  }
+ ]
+}
