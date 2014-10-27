@@ -13,9 +13,11 @@
 if (!class_exists('KwikUtils')) {
 
   define( 'KF_BASENAME',  basename(dirname( __FILE__ )));
+  define( 'KF_FUNC',      preg_replace('/-/', '_', KF_BASENAME));
   define( 'KF_URL',       get_template_directory_uri()."/inc/".KF_BASENAME);
   define( 'KF_PATH',      untrailingslashit( dirname( __FILE__ ) ) );
   define( 'KF_CACHE',     trailingslashit( dirname( __FILE__ ) )."cache" );
+  define( 'KF_PREFIX',    'kf_' );
 
   foreach (glob(KF_PATH . "/inc/*.php") as $inc_filename) {
     include $inc_filename;
@@ -32,7 +34,9 @@ if (!class_exists('KwikUtils')) {
 	 * @since KwikFramework .1
 	 */
   function kf_admin_js_css($hook) {
-    wp_enqueue_script( 'kf_admin',  KF_URL . '/js/'.KF_BASENAME.'.js', array('jquery'), NULL, true );
+    wp_enqueue_style('kf_resource_css', KF_URL . '/css/' . KF_PREFIX . 'resource.css', false, '2014-10-28');
+    wp_enqueue_style('kf_admin_css', KF_URL . '/css/' . KF_PREFIX . 'admin.css', false, '2014-10-28');
+    wp_enqueue_script( 'kf_admin_js',  KF_URL . '/js/'.KF_PREFIX. 'admin.js', array('jquery'), NULL, true );
   }
   add_action( 'admin_enqueue_scripts', 'kf_admin_js_css');
 

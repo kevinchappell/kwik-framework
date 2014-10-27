@@ -19,7 +19,7 @@
 
     public function repeat() {
       $R = 'Repeat';
-      $r = 'repeat';
+      $r = strtolower($R);
       $repeat = array(
         'no-'.$r => 'No '.$R,
         $r => $R,
@@ -70,17 +70,22 @@
      * @param  [Object] $attrs Object with properties for field attributes
      * @return [String]        markup for desired input field
      */
-    private function input($attrs) {
+    public function input($attrs) {
       $output = '';
-      if($attrs->label) {
-        $output .= $this->markup('label', $attrs->label, (object) array( 'for' => $attrs->id));
-        unset($attrs->label);
+      if($attrs['label'] && !is_null($attrs['label'])) {
+        $output = $this->markup('label', $attrs['label'], array( 'for' => $attrs['id']));
+        unset($attrs['label']);
       }
       $output .= '<input ' . $this->attrs($attrs) . ' />';
+
+      if($attrs['type'] !== 'hidden' && !is_null($attrs['type'])){
+        $output = $this->markup('div', $output, array('class'=>KF_PREFIX.'field kf_'.$attrs['type'].'_wrap'));
+      }
       return $output;
     }
 
-    public function img($name, $val, $label) {
+
+    public function img($name, $val, $label, $attrs) { // TODO extend $attrs
 
       wp_enqueue_media();
       $output = '';
@@ -88,44 +93,73 @@
         $thumb = wp_get_attachment_image_src($val, 'thumbnail');
         $thumb = $thumb['0'];
       }
-      $attrs = (object) array(
+      $defaultAttrs = array(
         'type' => 'hidden',
         'name' => $name,
         'class' => 'img_id',
         'value' => $val,
         'id' => $this->makeID($name)
       );
+      $attrs = array_merge($defaultAttrs, $attrs);
 
       if($label) {
         $attrs->label = esc_attr($label);
       }
+
       $output .= $this->input($attrs);
-      $img_attrs = (object) array("class"=>"img_prev", "width"=>"23", "height"=>"23", "title"=>get_the_title($val));
+      $img_attrs = array("class"=>"img_prev", "width"=>"23", "height"=>"23", "title"=>get_the_title($val));
       $output .= $this->markup('img', NULL, $img_attrs);
-      $output .= '<span id="site_bg_img_ttl" class="img_title">' . get_the_title($val) . (!empty($val) ? '<span title="' . __('Remove Image', 'kwik') . '" class="clear_img tooltip"></span>' : '') . '</span><input type="button" class="upload_img" id="upload_img" value="+ ' . __('IMG', 'kwik') . '" />';
+      $output .= '<span class="img_title">' . get_the_title($val) . (!empty($val) ? '<span title="' . __('Remove Image', 'kwik') . '" class="clear_img tooltip"></span>' : '') . '</span><input type="button" class="upload_img" id="upload_img" value="+ ' . __('IMG', 'kwik') . '" />';
+      $output = $this->markup('div', $output, array('class'=>KF_PREFIX.'field kf_img_wrap'));
       return $output;
     }
 
-    public function text($name, $val, $label = NULL) {
+    public function text($name, $val, $label = NULL, $attrs = NULL) {
       $output = '';
-      $attrs = (object) array(
+      $defaultAttrs =   array(
         'type' => 'text',
         'name' => $name,
-        'class' => 'op_text',
+        'class' => KF_PREFIX.'text',
         'value' => $val,
-        'id' => $this->makeID($name)
+        'id' => $this->makeID($name),
+        'label' => esc_attr($label)
       );
-
-      if($label) {
-        $attrs->label = esc_attr($label);
+      if(!is_null($attrs)){
+        $attrs = array_merge($defaultAttrs, $attrs);
       }
 
       $output .= $this->input($attrs);
+
+      return $output;
+    }
+
+    public function link($name, $val, $label = NULL, $attrs = NULL) {
+      $output = '';
+
+      $defaultAttrs =   array(
+        'type' => 'text',
+        'name' => $name.'[url]',
+        'class' => KF_PREFIX.'link',
+        'value' => $val['url'],
+        'id' => $this->makeID($name)
+      );
+      if(!is_null($attrs)){
+        $attrs = array_merge($defaultAttrs, $attrs);
+      }
+
+      if($label) {
+        $attrs['label'] = esc_attr($label);
+      }
+
+      $output .= $this->input($attrs);
+      $output .= $this->select($name.'[target]', $val['target'], $this->target());
+      $output = $this->markup('div', $output, array('class'=>KF_PREFIX.'link_wrap'));
+
       return $output;
     }
 
     public function nonce($name, $val) {
-      $attrs = (object) array(
+      $attrs = array(
         'type' => 'hidden',
         'name' => $name,
         'value' => $val,
@@ -135,10 +169,10 @@
 
     public function spinner($name, $val, $label = NULL) {
       $output = '';
-      $attrs = (object) array(
+      $attrs = array(
         'type' => 'number',
         'name' => $name,
-        'class' => 'kf_spinner',
+        'class' => KF_PREFIX.'spinner',
         'max' => '50',
         'min' => '1',
         'value' => $val,
@@ -157,7 +191,7 @@
       $output = '';
       wp_enqueue_script('cpicker', KF_URL . '/js/cpicker.js');
 
-      $attrs = (object) array(
+      $attrs = array(
         'type' => 'text',
         'name' => $name,
         'class' => 'cpicker',
@@ -174,23 +208,38 @@
       return $output;
     }
 
-    public function select($name, $val, $options, $label = NULL) {
+    public function select($name, $val, $optionsArray, $label = NULL) {
 
-      $attrs = (object) array(
+      $attrs = array(
         'name' => $name,
-        'class' => 'kf_select',
+        'class' => KF_PREFIX.'select',
         'id' => $this->makeID($name)
       );
 
+      $output = '';
+
       if($label) {
-        $output .= $this->markup('label', $label, (object) array( 'for' => $attrs->id));
+        $output .= $this->markup('label', $label, array( 'for' => $attrs->id));
       }
-      $output = '<select ' . $this->attrs($attrs) . '">';
-      foreach ($options as $k => $v) {
-        $output .= '<option ' . selected($k, $val, false) . ' value="' . $k . '">' . $v . '</option>';
+        $options = '';
+
+        foreach ($optionsArray as $k => $v) {
+        $oAttrs = array(
+          'value' => $k
+          );
+        if ($val === $k) {
+          $oAttr['selected'] = 'selected';
+        }
+        $options .= $this->markup('option', $v, $oAttrs);
+        // $options[$k] = '<option ' . selected($k, $val, false) . ' value="' . $k . '">' . $v . '</option>';
       }
 
-      $output .= '</select>';
+      $output .= $this->markup('select', $options, $attrs); // TODO finish refactor
+
+
+      // $output .= '</select>';
+      $output = $this->markup('div', $output, array('class'=>KF_PREFIX.'field '.KF_PREFIX.'select_wrap'));
+
       return $output;
     }
 
@@ -208,9 +257,9 @@
 
     private function attrs($attrs) {
       $output = '';
-      if (is_object($attrs)) {
-        if($attrs->label) {
-          unset($attrs->label);
+      if (is_array($attrs)) {
+        if($attrs['label']) {
+          unset($attrs['label']);
         }
         foreach ($attrs as $key => $val) {
           if (is_array($val)) {
@@ -228,11 +277,8 @@
     }
 
     public function markup($tag, $content = NULL, $attrs = NULL){
-      if($attrs) {
-        $attrs = $this->attrs($attrs);
-      }
 
-      $markup = '<'.$tag.' '.$attrs.' '.($tag === 'img' ? '/' : '').'>';
+      $markup = '<'.$tag.' '.$this->attrs($attrs).' '.($tag === 'img' ? '/' : '').'>';
       if($content) $markup .= $content . ($tag === 'label' ? ':' : '');
       if($tag !== 'img') $markup .= '</'.$tag.'>';
 
@@ -241,5 +287,3 @@
     }
 
   }//---------/ Class KwikInputs
-
-  
