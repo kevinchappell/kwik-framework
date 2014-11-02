@@ -18,15 +18,13 @@
     }
 
     public function repeat() {
-      $R = 'Repeat';
-      $r = strtolower($R);
-      $repeat = array(
+      $R = 'Repeat'; $r = strtolower($R);
+      return array(
         'no-'.$r => 'No '.$R,
         $r => $R,
         $r.'-x' => $R.'-X',
         $r.'-y' => $R.'-Y',
       );
-      return $repeat;
     }
 
     public function target() {
@@ -74,8 +72,8 @@
       $output = '';
       if($attrs['label'] && !is_null($attrs['label'])) {
         $output = $this->markup('label', $attrs['label'], array( 'for' => $attrs['id']));
-        unset($attrs['label']);
       }
+      unset($attrs['label']);
       $output .= '<input ' . $this->attrs($attrs) . ' />';
 
       if($attrs['type'] !== 'hidden' && !is_null($attrs['type'])){
@@ -85,13 +83,23 @@
     }
 
 
-    public function img($name, $val, $label, $attrs) { // TODO extend $attrs
-
+    public function img($name, $val, $label, $attrs) {
+      if(!$attrs){
+        $attrs = array();
+      }
       wp_enqueue_media();
       $output = '';
-      if($val){
-        $thumb = wp_get_attachment_image_src($val, 'thumbnail');
+      if($val && !empty($val)){
+        if($attrs['img_size']){
+          $img_size = $attrs['img_size'];
+          unset($attrs['img_size']);
+        } else {
+          $img_size = 'thumbnail';
+        }
+        $thumb = wp_get_attachment_image_src($val, $img_size);
         $thumb = $thumb['0'];
+        $img_title = get_the_title($val);
+        $remove_img = $this->markup('span', NULL, array('title'=>__('Remove Image', 'kwik'), 'class' => 'clear_img tooltip') );
       }
       $defaultAttrs = array(
         'type' => 'hidden',
@@ -102,14 +110,15 @@
       );
       $attrs = array_merge($defaultAttrs, $attrs);
 
-      if($label) {
-        $attrs->label = esc_attr($label);
-      }
+      $img_attrs = array("src"=> $thumb, "class"=>"img_prev", "width"=>"23", "height"=>"23", "title"=>$img_title);
 
       $output .= $this->input($attrs);
-      $img_attrs = array("class"=>"img_prev", "width"=>"23", "height"=>"23", "title"=>get_the_title($val));
+      if($label) {
+        $output .= $this->markup('label', esc_attr($label));
+      }
       $output .= $this->markup('img', NULL, $img_attrs);
-      $output .= '<span class="img_title">' . get_the_title($val) . (!empty($val) ? '<span title="' . __('Remove Image', 'kwik') . '" class="clear_img tooltip"></span>' : '') . '</span><input type="button" class="upload_img" id="upload_img" value="+ ' . __('IMG', 'kwik') . '" />';
+      $output .= $this->markup('span', NULL, array('class'=>"img_title"));
+      $output .= $this->markup('button', '+ '.__('IMG', 'kwik'), array('class'=>"upload_img", "type"=>"button"));
       $output = $this->markup('div', $output, array('class'=>KF_PREFIX.'field kf_img_wrap'));
       return $output;
     }
@@ -119,9 +128,9 @@
       $defaultAttrs =   array(
         'type' => 'text',
         'name' => $name,
-        'class' => KF_PREFIX.'text',
+        'class' => KF_PREFIX.'text '. $this->makeID($name),
         'value' => $val,
-        'id' => $this->makeID($name),
+        // 'id' => $this->makeID($name),
         'label' => esc_attr($label)
       );
       if(!is_null($attrs)){
@@ -139,9 +148,9 @@
       $defaultAttrs =   array(
         'type' => 'text',
         'name' => $name.'[url]',
-        'class' => KF_PREFIX.'link',
+        'class' => KF_PREFIX.'link '.$this->makeID($name),
         'value' => $val['url'],
-        'id' => $this->makeID($name)
+        // 'id' => $this->makeID($name)
       );
       if(!is_null($attrs)){
         $attrs = array_merge($defaultAttrs, $attrs);
@@ -196,14 +205,14 @@
         'name' => $name,
         'class' => 'cpicker',
         'value' => $val,
-        'id' => $this->makeID($name)
+        'id' => $this->makeID($name),
+        'label' => esc_attr($label)
       );
-      if($label) {
-        $attrs->label = esc_attr($label);
-      }
       $output .= $this->input($attrs);
       if (!empty($val)) {$output .= '<span class="clear_color tooltip" title="' . __('Remove Color', 'kwik') . '"></span>';
       }
+
+      $output = $this->markup('div', $output, array('class'=>'kf_field_color'));
 
       return $output;
     }
@@ -212,8 +221,8 @@
 
       $attrs = array(
         'name' => $name,
-        'class' => KF_PREFIX.'select',
-        'id' => $this->makeID($name)
+        'class' => KF_PREFIX.'select '.$this->makeID($name),
+        // 'id' => $this->makeID($name)
       );
 
       $output = '';
@@ -224,20 +233,14 @@
         $options = '';
 
         foreach ($optionsArray as $k => $v) {
-        $oAttrs = array(
-          'value' => $k
-          );
-        if ($val === $k) {
-          $oAttr['selected'] = 'selected';
+          $oAttrs = array('value' => $k);
+          if ($val === $k) {
+            $oAttr['selected'] = 'selected';
+          }
+          $options .= $this->markup('option', $v, $oAttrs);
         }
-        $options .= $this->markup('option', $v, $oAttrs);
-        // $options[$k] = '<option ' . selected($k, $val, false) . ' value="' . $k . '">' . $v . '</option>';
-      }
 
-      $output .= $this->markup('select', $options, $attrs); // TODO finish refactor
-
-
-      // $output .= '</select>';
+      $output .= $this->markup('select', $options, $attrs);
       $output = $this->markup('div', $output, array('class'=>KF_PREFIX.'field '.KF_PREFIX.'select_wrap'));
 
       return $output;
@@ -255,6 +258,11 @@
 
 
 
+    /**
+     * Takes an array of attributes and expands and returns them formatted for markup
+     * @param  [Array] $attrs Array of attributes
+     * @return [String]       attributes as strings ie. `name="the_name" class="the_class"`
+     */
     private function attrs($attrs) {
       $output = '';
       if (is_array($attrs)) {
@@ -277,13 +285,28 @@
     }
 
     public function markup($tag, $content = NULL, $attrs = NULL){
+      $no_close_tags = array('img', 'hr', 'br'); $no_close = in_array($tag, $no_close_tags);
 
-      $markup = '<'.$tag.' '.$this->attrs($attrs).' '.($tag === 'img' ? '/' : '').'>';
-      if($content) $markup .= $content . ($tag === 'label' ? ':' : '');
-      if($tag !== 'img') $markup .= '</'.$tag.'>';
-
+      $markup = '<'.$tag.' '.$this->attrs($attrs).' '.($no_close ? '/' : '').'>';
+      if($content){
+        $c = '';
+        if(is_array($content)){
+          foreach ($content as $key => $value) {
+            if(is_array($value)){
+              $c .= implode($value);
+            } elseif (is_string($value)) {
+              $c .= $value;
+            }
+          }
+        } else{
+          $c = $content;
+        }
+        $markup .= $c;
+      }
+      if(!$no_close) $markup .= '</'.$tag.'>';
 
       return $markup;
     }
+
 
   }//---------/ Class KwikInputs

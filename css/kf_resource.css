@@ -1,0 +1,176 @@
+.cpicker {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+}
+.cpicker-focus {
+    z-index: 2;
+}
+.cpicker.cpicker-theme-default .cpicker-input {
+    margin: 0px;
+    margin-right: 3px;
+    border: solid 1px #CCC;
+    font: 14px sans-serif;
+    width: 69px;
+    border-radius: 0;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, .04);
+    margin-right: -1px;
+}
+.cpicker-theme-default.cpicker .cpicker-input {
+    vertical-align: middle;
+    outline: none;
+}
+.cpicker-theme-default.cpicker-swatch-left .cpicker-input {
+    margin-left: -1px;
+    margin-right: auto;
+    line-height: 17px;
+}
+.cpicker-theme-default.cpicker-focus .cpicker-input, .cpicker-theme-default.cpicker-focus .cpicker-swatch {
+    border-color: #999;
+}
+.cpicker-hidden {
+    position: absolute;
+    left: -9999em;
+}
+.cpicker-swatch {
+    position: relative;
+    width: 23px;
+    height: 23px;
+    text-align: left;
+    background: url(../images/cpicker.png) -80px 0;
+    border: solid 1px #CCC;
+    vertical-align: middle;
+    display: inline-block;
+}
+.cpicker-swatch SPAN {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: none;
+    box-shadow: inset 0 9px 0 rgba(255, 255, 255, .1);
+    display: inline-block;
+}
+/* Panel */
+ .cpicker-panel {
+    position: absolute;
+    top: 26px;
+    left: 0;
+    width: 173px;
+    height: 152px;
+    background: white;
+    border: solid 1px #CCC;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+    display: none;
+}
+.cpicker-position-top .cpicker-panel {
+    top: -156px;
+}
+.cpicker-position-left .cpicker-panel {
+    left: -83px;
+}
+.cpicker-position-left.cpicker-with-opacity .cpicker-panel {
+    left: -104px;
+}
+.cpicker-with-opacity .cpicker-panel {
+    width: 194px;
+}
+.cpicker .cpicker-grid {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 150px;
+    height: 150px;
+    background: url(../images/cpicker.png) -120px 0;
+    cursor: crosshair;
+}
+.cpicker .cpicker-grid-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    background: none;
+}
+.cpicker-slider-saturation .cpicker-grid {
+    background-position: -420px 0;
+}
+.cpicker-slider-saturation .cpicker-grid-inner {
+    background: url(../images/cpicker.png) -270px 0;
+}
+.cpicker-slider-brightness .cpicker-grid {
+    background-position: -570px 0;
+}
+.cpicker-slider-brightness .cpicker-grid-inner {
+    background: black;
+}
+.cpicker-slider-wheel .cpicker-grid {
+    background-position: -720px 0;
+}
+.cpicker-slider, .cpicker-opacity-slider {
+    position: absolute;
+    top: 1px;
+    left: 152px;
+    width: 20px;
+    height: 150px;
+    background: white url(../images/cpicker.png) 0 0;
+    cursor: crosshair;
+}
+.cpicker-slider-saturation .cpicker-slider {
+    background-position: -60px 0;
+}
+.cpicker-slider-brightness .cpicker-slider {
+    background-position: -20px 0;
+}
+.cpicker-slider-wheel .cpicker-slider {
+    background-position: -20px 0;
+}
+.cpicker-opacity-slider {
+    left: 173px;
+    background-position: -40px 0;
+    display: none;
+}
+.cpicker-with-opacity .cpicker-opacity-slider {
+    display: block;
+}
+/* Pickers */
+ .cpicker-grid .cpicker-picker {
+    position: absolute;
+    top: 70px;
+    left: 70px;
+    width: 10px;
+    height: 10px;
+    border: solid 1px black;
+    border-radius: 10px;
+    margin-top: -6px;
+    margin-left: -6px;
+    background: none;
+}
+.cpicker-grid .cpicker-picker SPAN {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 6px;
+    border: solid 2px white;
+}
+.cpicker-picker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 2px;
+    background: white;
+    border: solid 1px black;
+    margin-top: -2px;
+}
+/* Inline controls */
+.cpicker-inline .cpicker-input, .cpicker-inline .cpicker-swatch {
+    display: none;
+}
+.cpicker-inline .cpicker-panel {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: inline-block;
+}

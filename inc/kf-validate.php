@@ -1,7 +1,7 @@
 <?php
 
 
-  Class Validate extends KwikInputs {
+  Class KwikValidate extends KwikInputs {
 
     public function validateFont($val) {
       $font = array(

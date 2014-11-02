@@ -58,6 +58,16 @@ Class KwikUtils {
     }
   }
 
+  public function __update_meta($post_id, $field_name, $value = ''){
+    if (empty($value) OR !$value) {
+      delete_post_meta($post_id, $field_name);
+    } elseif (!get_post_meta($post_id, $field_name)) {
+      add_post_meta($post_id, $field_name, $value);
+    } else {
+      update_post_meta($post_id, $field_name, $value);
+    }
+  }
+
   public function get_all_post_types() {
     $all_post_types = array();
     $args = array(
@@ -156,8 +166,8 @@ Class KwikUtils {
     }
 
     $output = '';
-    $output .= '<div id="op_settings">';
-    $output .= '<ul id="op_settings_index">';
+    $output .= '<div id="kf_settings">';
+    $output .= '<ul id="kf_settings_index">';
     foreach ((array) $wp_settings_sections[$page] as $section) {
       // var_dump($section);
       $output .= $inputs->markup('li', '<a href="#' . $section['id'] . '">' . $section['title'] . '</a>');
@@ -166,7 +176,7 @@ Class KwikUtils {
     $output .= '</ul>';
 
     foreach ((array) $wp_settings_sections[$page] as $section) {
-      $output .= '<div id="'.$page. '_' . $section['id'] . '" class="op_options_panel">';
+      $output .= '<div id="'.$page. '_' . $section['id'] . '" class="kf_options_panel">';
       $output .= !empty($section['title']) ? "<h3>{$section['title']}</h3>\n" : "";
       // call_user_func($section['callback'], $section);
       //
