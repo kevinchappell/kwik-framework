@@ -133,9 +133,8 @@
         // 'id' => $this->makeID($name),
         'label' => esc_attr($label)
       );
-      if(!is_null($attrs)){
-        $attrs = array_merge($defaultAttrs, $attrs);
-      }
+
+      $attrs = !is_null($attrs) ? array_merge($defaultAttrs, $attrs) : $defaultAttrs;
 
       $output .= $this->input($attrs);
 
@@ -176,21 +175,22 @@
       return $this->input($attrs);
     }
 
-    public function spinner($name, $val, $label = NULL) {
+    public function spinner($name, $val, $label = NULL, $attrs = NULL) {
       $output = '';
-      $attrs = array(
+      $defaultAttrs = array(
         'type' => 'number',
         'name' => $name,
         'class' => KF_PREFIX.'spinner',
         'max' => '50',
         'min' => '1',
         'value' => $val,
-        'label'=> $label
+        'label'=> esc_attr($label)
       );
 
-      if($label) {
-        $attrs->label = esc_attr($label);
-      }
+
+
+      $attrs = !is_null($attrs) ? array_merge($defaultAttrs, $attrs) : $defaultAttrs;
+
       $output .= $this->input($attrs);
 
       return $output;
@@ -218,7 +218,6 @@
     }
 
     public function select($name, $val, $optionsArray, $label = NULL) {
-
       $attrs = array(
         'name' => $name,
         'class' => KF_PREFIX.'select '.$this->makeID($name),
@@ -235,7 +234,7 @@
         foreach ($optionsArray as $k => $v) {
           $oAttrs = array('value' => $k);
           if ($val === $k) {
-            $oAttr['selected'] = 'selected';
+            $oAttrs['selected'] = 'selected';
           }
           $options .= $this->markup('option', $v, $oAttrs);
         }

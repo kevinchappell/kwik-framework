@@ -105,3 +105,91 @@ min-width: 76px;
 .kf_setting > div:last-child{
     margin-right:0;
 }
+
+
+
+
+
+.kf_settings {
+    -webkit-transition: height 250ms;
+    -moz-transition: height 250ms;
+    transition: height 250ms;
+    display: block;
+}
+
+.kf_settings .kf_options_panel {
+    padding: 2%;
+    background: #fff;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    border-radius: 5px;
+    width: 76%;
+    margin-right: 2%;
+    min-height: 215px;
+    color: #333333;
+    border: 1px solid #ccc;
+    position:absolute;
+    right:0;
+
+}
+.kf_settings .kf_options_panel h3{
+    display:none;
+
+    }
+.kf_settings_index {
+    width: 18%;
+    float: left;
+}
+.kf_settings_index a {
+    display: block;
+    cursor: pointer;
+    padding: 10px 5px;
+    font: 1.5em "Trebuchet MS", Arial, Helvetica, sans-serif;
+    background: #efefef;
+    border-color: #ccc #FFFFFF #ccc #ccc;
+    border-style: solid solid solid solid;
+    border-width: 1px;
+}
+.kf_settings_index a:focus{outline:0 none;}
+.kf_settings_index li.ui-state-active a {
+    background:#fff;
+    border-right: 1px solid #fff;
+    margin-right: -1px;
+    z-index: 10;
+    position: relative;
+}
+.kf_settings_index li:first-child a {
+    border-radius: 5px 0 0 0;
+}
+.kf_settings_index li:last-child a {
+    border-radius:0 0 0 5px;
+}
+.kf_settings_index li {
+    margin-bottom: -1px;
+}
+.kf_settings_index li a {
+    color: #333;
+    text-decoration:none;
+}
+.kf_settings h2 {
+    text-align: center;
+    font: 2em "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin: 0 0 0.5em;
+    color: #000;
+}
+.kf_settings h2.button-primary {
+    display:block;
+    height:auto;
+    padding: 10px 0;
+    margin: 0 0 -3px 0;
+}
+
+.kf_map_settings input[type="text"], .kf_map_settings select {
+    width: 30%;
+    float: left;
+}
+.kf_map_settings textarea {
+    width: 79%;
+    float: left;
+}

@@ -38,4 +38,12 @@ jQuery(document).ready(function ($) {
 
 
 
+  $('.kf_settings').tabs({
+    beforeActivate: function(event, ui) {
+      window.location.hash = ui.newPanel.selector;
+    }
+  });
+
+
+
 });

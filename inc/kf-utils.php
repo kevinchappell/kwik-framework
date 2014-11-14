@@ -101,31 +101,26 @@ Class KwikUtils {
     return $all_post_types;
   }
 
-  // TODO: make this better,  switch case or something
-  public function number_to_class($num = 1, $echo = true) {
-    $class = '';
-    if ($num === 1) {
-      return;
-    } else if ($num == 2) {
-      $class = 'halves';
-    } else if ($num == 3) {
-        $class = 'thirds';
-    } else if ($num == 4) {
-        $class = 'fourths';
-    } else if ($num == 5) {
-        $class = 'fifths';
-    }
-
-    if (!$echo) {
-      return $class;
+  public function number_to_string($num, $echo = FALSE){
+    $numbers = array('zero','one','two','three','four','five','six','seven', 'eight', 'nine', 'ten');
+    if($echo){
+      echo $numbers[$num];
     } else {
-      echo $class;
+      return $numbers[$num];
     }
+  }
 
-  }// ------/ number_to_class
+  public function number_to_fractions($num, $echo = FALSE){
+    $numbers = array('','one','halves','thirds','fourths','fifths','sixths','sevenths');
+    if($echo){
+      echo $numbers[$num];
+    } else {
+      return $numbers[$num];
+    }
+  }
 
   public function settings_init($name, $page, $settings) {
-
+    $options = get_option($page);
     foreach ($settings as $section => $val) {
       register_setting($page, $page, $this->settings_validate);
       add_settings_section(
@@ -137,7 +132,8 @@ Class KwikUtils {
       foreach ($val['settings'] as $k => $v) {
         $args = array(
           'value' => $settings[$section]['settings'][$k]['value'],
-          'options' => $settings[$section]['settings'][$k]['options']
+          'options' => $settings[$section]['settings'][$k]['options'],
+          'attrs' => $settings[$section]['settings'][$k]['attrs']
         );
         add_settings_field(
           $k, // id
@@ -166,10 +162,9 @@ Class KwikUtils {
     }
 
     $output = '';
-    $output .= '<div id="kf_settings">';
-    $output .= '<ul id="kf_settings_index">';
+    $output .= '<div class="kf_settings">';
+    $output .= '<ul class="kf_settings_index">';
     foreach ((array) $wp_settings_sections[$page] as $section) {
-      // var_dump($section);
       $output .= $inputs->markup('li', '<a href="#' . $section['id'] . '">' . $section['title'] . '</a>');
     }
     $output .= $inputs->markup('li', get_submit_button(__('Save', 'kwik')), array("class" => 'kf_submit'));
@@ -177,20 +172,15 @@ Class KwikUtils {
 
     foreach ((array) $wp_settings_sections[$page] as $section) {
       $output .= '<div id="'.$page. '_' . $section['id'] . '" class="kf_options_panel">';
-      $output .= !empty($section['title']) ? "<h3>{$section['title']}</h3>\n" : "";
-      // call_user_func($section['callback'], $section);
-      //
-      //
+      $output .= !empty($section['title']) ? $inputs->markup('h3', $section['title']) : "";
       $output .= $this->section_callback($section);
 
       if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][
       $section['id']])) {
         continue;
       }
-
-      $output .= '<table class="form-table">';
-      $output .= $this->settings_fields($page, $section['id'], $settings);
-      $output .= '</table>';
+      $settings_fields = $this->settings_fields($page, $section['id'], $settings);
+      $output .= $inputs->markup('table', $settings_fields, array("class" => "form-table"));
       $output .= "</div>\n";
     }
 
@@ -219,14 +209,21 @@ Class KwikUtils {
 
       $value = $settings[$field['id']] ? $settings[$field['id']] : $field['args']['value'];
 
-      $output .= '<td class="' . $field['id'] . ' ' . $field['callback'] . '">';
-      $selectOptions = $field['callback'] === 'select' ? $field['args']['options'] : NULL;
-      $output .= $inputs->$field['callback'](
-        $page.'['.$field['id'].']', // name
-        $value, // value
-        $selectOptions // options
-        );
-      // $output .= call_user_func($field['callback'], $field['args']);
+      $output .= '<td class="' . $field['id'] . '">';
+      if($field['callback'] === 'select'){
+        $output .= $inputs->$field['callback'](
+          $page.'['.$field['id'].']', // name
+          $value, // value
+          $field['args']['options'] // options
+          );
+      } else {
+        $output .= $inputs->$field['callback'](
+          $page.'['.$field['id'].']', // name
+          $value, // value
+          NULL, // label
+          $field['args']['attrs']
+          );
+      }
       $output .= '</td>';
       $output .= '</tr>';
 
