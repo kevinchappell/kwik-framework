@@ -3,16 +3,12 @@
   Class KwikInputs{
 
     public function positions() {
+      $t = 'Top';$r = 'Right';$b = 'Bottom';$l = 'Left';$m = 'Middle';
+      $c = 'Center';$z = '0';$s = ' ';$f = '50%';$o = '100%';
       $positions = array(
-        '0 0' => 'Top Left',
-        '0 50%' => 'Top Center',
-        '0 100%' => 'Top Right',
-        '50% 0' => 'Middle Left',
-        '50% 50%' => 'Middle Center',
-        '50% 100%' => 'Middle Right',
-        '100% 0' => 'Bottom Left',
-        '100% 50%' => 'Bottom Center',
-        '100% 100%' => 'Bottom Right',
+        $z.$s.$z => $t.$s.$l,$z.$s.$f => $t.$s.$c,$z.$s.$o => $t.$s.$r,$f.$s.$z => $m.$s.$l,
+        $f.$s.$f => $m.$s.$c,$f.$s.$o => $m.$s.$r,$o.$s.$z => $b.$s.$l,$o.$s.$f => $b.$s.$c,
+        $o.$s.$o => $b.$s.$r
       );
       return $positions;
     }
@@ -75,6 +71,10 @@
       }
       unset($attrs['label']);
       $output .= '<input ' . $this->attrs($attrs) . ' />';
+
+      if ($attrs['value'] && $attrs['class'] === 'cpicker') {
+        $output .= '<span class="clear_color tooltip" title="' . __('Remove Color', 'kwik') . '"></span>';
+      }
 
       if($attrs['type'] !== 'hidden' && !is_null($attrs['type'])){
         $output = $this->markup('div', $output, array('class'=>KF_PREFIX.'field kf_'.$attrs['type'].'_wrap'));
@@ -187,8 +187,6 @@
         'label'=> esc_attr($label)
       );
 
-
-
       $attrs = !is_null($attrs) ? array_merge($defaultAttrs, $attrs) : $defaultAttrs;
 
       $output .= $this->input($attrs);
@@ -209,8 +207,6 @@
         'label' => esc_attr($label)
       );
       $output .= $this->input($attrs);
-      if (!empty($val)) {$output .= '<span class="clear_color tooltip" title="' . __('Remove Color', 'kwik') . '"></span>';
-      }
 
       $output = $this->markup('div', $output, array('class'=>'kf_field_color'));
 
@@ -254,7 +250,6 @@
       }
       return $this->select($name, $val, $options);
     }
-
 
 
     /**

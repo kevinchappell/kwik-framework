@@ -3,7 +3,8 @@ jQuery(document).ready(function ($) {
   var _custom_media = true,
     _orig_send_attachment = wp.media.editor.send.attachment;
 
-  // yes I am aware that binding events on document is lame.
+  // yes I am aware that binding events on document is lame
+  // but sort of needed for this usage.
   $(document).on('click', '.upload_img, .img_prev', function () {
     console.log($(this));
     var button = $(this),
@@ -15,7 +16,11 @@ jQuery(document).ready(function ($) {
         button.siblings('.img_title').html(attachment.title + '<span class="clear_img tooltip" title="Remove Image"></span>');
         img_id.val(attachment.id);
         img_id.trigger('change');
-        button.siblings('.img_prev').attr('src', attachment.url);
+        if(button.hasClass('img_prev')){
+          button.attr('src', attachment.url);
+        } else {
+          button.siblings('.img_prev').attr('src', attachment.url);
+        }
       } else {
         return _orig_send_attachment.apply(this, [props, attachment]);
       }

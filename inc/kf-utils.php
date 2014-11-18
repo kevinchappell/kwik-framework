@@ -110,7 +110,7 @@ Class KwikUtils {
     }
   }
 
-  public function number_to_fractions($num, $echo = FALSE){
+  public function number_to_class($num, $echo = FALSE){
     $numbers = array('','one','halves','thirds','fourths','fifths','sixths','sevenths');
     if($echo){
       echo $numbers[$num];
@@ -162,29 +162,26 @@ Class KwikUtils {
     }
 
     $output = '';
-    $output .= '<div class="kf_settings">';
-    $output .= '<ul class="kf_settings_index">';
     foreach ((array) $wp_settings_sections[$page] as $section) {
-      $output .= $inputs->markup('li', '<a href="#' . $section['id'] . '">' . $section['title'] . '</a>');
+      $section_nav_li .= $inputs->markup('li', '<a href="#' .KF_PREFIX. $section['id'] . '">' . $section['title'] . '</a>');
     }
-    $output .= $inputs->markup('li', get_submit_button(__('Save', 'kwik')), array("class" => 'kf_submit'));
-    $output .= '</ul>';
+    $save_btn = $inputs->markup('li', get_submit_button(__('Save', 'kwik')), array("class" => 'kf_submit'));
+    $output .= $inputs->markup('ul', $section_nav_li.$save_btn, array("class" => KF_PREFIX.'settings_index'));
 
     foreach ((array) $wp_settings_sections[$page] as $section) {
-      $output .= '<div id="'.$page. '_' . $section['id'] . '" class="kf_options_panel">';
-      $output .= !empty($section['title']) ? $inputs->markup('h3', $section['title']) : "";
-      $output .= $this->section_callback($section);
+      $cur_section = !empty($section['title']) ? $inputs->markup('h3', $section['title']) : "";
+      $cur_section .= $this->section_callback($section);
 
-      if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][
-      $section['id']])) {
+      if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][$section['id']])) {
         continue;
       }
       $settings_fields = $this->settings_fields($page, $section['id'], $settings);
-      $output .= $inputs->markup('table', $settings_fields, array("class" => "form-table"));
-      $output .= "</div>\n";
+      $cur_section .= $inputs->markup('table', $settings_fields, array("class" => "form-table"));
+      $output .= $inputs->markup('div', $cur_section, array("class" => KF_PREFIX."options_panel", "id" => KF_PREFIX. $section['id']));
+
     }
 
-    $output .= '</div>';
+    $output = $inputs->markup('div', $output, array("class" => KF_PREFIX."settings", "id" => KF_PREFIX. $section['id']));
 
     return $output;
   }
@@ -196,36 +193,35 @@ Class KwikUtils {
     if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][$section])) {
       return;
     }
-    $output = '';
+
     $sectionFields = (array) $wp_settings_fields[$page][$section];
 
     foreach ($sectionFields as $field) {
-      $output .= '<tr valign="top">';
+
       if (!empty($field['args']['label_for'])) {
-        $output .= '<th scope="row"><label for="' . $field['args']['label_for'] . '">' . $field['title'] . '</label></th>';
-      } else {
-        $output .= '<th scope="row">' . $field['title'] . '</th>';
+        $field['title'] = $inputs->markup('label', $field['title'], array('for'=>$field['args']['label_for']));
       }
 
+      $th = $inputs->markup('th', $field['title'], array('scope'=>'row'));
       $value = $settings[$field['id']] ? $settings[$field['id']] : $field['args']['value'];
 
-      $output .= '<td class="' . $field['id'] . '">';
       if($field['callback'] === 'select'){
-        $output .= $inputs->$field['callback'](
+        $field = $inputs->$field['callback'](
           $page.'['.$field['id'].']', // name
           $value, // value
           $field['args']['options'] // options
           );
       } else {
-        $output .= $inputs->$field['callback'](
+        $field = $inputs->$field['callback'](
           $page.'['.$field['id'].']', // name
           $value, // value
           NULL, // label
           $field['args']['attrs']
           );
       }
-      $output .= '</td>';
-      $output .= '</tr>';
+
+      $td = $inputs->markup('td', $field, array('class' => $field['id']));
+      $output .= $inputs->markup('tr', $th.$td, array('valign'=>'top'));
 
     }
       return $output;
