@@ -1771,7 +1771,7 @@ jQuery(document).ready(function($) {
                 wrapper.parent('.cpicker').after(function() {
 
                     if ($(this).siblings('.clear_color').length < 1)
-                        return '<span class="clear_color tooltip" title="Clearing the color will make it &quot;transparent&quot;"></span>';
+                        return '<span class="clear_color" title="Clearing the color will make it &quot;transparent&quot;"></span>';
                 });
 
 

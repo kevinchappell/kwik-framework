@@ -6,7 +6,6 @@ jQuery(document).ready(function ($) {
   // yes I am aware that binding events on document is lame
   // but sort of needed for this usage.
   $(document).on('click', '.upload_img, .img_prev', function () {
-    console.log($(this));
     var button = $(this),
       _custom_media = true;
 
@@ -41,14 +40,11 @@ jQuery(document).ready(function ($) {
     img_ttl.siblings('.img_prev').attr('src', '');
   });
 
-
-
   $('.kf_settings').tabs({
     beforeActivate: function(event, ui) {
       window.location.hash = ui.newPanel.selector;
     }
   });
-
 
 
 });

@@ -1,8 +1,8 @@
 <?php
 
 /**
-* Name: Kwik Framework
-* URI: http://kevin-chappell.com/kwik-framework
+* Plugin Name: Kwik Framework
+* Plugin URI: http://kevin-chappell.com/kwik-framework
 * Description: Reusable utilities and inputs to aid in WordPress theme and plugin creation
 * Author: Kevin Chappell
 * Version: .1
@@ -14,7 +14,7 @@ if (!class_exists('KwikUtils')) {
 
   define( 'KF_BASENAME',  basename(dirname( __FILE__ )));
   define( 'KF_FUNC',      preg_replace('/-/', '_', KF_BASENAME));
-  define( 'KF_URL',       get_template_directory_uri()."/inc/".KF_BASENAME);
+  define( 'KF_URL',       untrailingslashit(plugins_url('', __FILE__)));
   define( 'KF_PATH',      untrailingslashit( dirname( __FILE__ ) ) );
   define( 'KF_CACHE',     trailingslashit( dirname( __FILE__ ) )."cache" );
   define( 'KF_PREFIX',    'kf_' );

@@ -6,6 +6,8 @@
  */
 Class KwikUtils {
 
+  // static $settings_sections;
+
   /* returns a result form url */
   private function curl_get_result($url) {
     $ch = curl_init();
@@ -120,6 +122,7 @@ Class KwikUtils {
   }
 
   public function settings_init($name, $page, $settings) {
+    wp_enqueue_script('jquery-ui-tabs');
     $options = get_option($page);
     foreach ($settings as $section => $val) {
       register_setting($page, $page, $this->settings_validate);
@@ -129,21 +132,35 @@ Class KwikUtils {
         $val['section_desc'], // callback for section
         $page
         );
-      foreach ($val['settings'] as $k => $v) {
+      $this->add_kf_fields($val['settings'], $section, $page, $settings);
+    }
+  }
+
+  private function add_kf_fields($fields, $section, $page, $settings, $multi = NULL){
+    foreach ($fields as $k => $v) {
+      if(!$v['type']){
+        $args = array(
+          'fields' => $settings[$section]['settings'][$k]['fields'],
+          'desc' => $settings[$section]['settings'][$k]['desc']
+          );
+        $callback = 'multi';
+      } else{
         $args = array(
           'value' => $settings[$section]['settings'][$k]['value'],
           'options' => $settings[$section]['settings'][$k]['options'],
-          'attrs' => $settings[$section]['settings'][$k]['attrs']
+          'attrs' => $settings[$section]['settings'][$k]['attrs'],
+          'desc' => $settings[$section]['settings'][$k]['desc']
         );
-        add_settings_field(
-          $k, // id
-          $v['title'], // title
-          $v['type'], //callback, but we are sending a type to circum `call_user_func`
-          $page,
-          $section, // section
-          $args
-          );
+        $callback = $v['type'];
       }
+      add_settings_field(
+        $k, // id
+        $v['title'], // title
+        $callback, //callback, type or multi to insert multiple fields in single settings
+        $page,
+        $section, // section
+        $args
+      );
     }
   }
 
@@ -153,7 +170,7 @@ Class KwikUtils {
   }
 
 
-  public function settings_sections($page, $settings){
+  public static function settings_sections($page, $settings){
     $inputs = new KwikInputs();
     global $wp_settings_sections, $wp_settings_fields;
 
@@ -170,12 +187,12 @@ Class KwikUtils {
 
     foreach ((array) $wp_settings_sections[$page] as $section) {
       $cur_section = !empty($section['title']) ? $inputs->markup('h3', $section['title']) : "";
-      $cur_section .= $this->section_callback($section);
+      $cur_section .= self::section_callback($section);
 
       if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][$section['id']])) {
         continue;
       }
-      $settings_fields = $this->settings_fields($page, $section['id'], $settings);
+      $settings_fields = self::settings_fields($page, $section['id'], $settings);
       $cur_section .= $inputs->markup('table', $settings_fields, array("class" => "form-table"));
       $output .= $inputs->markup('div', $cur_section, array("class" => KF_PREFIX."options_panel", "id" => KF_PREFIX. $section['id']));
 
@@ -197,30 +214,37 @@ Class KwikUtils {
     $sectionFields = (array) $wp_settings_fields[$page][$section];
 
     foreach ($sectionFields as $field) {
+      $id = esc_attr($field['id']);
+
+      if($field['args']['desc']){
+        $desc = $inputs->markup('span', '', array('class'=>'dashicons ks_info_tip', 'tooltip' => $field['args']['desc']));
+      }
+      $title = $field['title'].' '.$desc;
 
       if (!empty($field['args']['label_for'])) {
-        $field['title'] = $inputs->markup('label', $field['title'], array('for'=>$field['args']['label_for']));
+        $field['title'] = $inputs->markup('label', $title, array('for'=>$field['args']['label_for']));
       }
 
-      $th = $inputs->markup('th', $field['title'], array('scope'=>'row'));
+      $th = $inputs->markup('th', $title, array('scope'=>'row'));
       $value = $settings[$field['id']] ? $settings[$field['id']] : $field['args']['value'];
 
-      if($field['callback'] === 'select'){
+      if($field['callback'] === 'multi'){
         $field = $inputs->$field['callback'](
-          $page.'['.$field['id'].']', // name
-          $value, // value
-          $field['args']['options'] // options
+          $page.'['.$id.']', // name
+          $value, // value`
+          $field['args']
           );
       } else {
         $field = $inputs->$field['callback'](
-          $page.'['.$field['id'].']', // name
+          $page.'['.$id.']', // name
           $value, // value
           NULL, // label
-          $field['args']['attrs']
+          $field['args']['attrs'],
+          $field['args']['options'] // options
           );
       }
 
-      $td = $inputs->markup('td', $field, array('class' => $field['id']));
+      $td = $inputs->markup('td', $field, array('class' => $id));
       $output .= $inputs->markup('tr', $th.$td, array('valign'=>'top'));
 
     }

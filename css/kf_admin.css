@@ -9,6 +9,9 @@
 #side-sortables .kf_field input[type="text"], #side-sortables .kf_field select {
   width: 99.3%;
 }
+#side-sortables .kf_field .cpicker input[type="text"]{
+  width:auto;
+}
 /*---------------   IMG INPUT   ---------------*/
 
 .kf_img_wrap {} .kf_field .img_prev {
@@ -28,8 +31,13 @@
 }
 .kf_field .clear_img, .clear_color {
   background: url('../images/icons/clear.png') no-repeat 50% 50%/100% 100%;
-  height: 12px;
-  width: 12px;
+  height: 10px;
+  width: 10px;
+  box-shadow: 0 0 0px 2px #fff inset;
+  position: absolute;
+  top: 0;
+  border: 1px solid #ddd;
+  border-left: 0 none;
   display: inline-block;
 }
 .kf_field .upload_img {
@@ -192,4 +200,66 @@ min-width: 76px;
 .kf_map_settings textarea {
     width: 79%;
     float: left;
+}
+
+
+.kf_multi_field > div {
+  display:inline-block;
+  margin-right:10px;
+}
+.kf_multi_field > div label{
+  margin-right:5px;
+}
+
+
+
+/*   ------------   TOOLTIP   ------------   */
+*[tooltip] {
+    position: relative;
+}
+*[tooltip]:hover:after {
+    background: #333;
+    background: rgba(0, 0, 0, .9);
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    content: attr(tooltip);
+    left: 20%;
+    padding: 10px 5px;
+    position: absolute;
+    z-index: 98;
+    width: 230px;
+    text-shadow: none;
+    font-size:10px;
+    line-height:1.5em;
+}
+*[tooltip]:hover:before {
+    border: solid;
+    border-color: #222 transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 20px;
+    content:"";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+}
+
+
+.ks_info_tip{
+  cursor:default;
+}
+
+
+
+
+/*-----------   UTILS   -----------*/
+
+
+/* Clearing floats */
+ .clear:after, .wrapper:after, .format-status .entry-header:after {
+    clear: both;
+}
+.clear:before, .clear:after, .wrapper:before, .wrapper:after, .format-status .entry-header:before, .format-status .entry-header:after {
+    display: table;
+    content:"";
 }

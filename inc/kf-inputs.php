@@ -59,6 +59,33 @@
     }
 
 
+    public function multi($name, $value, $args) {
+      $output = '';
+      $fields = $args['fields'];
+      foreach ($fields as $k => $v) {
+        $val = $value[$k] ? $value[$k] : $args['fields'][$k]['value'];
+        if($v['type'] === 'select'){
+          $output .= $this->$v['type'](
+            $name.'['.$k.']', // name
+            $value[$k], // value
+            $v['title'], // label
+            $v['options'],
+            $v['attrs']
+          );
+        } else {
+          $output .= $this->$v['type'](
+            $name.'['.$k.']', // name
+            $val, // value
+            $v['title'], // label
+            $v['attrs']
+          );
+        }
+      }
+
+      return self::markup('div', $output, array('class' => 'kf_multi_field'));
+    }
+
+
     /**
      * Generate markup for input field
      * @param  [Object] $attrs Object with properties for field attributes
@@ -73,7 +100,7 @@
       $output .= '<input ' . $this->attrs($attrs) . ' />';
 
       if ($attrs['value'] && $attrs['class'] === 'cpicker') {
-        $output .= '<span class="clear_color tooltip" title="' . __('Remove Color', 'kwik') . '"></span>';
+        $output .= $this->markup('span', NULL, array('class'=>'clear_color', 'title'=>__('Remove Color', 'kwik')));
       }
 
       if($attrs['type'] !== 'hidden' && !is_null($attrs['type'])){
@@ -83,6 +110,14 @@
     }
 
 
+    /**
+     * Custom image input that uses the wordpress media library for uploading and storage
+     * @param  [string] $name  name of input
+     * @param  [string] $val   id of stored image
+     * @param  [string] $label
+     * @param  [array]  $attrs additional attributes. Can customize size of image.
+     * @return [string] returns markup for image input field
+     */
     public function img($name, $val, $label, $attrs) {
       if(!$attrs){
         $attrs = array();
@@ -146,11 +181,12 @@
 
       $defaultAttrs =   array(
         'type' => 'text',
-        'name' => $name.'[url]',
+        'name' => $name."[url]",
         'class' => KF_PREFIX.'link '.$this->makeID($name),
         'value' => $val['url'],
         // 'id' => $this->makeID($name)
       );
+
       if(!is_null($attrs)){
         $attrs = array_merge($defaultAttrs, $attrs);
       }
@@ -160,7 +196,7 @@
       }
 
       $output .= $this->input($attrs);
-      $output .= $this->select($name.'[target]', $val['target'], $this->target());
+      $output .= $this->select($name."[target]", $val['target'], NULL, NULL, $this->target());
       $output = $this->markup('div', $output, array('class'=>KF_PREFIX.'link_wrap'));
 
       return $output;
@@ -208,22 +244,51 @@
       );
       $output .= $this->input($attrs);
 
-      $output = $this->markup('div', $output, array('class'=>'kf_field_color'));
+      $output = $this->markup('div', $output, array('class'=> array(KF_PREFIX.'field_color', KF_PREFIX.'field')));
 
       return $output;
     }
 
-    public function select($name, $val, $optionsArray, $label = NULL) {
-      $attrs = array(
+    public function toggle($name, $val, $label = NULL, $attrs = NULL) {
+      $output = '';
+
+      wp_enqueue_script('kcToggle-js', KF_URL . '/js/kcToggle.js', array('jquery', 'kf_admin_js'));
+      wp_enqueue_style('kcToggle-css', KF_URL . '/css/kcToggle.css', false);
+
+      $defaultAttrs = array(
+        'type' => 'checkbox',
+        'name' => $name,
+        'class' => 'kcToggle',
+        'value' => $val || true,
+        'id' => $this->makeID($name),
+        'label' => esc_attr($label),
+        'kcToggle' => NULL
+      );
+      if(!is_null($val) && $val !== ""){
+        $defaultAttrs["checked"] = "checked";
+      }
+
+      $attrs = !is_null($attrs) ? array_merge($defaultAttrs, $attrs) : $defaultAttrs;
+
+      $output .= $this->input($attrs);
+      $output = $this->markup('div', $output, array('class'=>'kf_field_toggle'));
+
+      return $output;
+    }
+
+    public function select($name, $val, $label = NULL, $attrs = NULL, $optionsArray) {
+      $defaultAttrs = array(
         'name' => $name,
         'class' => KF_PREFIX.'select '.$this->makeID($name),
-        // 'id' => $this->makeID($name)
+        'id' => $this->makeID($name)
       );
+
+      $attrs = !is_null($attrs) ? array_merge($defaultAttrs, $attrs) : $defaultAttrs;
 
       $output = '';
 
       if($label) {
-        $output .= $this->markup('label', $label, array( 'for' => $attrs->id));
+        $output .= $this->markup('label', esc_attr($label), array( 'for' => $attrs['id']));
       }
         $options = '';
 
@@ -266,8 +331,11 @@
         foreach ($attrs as $key => $val) {
           if (is_array($val)) {
             $val = implode(" ", $val);
+          } elseif(!$val) {
+            $val = ' ';
           }
-          $output .= $key . '="' . esc_attr($val) . '" ';
+          if($val !== ' ') $val = '="'.esc_attr($val).'"';
+          $output .= $key . $val;
         }
       }
       return $output;
@@ -281,7 +349,7 @@
     public function markup($tag, $content = NULL, $attrs = NULL){
       $no_close_tags = array('img', 'hr', 'br'); $no_close = in_array($tag, $no_close_tags);
 
-      $markup = '<'.$tag.' '.$this->attrs($attrs).' '.($no_close ? '/' : '').'>';
+      $markup = '<'.$tag.' '.self::attrs($attrs).' '.($no_close ? '/' : '').'>';
       if($content){
         $c = '';
         if(is_array($content)){
