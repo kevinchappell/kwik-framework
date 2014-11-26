@@ -12,6 +12,14 @@
 #side-sortables .kf_field .cpicker input[type="text"]{
   width:auto;
 }
+
+
+
+
+
+
+
+
 /*---------------   IMG INPUT   ---------------*/
 
 .kf_img_wrap {} .kf_field .img_prev {
@@ -30,7 +38,11 @@
   margin-right: -1px;
 }
 .kf_field .clear_img, .clear_color {
-  background: url('../images/icons/clear.png') no-repeat 50% 50%/100% 100%;
+  background-color: #fff url('../images/icons/clear.png') no-repeat 50% 50%/100% 100%;
+  background-image: url('../images/icons/clear.png');
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat 50% 50%;
   height: 10px;
   width: 10px;
   box-shadow: 0 0 0px 2px #fff inset;
@@ -55,6 +67,9 @@
 }
 .kf_field .upload_img:hover {
   background-color: #ccc;
+}
+.kf_img_wrap:hover .clear_img {
+  display: inline-block;
 }
 
 

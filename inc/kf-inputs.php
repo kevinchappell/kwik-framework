@@ -152,7 +152,13 @@
         $output .= $this->markup('label', esc_attr($label));
       }
       $output .= $this->markup('img', NULL, $img_attrs);
-      $output .= $this->markup('span', NULL, array('class'=>"img_title"));
+      if($thumb){
+        $img_ttl = get_the_title($val);
+        $img_ttl = $img_ttl.$this->markup('span', NULL, array( "class" => "clear_img", "tooltip" => __('Remove Image', 'kwik')));
+      } else {
+        $img_ttl = NULL;
+      }
+      $output .= $this->markup('span', $img_ttl, array('class'=>"img_title"));
       $output .= $this->markup('button', '+ '.__('IMG', 'kwik'), array('class'=>"upload_img", "type"=>"button"));
       $output = $this->markup('div', $output, array('class'=>KF_PREFIX.'field kf_img_wrap'));
       return $output;
