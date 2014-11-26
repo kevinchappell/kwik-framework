@@ -82,7 +82,7 @@
         }
       }
 
-      return self::markup('div', $output, array('class' => 'kf_multi_field'));
+      return self::markup('div', $output, array('class' => 'kf_field kf_multi_field'));
     }
 
 
@@ -252,8 +252,8 @@
     public function toggle($name, $val, $label = NULL, $attrs = NULL) {
       $output = '';
 
-      wp_enqueue_script('kcToggle-js', KF_URL . '/js/kcToggle.js', array('jquery', 'kf_admin_js'));
-      wp_enqueue_style('kcToggle-css', KF_URL . '/css/kcToggle.css', false);
+      wp_enqueue_script('kcToggle-js', 'http://kevinchappell.github.io/kcToggle/kcToggle.js', array('jquery'));
+      wp_enqueue_style('kcToggle-css', 'http://kevinchappell.github.io/kcToggle/kcToggle.css', false);
 
       $defaultAttrs = array(
         'type' => 'checkbox',
