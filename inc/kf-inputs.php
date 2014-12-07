@@ -58,6 +58,16 @@
       return $fontWeights;
     }
 
+    public function defaultFonts() {
+      $fontWeights = array(
+        (object) array('family' => '“Helvetica Neue”'),
+        (object) array('family' => '“Baskerville Old Face”'),
+        (object) array('family' => '“Trebuchet MS”'),
+        (object) array('family' => '"Century Gothic"'),
+        (object) array('family' => '“Courier Bold')
+      );
+      return $fontWeights;
+    }
 
     public function multi($name, $value, $args) {
       $output = '';
@@ -69,8 +79,8 @@
             $name.'['.$k.']', // name
             $value[$k], // value
             $v['title'], // label
-            $v['options'],
-            $v['attrs']
+            $v['attrs'],
+            $v['options']
           );
         } else {
           $output .= $this->$v['type'](
@@ -118,7 +128,7 @@
      * @param  [array]  $attrs additional attributes. Can customize size of image.
      * @return [string] returns markup for image input field
      */
-    public function img($name, $val, $label, $attrs) {
+    public function img($name, $val, $label, $attrs = NULL) {
       if(!$attrs){
         $attrs = array();
       }
@@ -312,14 +322,58 @@
       return $output;
     }
 
-    public function fontFamily($name, $val) {
+
+    public function font($name, $val, $label = NULL) {
+      $output = '';
+      $fields = array(
+        'fields' => array(
+          'color' => array(
+            'type'=> 'color',
+            'title'=> 'Color:',
+            'value'=> $val['color']
+            ),
+          'weight' => array(
+            'type' => 'select',
+            'title' => __('Weight', 'kwik'),
+            'value' => $val['weight'],
+            'options' => $this->fontWeights()
+            ),
+          'size' => array(
+            'type' => 'spinner',
+            'title'=> __('Size', 'kwik'),
+            'value'=> $val['size']
+            ),
+          'line-height' => array(
+            'type' => 'spinner',
+            'title' => __('Line-Height', 'kwik'),
+            'value' => $val['line-height']
+            ),
+          'font-family' => array(
+            'type' => 'fontFamily',
+            'title'=> __('Font-Family', 'kwik'),
+            'value' => $val['font-family']
+            )
+          )
+        );
+
+      if($label) {
+        $output .= $this->markup('label', esc_attr($label));
+      }
+
+      $output .= $this->multi($name, $val, $fields);
+
+      return $output;
+    }
+
+    public function fontFamily($name, $val, $label = NULL) {
       $utils = new KwikUtils();
-      $fonts = $utils->get_google_fonts($api_key);  // TODO: Api key from settings
+      $fonts = $utils->get_google_fonts();
       $options = array();
       foreach ($fonts as $font) {
-        $options[str_replace(' ', '+', $font->family)] = $font->family;
+        $key = str_replace(' ', '+', $font->family);
+        $options[$key] = $font->family;
       }
-      return $this->select($name, $val, $options);
+      return $this->select($name, $val, $label, NULL, $options);
     }
 
 

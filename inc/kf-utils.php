@@ -47,17 +47,24 @@ Class KwikUtils {
     return file_get_contents($cache_file);
   }
 
-  public function get_google_fonts($api_key) {
+  public function get_google_fonts() {
+    $kf_options = get_option(KF_FUNC);
+    $api_key = $kf_options['fonts_key'];
+    $defaults_fonts = KwikInputs::defaultFonts();
 
-    $feed = "https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&fields=items(category%2Cfamily%2Cvariants)&key=" . $api_key;
+    if($api_key){
+      $feed = "https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&fields=items(category%2Cfamily%2Cvariants)&key=" . $api_key;
+      $fonts = json_decode($this->fetchCachedResource($feed, 'fonts', 1200));
 
-    $fonts = json_decode($this->fetchCachedResource($feed, 'fonts', 1200));
-
-    if ($fonts) {           // are there any results?
-      return $fonts->items;
-    } else {                // There are no fonts... somehow
-      return false;
+      if ($fonts) {           // are there any results?
+        return $fonts->items;
+      } else {                // There are no fonts... somehow
+        return $defaults_fonts;
+      }
+    } else {
+      return $defaults_fonts;
     }
+
   }
 
   public function __update_meta($post_id, $field_name, $value = ''){
@@ -122,10 +129,11 @@ Class KwikUtils {
   }
 
   public function settings_init($name, $page, $settings) {
+    $validate = new KwikValidate($settings);
     wp_enqueue_script('jquery-ui-tabs');
     $options = get_option($page);
     foreach ($settings as $section => $val) {
-      register_setting($page, $page, $this->settings_validate);
+      register_setting($page, $page, array($validate,'validateSettings'));
       add_settings_section(
         $section, // section id
         $val['section_title'],
@@ -206,6 +214,8 @@ Class KwikUtils {
 
   private function settings_fields($page, $section, $settings) {
     $inputs = new KwikInputs();
+    $errors = get_settings_errors();
+
     global $wp_settings_fields;
     if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][$section])) {
       return;
@@ -214,12 +224,23 @@ Class KwikUtils {
     $sectionFields = (array) $wp_settings_fields[$page][$section];
 
     foreach ($sectionFields as $field) {
+      $error_class = '';
       $id = esc_attr($field['id']);
+      $type = $field['callback'];
 
       if($field['args']['desc']){
         $desc = $inputs->markup('span', '', array('class'=>'dashicons ks_info_tip', 'tooltip' => $field['args']['desc']));
       }
+
       $title = $field['title'].' '.$desc;
+
+      $setting_error = get_settings_errors($id);
+
+      if($setting_error[0]){
+        $error_icon = $inputs->markup('span', '!', array('class'=>'error_icon', 'tooltip' => $setting_error[0]['message']));
+        $title = $title.$error_icon;
+        $error_class = 'error';
+      }
 
       if (!empty($field['args']['label_for'])) {
         $field['title'] = $inputs->markup('label', $title, array('for'=>$field['args']['label_for']));
@@ -244,8 +265,8 @@ Class KwikUtils {
           );
       }
 
-      $td = $inputs->markup('td', $field, array('class' => $id));
-      $output .= $inputs->markup('tr', $th.$td, array('valign'=>'top'));
+      $td = $inputs->markup('td', $field);
+      $output .= $inputs->markup('tr', $th.$td, array('valign'=>'top', 'class' => array($id, KF_PREFIX.'option', 'type-'.$type, $error_class)));
 
     }
       return $output;

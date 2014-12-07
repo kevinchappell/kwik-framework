@@ -3,6 +3,10 @@
 
   Class KwikValidate extends KwikInputs {
 
+    function __construct($settings){
+      $this->settings = $settings;
+    }
+
     public function validateFont($val) {
       $font = array(
         'color' => $this->color($val['color']),
@@ -23,11 +27,6 @@
       );
 
       return $link_color;
-    }
-
-    public function color($val) {
-      $color = (isset($val) && preg_match('/^#?([a-f0-9]{3}){1,2}$/i', $val)) ? '#' . strtolower(ltrim($val, '#')) : '';
-      return $color;
     }
 
     public function validateHeaders($val) {
@@ -53,6 +52,55 @@
       }
 
       return $headers;
+    }
+
+
+    public function text($key, $val){
+      if(preg_match("/<[^<]+>/",$val,$m) !== 0){
+        add_settings_error( $key, 'text', __('HTML is not allowed in this field.', 'kwik'), 'kf_error' );
+      }
+      return wp_filter_nohtml_kses($val);
+    }
+
+    public function color($val) {
+      $color = (isset($val) && preg_match('/^#?([a-f0-9]{3}){1,2}$/i', $val)) ? '#' . strtolower(ltrim($val, '#')) : '';
+      return $color;
+    }
+
+    public function font($key, $val){
+      return $val;
+    }
+
+    public function validateSettings($setting){
+      $settings = $this->settings;
+      foreach ($setting as $key => $val) {
+        $path_segments = $this->find_key($key, $this->settings);
+        $addr = &$settings;
+        foreach($path_segments as $i => $path_segment){
+          $addr = &$addr[$path_segment];
+        }
+        //validate field by type
+        $setting[$key] = $this->$addr['type']($key, $val);
+        unset($addr);
+      }
+      return $setting;
+    }
+
+    public function find_key( $name, $settings, $strict=false, $path=array() ){
+      if( !is_array($settings) ) {
+        return false;
+      }
+
+      foreach( $settings as $key => $val ) {
+        if( is_array($val) && $subPath = $this->find_key($name, $val, $strict, $path) ) {
+          $path = array_merge($path, array($key), $subPath);
+          return $path;
+        } elseif( (!$strict && $key == $name) || ($strict && $key === $name) ) {
+          $path[] = $key;
+          return $path;
+        }
+      }
+      return false;
     }
 
   }
