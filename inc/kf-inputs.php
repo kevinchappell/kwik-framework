@@ -64,7 +64,7 @@
         (object) array('family' => '“Baskerville Old Face”'),
         (object) array('family' => '“Trebuchet MS”'),
         (object) array('family' => '"Century Gothic"'),
-        (object) array('family' => '“Courier Bold')
+        (object) array('family' => '“Courier Bold"')
       );
       return $fontWeights;
     }

@@ -62,12 +62,49 @@
       return wp_filter_nohtml_kses($val);
     }
 
-    public function color($val) {
-      $color = (isset($val) && preg_match('/^#?([a-f0-9]{3}){1,2}$/i', $val)) ? '#' . strtolower(ltrim($val, '#')) : '';
+    public function color($key, $val) {
+      $colorCode = ltrim($val, '#');
+
+      if (ctype_xdigit($colorCode) && (strlen($colorCode) == 6 || strlen($colorCode) == 3)){
+        $color =  $val;
+      } else {
+        add_settings_error( $key, 'color', __('Invalid Color', 'kwik'), 'kf_error' );
+        $color = '';
+      }
+
       return $color;
     }
 
     public function font($key, $val){
+      $font = array(
+        'color' => self::color($key, $val['color']),
+        'weight' => self::select($key, $val['weight']),
+        'size' => is_numeric($val['size']) ? $val['size'] : '',
+        'line-height' => is_numeric($val['line-height']) ? $val['line-height'] : '',
+        'font-family' => wp_filter_nohtml_kses($val['font-family'])
+      );
+      return $val;
+    }
+
+    public function select($key, $val){
+      return $val;
+    }
+
+    public function spinner($key, $val){
+      if(!is_numeric($val['line-height'])){
+        add_settings_error( $key, 'spinner', __('Only numbers are allowed', 'kwik'), 'kf_error' );
+      }
+      return $val;
+    }
+
+    public function img($key, $val){
+      if(!is_numeric($val['line-height']) && !empty($val)){
+        add_settings_error( $key, 'img', __('Invalid Selection', 'kwik'), 'kf_error' );
+      }
+      return $val;
+    }
+
+    public function multi($key, $val){
       return $val;
     }
 

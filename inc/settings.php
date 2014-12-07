@@ -46,17 +46,6 @@ function kf_default_options() {
           'type' => 'text',
           'title' => __('Google Analtytics Tracking ID', 'kwik'),
           'value' => ''
-        ),
-        'default_font' => array(
-          'type' => 'font',
-          'title' => __('Default Font', 'kwik'),
-          'value' => array(
-            'color' => '#333333',
-            'weight' => 'normal',
-            'size' => 14,
-            'line-height' => 20,
-            'font-family' => '“Helvetica Neue”'
-            )
         )
       )
     )

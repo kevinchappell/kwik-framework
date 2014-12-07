@@ -146,7 +146,7 @@ Class KwikUtils {
 
   private function add_kf_fields($fields, $section, $page, $settings, $multi = NULL){
     foreach ($fields as $k => $v) {
-      if(!$v['type']){
+      if(!$v['type'] || $v['type']  === 'multi'){
         $args = array(
           'fields' => $settings[$section]['settings'][$k]['fields'],
           'desc' => $settings[$section]['settings'][$k]['desc']

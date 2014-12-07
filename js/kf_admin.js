@@ -1,13 +1,11 @@
 jQuery(document).ready(function($) {
 
-  var _custom_media = true,
-    _orig_send_attachment = wp.media.editor.send.attachment;
-
   // yes I am aware that binding events on document is lame
   // but sort of needed for this usage.
   $(document).on('click', '.upload_img, .img_prev', function() {
-    var button = $(this),
-      _custom_media = true;
+    var button = $(this);
+    var _orig_send_attachment = wp.media.editor.send.attachment,
+        _custom_media = true;
 
     wp.media.editor.send.attachment = function(props, attachment) {
       if (_custom_media) {
