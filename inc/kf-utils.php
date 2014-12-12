@@ -128,6 +128,21 @@ Class KwikUtils {
     }
   }
 
+  public function neat_trim($str, $n, $delim = '&hellip;', $neat = true) {
+    $len = strlen($str);
+    if ($len > $n) {
+      if ($neat) {
+        preg_match('/(.{' . $n . '}.*?)\b/', $str, $matches);
+        return rtrim($matches[1]) . $delim;
+      } else {
+        return substr($str, 0, $n) . $delim;
+
+      }
+    } else {
+      return $str;
+    }
+  }
+
   public function settings_init($name, $page, $settings) {
     $validate = new KwikValidate($settings);
     wp_enqueue_script('jquery-ui-tabs');

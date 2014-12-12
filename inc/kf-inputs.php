@@ -394,7 +394,7 @@
           } elseif(!$val) {
             $val = ' ';
           }
-          if($val !== ' ') $val = '="'.esc_attr($val).'"';
+          if($val !== ' ') $val = '="'.esc_attr($val).'" ';
           $output .= $key . $val;
         }
       }

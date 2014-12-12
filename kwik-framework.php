@@ -23,6 +23,11 @@ if (!class_exists('KwikUtils')) {
     include $inc_filename;
   }
 
+  // Load Widgets
+  foreach (glob(KF_PATH . "/widgets/*.php") as $widget_filename) {
+    include $widget_filename;
+  }
+
   if (!file_exists(KF_CACHE)) {
     mkdir(KF_CACHE, 0755, true);
   }
