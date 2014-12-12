@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Kwik-framework : Some basic buildings blocks to make building a WordPress Theme or Plugin easier">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Kwik-framework</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/kevinchappell/kwik-framework">View on GitHub</a>
+
+          <h1 id="project_title">Kwik-framework</h1>
+          <h2 id="project_tagline">Some basic buildings blocks to make building a WordPress Theme or Plugin easier</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/kevinchappell/kwik-framework/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/kevinchappell/kwik-framework/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="kwik-framework" class="anchor" href="#kwik-framework" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kwik Framework</h1>
+
+<p>This is a framework for rapid development of WordPress themes and Plugins. It lets you quickly create option pages with dynamic error handling, programmatically generate markup where needed and provides custom inputs for your theme or plugin.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Simply installing the plugin provides a robust API that lets you quickly create settings pages for you plugin or theme.</p>
+
+<p><strong>Generating Setting Page</strong></p>
+
+<pre><code>&lt;?php
+add_action( 'admin_menu', 'my_plugin_add_admin_menu' );
+add_action( 'admin_init', 'my_plugin_settings_init' );
+
+function my_plugin_add_admin_menu() {
+  // add_submenu_page( 'edit.php?post_type=kwik-framework', __('Kwik Framework Settings', 'kwik'), __('Settings', 'kwik'), 'manage_options', 'kwik_framework', 'my-plugin' );
+  add_options_page('Kwik Framework Settings', 'Kwik Framework', 'manage_options', 'my-plugin', 'my-plugin'.'_settings');
+}
+
+function my_plugin_settings_init() {
+  $utils = new KwikUtils();
+  $defaultSettings = my_plugin_default_options();
+  $utils-&gt;settings_init(MyPlugin, 'my-plugin', $defaultSettings);
+}
+
+function kwik_framework_settings() {
+  $settings = my_plugin_get_options();
+  echo '&lt;div class="wrap"&gt;';
+    echo KwikInputs::markup('h2', __('Framework Settings', 'kwik'));
+    echo KwikInputs::markup('p', __('Set the API keys and other options for your website. Kwik Framework needs these settings to connect to Google fonts and other APIs.','kwik'));
+    echo '&lt;form action="options.php" method="post"&gt;';
+      settings_fields('my-plugin');
+      echo KwikUtils::settings_sections('my-plugin', $settings);
+    echo '&lt;/form&gt;';
+  echo '&lt;/div&gt;';
+  echo KwikInputs::markup('div', $output, array('class'=&gt;'wrap'));
+}
+
+function my_plugin_get_options() {
+  return get_option('my-plugin', my_plugin_default_options());
+}
+
+function my_plugin_default_options() {
+
+  $my_plugin_default_options = array(
+    'section_1' =&gt; array(
+      'section_title' =&gt; __('Section One', 'kwik'),
+      'section_desc' =&gt; __('This is the description for section one.', 'kwik'),
+      'settings' =&gt; array(
+        'sec_1_first_option' =&gt; array(
+          'type' =&gt; 'text',
+          'title' =&gt; __('First Option', 'kwik'),
+          'value' =&gt; ''
+        ),
+        'sec_2_second_option' =&gt; array(
+          'type' =&gt; 'text',
+          'title' =&gt; __('Second Option', 'kwik'),
+          'value' =&gt; ''
+        )
+      )
+    ),
+    'section_2' =&gt; array(
+      'section_title' =&gt; __('Section Two', 'kwik'),
+      'section_desc' =&gt; __('This is the description for section two.', 'kwik'),
+      'settings' =&gt; array(
+        'sec_2_first_option' =&gt; array(
+          'type' =&gt; 'text',
+          'title' =&gt; __('Option One Title', 'kwik'),
+          'value' =&gt; ''
+        ),
+        'sec_2_second_option' =&gt; array(
+          'type' =&gt; 'text',
+          'title' =&gt; __('Option Two Title', 'kwik'),
+          'value' =&gt; ''
+        )
+      )
+    )
+  );
+
+  return apply_filters('my_plugin_default_options', $kf_default_options);
+}
+?&gt;
+</code></pre>
+
+<p>That's it. The above code block will add a new options page to your theme or plugin with automatic field validation. In this example, options are added to the <code>my_plugin_default_options</code> multi-dimensional array. Type is defined as the input type to be used such as <code>text</code> and <code>select</code> but Kwik Framework also provides the following custom types <code>img</code>, <code>font</code>, <code>toggle</code>, <code>color</code>, <code>link</code>, <code>spinner</code> and <code>nonce</code>. The custom inputs can be easily extended using the <code>input</code> or <code>multi</code> types and supplying your own attributes.</p>
+
+<p><strong>Generating markup</strong></p>
+
+<pre><code>$inputs = new KwikInputs();
+
+$link = $inputs-&gt;markup('a', "This is a link", array("class" =&gt; "test_link", href="http://test-site.com", "title" =&gt; "Test Title"));
+
+echo $link;
+</code></pre>
+
+<h2>
+<a id="widgets" class="anchor" href="#widgets" aria-hidden="true"><span class="octicon octicon-link"></span></a>Widgets</h2>
+
+<h3>
+<a id="latest-posts" class="anchor" href="#latest-posts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Latest Posts</h3>
+
+<p>Displays a list of posts. Features:</p>
+
+<ul>
+<li>Filter by category and tag</li>
+<li>date and read more formatting</li>
+<li>numerous options</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Kwik-framework maintained by <a href="https://github.com/kevinchappell">kevinchappell</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-4784386-20");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
