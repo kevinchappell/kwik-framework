@@ -2,10 +2,10 @@
 
 /**
 * Plugin Name: Kwik Framework
-* Plugin URI: http://kevin-chappell.com/kwik-framework
+* Plugin URI: http://kevinchappell.github.io/kwik-framework/
 * Description: Reusable utilities and inputs to aid in WordPress theme and plugin creation
 * Author: Kevin Chappell
-* Version: .1
+* Version: .1.4
 * Author URI: http://kevin-chappell.com
 */
 

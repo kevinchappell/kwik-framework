@@ -1,13 +1,25 @@
-#Kwik Framework
+=== Kwik Framework ===
 
-This is a framework for rapid development of WordPress themes and Plugins. It lets you quickly create option pages with dynamic error handling, programmatically generate markup where needed and provides custom inputs for your theme or plugin.
+Contributors:  kevinchappell
+Tags: framework, options, settings, widgets, common
+Requires at least: 3.8
+Tested up to: 4.0
+Stable tag: 3.8.1
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-## Usage
+== Description ==
+
+Kwik Framework is a framework for <strong>rapid</strong> development of WordPress themes and Plugins. It lets you quickly create option pages with dynamic error handling, programmatically generate markup where needed and provides custom inputs for your theme or plugin.
+
+
+== Usage ==
+
 Simply installing the plugin provides a robust API that lets you quickly create settings pages for you plugin or theme.
 
-**Generating Setting Page**
-```
-<?php
+= Generating Setting Page =
+
+<pre><code>
 add_action( 'admin_menu', 'my_plugin_add_admin_menu' );
 add_action( 'admin_init', 'my_plugin_settings_init' );
 
@@ -40,7 +52,6 @@ function my_plugin_get_options() {
 }
 
 function my_plugin_default_options() {
-
   $my_plugin_default_options = array(
     'section_1' => array(
       'section_title' => __('Section One', 'kwik'),
@@ -78,26 +89,28 @@ function my_plugin_default_options() {
 
   return apply_filters('my_plugin_default_options', $kf_default_options);
 }
-?>
-```
+</code></pre>
+
 That's it. The above code block will add a new options page to your theme or plugin with automatic field validation. In this example, options are added to the `my_plugin_default_options` multi-dimensional array. Type is defined as the input type to be used such as `text` and `select` but Kwik Framework also provides the following custom types `img`, `font`, `toggle`, `color`, `link`, `spinner` and `nonce`. The custom inputs can be easily extended using the `input` or `multi` types and supplying your own attributes.
 
 
 
-**Generating markup**
-```
+= Generating markup =
+
+<pre><code>
 $inputs = new KwikInputs();
 
 $link = $inputs->markup('a', "This is a link", array("class" => "test_link", href="http://test-site.com", "title" => "Test Title"));
 
 echo $link;
-```
+</code></pre>
 
-## Widgets
+== Widgets ==
 
-### Latest Posts ###
+= Latest Posts =
 Displays a list of posts. Features:
-- Filter by category and tag
-- date and read more formatting
-- numerous options
+
+* Filter by category and tag
+* date and read more formatting
+* numerous options
 

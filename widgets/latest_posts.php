@@ -76,10 +76,8 @@ class Kwik_Latest_Posts_Widget extends WP_Widget {
 			} else{
 				$views_posts_link =  get_bloginfo('url');
 			}
-			$views_posts_link = '<a href="'.$views_posts_link.'" class="view_all">'.$show_all_text.'</a>';
+			$views_posts_link = KwikInputs::markup('a', $show_all_text, array("class" => "view_all", "href" => $views_posts_link, "title" => __("View All", "kwik")));
 		}
-
-
 
 
 		/* Before widget (defined by themes). */
@@ -93,7 +91,7 @@ class Kwik_Latest_Posts_Widget extends WP_Widget {
 		$with_tag = ( $tag_id ) ? "tag={$tag_id}&": '';
 		$num_posts_query = new WP_Query( "{$cats_to_include}{$with_tag}showposts={$num_posts}&post_type={$post_type}&offset={$post_offset}" );
 		if( $num_posts_query->have_posts()) : ?>
-		<style type="text/css">.widget_latest_posts .view_all{float: right;font-size: 12px;margin-top: 6px;}</style>
+		<style type="text/css">.widget_latest_posts .view_all{float: right;font-size: 12px;}</style>
 		    <div class="latest_posts">
 			<ul>
         <?php	while( $num_posts_query->have_posts()) : $num_posts_query->the_post();
@@ -102,17 +100,10 @@ class Kwik_Latest_Posts_Widget extends WP_Widget {
 				<li>
 		<?php
       $category = get_the_category(get_the_ID());
-if ( has_post_thumbnail() && $show_thumbs != false ) {
-	$thumb = wp_get_attachment_image_src(get_post_thumbnail_id(), 'thumbnail' );
-	echo '<a href="'.get_permalink().'" title="'.get_the_title().'">';
-	if($thumb_crop){
-		echo '<img src="'.WP_PLUGIN_URL .'/kwik-cart/lib/images/timthumb.php?src='.$thumb['0'].'&amp;w='.$post_thumb_width.'&amp;h='.$post_thumb_height.'&amp;zc=1" alt="'.get_the_title().'" />';
-	} else {
-		// if user doesnt need custom cropped image lets use the wordpress generated images
-		the_post_thumbnail(array($post_thumb_width, $post_thumb_height));
-	}
-	echo '</a>';
- }
+      if ( has_post_thumbnail() && $show_thumbs !== false ) {
+        $thumb = get_the_post_thumbnail( get_the_ID(), array( $post_thumb_width, $post_thumb_height));
+        echo KwikInputs::markup('a', $thumb, array("href" => get_permalink(), "title" => get_the_title()));
+      }
 
 
   ?>
@@ -164,7 +155,6 @@ if ( has_post_thumbnail() && $show_thumbs != false ) {
 		$instance['show_thumbs'] = $new_instance['show_thumbs'];
 		$instance['post_thumb_width'] = ( $new_instance['post_thumb_width'] ) ? absint(strip_tags( $new_instance['post_thumb_width'] )) : 60;
 		$instance['post_thumb_height'] = ( $new_instance['post_thumb_height'] ) ? absint(strip_tags( $new_instance['post_thumb_height'] )) : 60;
-		$instance['thumb_crop'] = $new_instance['thumb_crop'];
 		$instance['show_all_text'] = $new_instance['show_all_text'];
 		$instance['show_all_link'] = strip_tags( $new_instance['show_all_link']);
 
@@ -189,7 +179,6 @@ if ( has_post_thumbnail() && $show_thumbs != false ) {
 		'excerpt_length' => 60,
 		'read_more' => false,
 		'show_thumbs' => true,
-		'thumb_crop' => false,
 		'post_thumb_width' => 100,
 		'post_thumb_height' => 100,
 		'excerpt_length' => 30,
@@ -362,14 +351,6 @@ if($instance['show_thumbs']) : ?>
       <input id="<?php echo $this->get_field_id( 'post_thumb_height' ); ?>" type="text" name="<?php echo $this->get_field_name( 'post_thumb_height' ); ?>" value="<?php echo $instance['post_thumb_height']; ?>" size="5" maxlength="4" />
       <br />
       <span style="width:58px;display:inline-block;"><?php esc_html_e('Width', 'kwik'); ?></span>&#10005;<span style="margin-left:9px;width:150px;"><?php esc_html_e('Height in pixels', 'kwik'); ?></span>
-
-       <!-- crop -->
-    </p>
-    <p>
-      <label for="<?php echo $this->get_field_id( 'thumb_crop' ); ?>">
-          <input class="checkbox" type="checkbox" <?php checked( $instance['thumb_crop'], true ); ?> id="<?php echo $this->get_field_id( 'thumb_crop' ); ?>" name="<?php echo $this->get_field_name( 'thumb_crop' ); ?>" value="1" <?php checked('1', $instance['thumb_crop']); ?> />
-          <?php esc_html_e('Crop thumbnail?', 'kwik'); ?>
-      </label>
     </p>
 
 <?php endif; ?>
