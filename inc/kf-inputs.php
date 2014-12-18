@@ -248,7 +248,7 @@
 
     public function color($name, $val, $label = NULL) {
       $output = '';
-      wp_enqueue_script('cpicker', KF_URL . '/js/cpicker.js');
+      wp_enqueue_script('cpicker', KF_URL . '/js/cpicker.min.js');
 
       $attrs = array(
         'type' => 'text',
