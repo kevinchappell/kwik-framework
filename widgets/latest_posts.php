@@ -87,46 +87,60 @@ class Kwik_Latest_Posts_Widget extends WP_Widget {
 		if ( $title ) echo $before_title . $title . $views_posts_link . $after_title;
 
 		/* Display the Latest Items accordingly... */
-    $cats_to_include = ( $category_id ) ? "cat={$category_id}&": '';
-		$with_tag = ( $tag_id ) ? "tag={$tag_id}&": '';
-		$num_posts_query = new WP_Query( "{$cats_to_include}{$with_tag}showposts={$num_posts}&post_type={$post_type}&offset={$post_offset}" );
-		if( $num_posts_query->have_posts()) : ?>
-		<style type="text/css">.widget_latest_posts .view_all{float: right;font-size: 12px;}</style>
+    $args = array(
+      'cat' => array($category_id),
+      'post_type' => $post_type,
+      'post_status' => 'publish',
+      'posts_per_page' => $num_posts,
+      'ignore_sticky_posts'=> 1,
+      'offset' => $post_offset
+    );
+
+    if($tag_id){
+      $args['tag'] = $tag_id;
+    }
+
+    if($category_id){
+      $args['cat'] = $category_id;
+    }
+
+    $current_post =  array(get_the_ID());
+    if($current_post){
+      $args['post__not_in'] = $current_post;
+    }
+
+    $latest_posts = null;
+		$latest_posts = new WP_Query($args);
+		if( $latest_posts->have_posts()) : ?>
 		    <div class="latest_posts">
-			<ul>
-        <?php	while( $num_posts_query->have_posts()) : $num_posts_query->the_post();
-		update_post_caches($posts);
-		?>
-				<li>
-		<?php
-      $category = get_the_category(get_the_ID());
-      if ( has_post_thumbnail() && $show_thumbs !== false ) {
-        $thumb = get_the_post_thumbnail( get_the_ID(), array( $post_thumb_width, $post_thumb_height));
-        echo KwikInputs::markup('a', $thumb, array("href" => get_permalink(), "title" => get_the_title()));
-      }
+    			<ul>
+            <?php	while( $latest_posts->have_posts()) : $latest_posts->the_post();
+        		update_post_caches($posts);
+        		?>
+      			<li>
+          		<?php
+                $category = get_the_category(get_the_ID());
+                if ( has_post_thumbnail() && $show_thumbs !== false ) {
+                  $thumb = get_the_post_thumbnail( get_the_ID(), array( $post_thumb_width, $post_thumb_height));
+                  echo KwikInputs::markup('a', $thumb, array("href" => get_permalink(), "title" => get_the_title()));
+                }
+              ?>
+            	<a title="<?php the_title(); ?>" href="<?php the_permalink() ?>"><?php the_title(); ?></a><br/>
 
+              <?php if($excerpt_length != 0) echo '<div class="entry-summary">'.KwikUtils::neat_trim(get_the_excerpt(), $excerpt_length, $delim, $neat).'</div>';  ?>
 
-  ?>
-	<a title="<?php the_title(); ?>" href="<?php the_permalink() ?>"><?php the_title(); ?></a><br/>
-
-    <?php if($excerpt_length != 0) echo '<div class="entry-summary">'.KwikUtils::neat_trim(get_the_excerpt(), $excerpt_length, $delim, $neat).'</div>';  ?>
-
-    <?php if (isset($show_date)) {
-    	if ($date_style == 'human_time_diff') {
-    		echo '<div class="post_date">'.human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago</div>';
-    	} else {
-    		the_time($date_style, '<div class="post_date">', '</div>');
-    	}
-    } ?>
-
-
-
-				</li>
-<?php			    endwhile; ?>
-			</ul>
+              <?php if (isset($show_date)) {
+              	if ($date_style == 'human_time_diff') {
+              		echo '<div class="post_date">'.human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago</div>';
+              	} else {
+              		the_time($date_style, '<div class="post_date">', '</div>');
+              	}
+              } ?>
+      			</li>
+    <?php endwhile; ?>
+    			</ul>
 		    </div><!-- end widget -->
-<?php		endif;
-                wp_reset_postdata();
+<?php endif; wp_reset_postdata();
 
 		/* After widget (defined by themes). */
 		echo $after_widget;
