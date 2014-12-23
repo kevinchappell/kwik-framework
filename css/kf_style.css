@@ -1,0 +1,14 @@
+.widget_latest_posts .view_all {
+  float: right;
+  font-size: 12px;
+  margin-top: 6px;
+}
+.latest_posts li img {
+  float: left;
+  width: 70px;
+  height: auto;
+  margin-right: 10px;
+}
+.latest_posts .entry-summary {
+  clear: left;
+}
