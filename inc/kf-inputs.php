@@ -25,35 +25,35 @@
 
     public function target() {
       $target = array(
-        '_blank' => 'New Window/Tab',
-        '_self' => 'Same Window'
+        '_blank' => __('New Window/Tab', 'kwik'),
+        '_self' => __('Same Window', 'kwik')
       );
       return $target;
     }
 
     public function bgSize() {
       $bgSize = array(
-        'auto' => 'Default',
-        '100% 100%' => 'Stretch',
-        'cover' => 'Cover',
+        'auto' => __('Default', 'kwik'),
+        '100% 100%' => __('Stretch', 'kwik'),
+        'cover' => __('Cover', 'kwik'),
       );
       return $bgSize;
     }
 
     public function bgAttachment() {
       $bgAttachment = array(
-        'scroll' => 'Scroll',
-        'fixed' => 'Fixed',
+        'scroll' => __('Scroll', 'kwik'),
+        'fixed' => __('Fixed', 'kwik'),
       );
       return $bgAttachment;
     }
 
     public function fontWeights() {
       $fontWeights = array(
-        'normal' => 'Normal',
-        'bold' => 'Bold',
-        'bolder' => 'Bolder',
-        'lighter' => 'Lighter',
+        'normal' => __('Normal', 'kwik'),
+        'bold' => __('Bold', 'kwik'),
+        'bolder' => __('Bolder', 'kwik'),
+        'lighter' => __('Lighter', 'kwik')
       );
       return $fontWeights;
     }
@@ -69,31 +69,30 @@
       return $fontWeights;
     }
 
-    public function multi($name, $value, $args) {
-      $output = '';
-      $fields = $args['fields'];
-      foreach ($fields as $k => $v) {
-        $val = $value[$k] ? $value[$k] : $args['fields'][$k]['value'];
-        if($v['type'] === 'select'){
-          $output .= $this->$v['type'](
-            $name.'['.$k.']', // name
-            $value[$k], // value
-            $v['title'], // label
-            $v['attrs'],
-            $v['options']
-          );
-        } else {
-          $output .= $this->$v['type'](
-            $name.'['.$k.']', // name
-            $val, // value
-            $v['title'], // label
-            $v['attrs']
-          );
-        }
-      }
-
-      return self::markup('div', $output, array('class' => 'kf_field kf_multi_field'));
+    public function orderBy() {
+      $orderBy = array(
+        'menu_order' => __('Menu Order', 'kwik'),
+        'post_title' => __('Alphabetical', 'kwik'),
+        'post_date' => __('Post Date', 'kwik')
+      );
+      return $orderBy;
     }
+
+    public function order() {
+      $order = array(
+        'ASC' => __('Ascending', 'kwik'),
+        'DESC' => __('Descending', 'kwik')
+      );
+      return $order;
+    }
+
+
+/**
+ *****************************************
+ * INPUTS --------------------------------
+ *****************************************
+*/
+
 
 
     /**
@@ -117,6 +116,33 @@
         $output = $this->markup('div', $output, array('class'=>KF_PREFIX.'field kf_'.$attrs['type'].'_wrap'));
       }
       return $output;
+    }
+
+    /**
+     * Use multiple fields for a single option. Useful for generating
+     * width/height or geocoordinates array.
+     * @param  [String]   $name   name of the field or option
+     * @param  [Dynamic]  $value  [description]
+     * @param  [Array]    $args   Holds the Array of inputs to be generated
+     * @return [String]           Genearated markup of inputs sharing a single name
+     */
+    public function multi($name, $value, $args) {
+      $output = '';
+      $fields = $args['fields'];
+      foreach ($fields as $k => $v) {
+        $val = $value[$k] ? $value[$k] : $args['fields'][$k]['value'];
+        $v['options'] = $v['type'] === 'select' ? $v['options'] : NULL;
+
+        $output .= $this->$v['type'](
+          $name.'['.$k.']', // name
+          $value[$k], // value
+          $v['title'], // label
+          $v['attrs'], // array or attributes
+          $v['options'] // array of `<options>` if this is a `<select>`
+        );
+      }
+
+      return self::markup('div', $output, array('class' => 'kf_field kf_multi_field'));
     }
 
 
@@ -280,6 +306,7 @@
         'label' => esc_attr($label),
         'kcToggle' => NULL
       );
+
       if(!is_null($val) && $val !== ""){
         $defaultAttrs["checked"] = "checked";
       }
@@ -288,6 +315,29 @@
 
       $output .= $this->input($attrs);
       $output = $this->markup('div', $output, array('class'=>'kf_field_toggle'));
+
+      return $output;
+    }
+
+    public function cb($name, $val, $label = NULL, $attrs = NULL) {
+      $output = '';
+
+      $defaultAttrs = array(
+        'type' => 'checkbox',
+        'name' => $name,
+        'value' => $val || true,
+        // 'id' => $this->makeID($name),
+        'label' => esc_attr($label)
+      );
+
+      if(!is_null($val) && $val !== ""){
+        $defaultAttrs["checked"] = NULL;
+      }
+
+      $attrs = !is_null($attrs) ? array_merge($defaultAttrs, $attrs) : $defaultAttrs;
+
+      $output .= $this->input($attrs);
+      $output = $this->markup('div', $output);
 
       return $output;
     }
