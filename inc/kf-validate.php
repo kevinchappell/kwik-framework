@@ -91,7 +91,7 @@
     }
 
     public function spinner($key, $val){
-      if(!is_numeric($val['line-height'])){
+      if(!is_numeric($val)){
         add_settings_error( $key, 'spinner', __('Only numbers are allowed', 'kwik'), 'kf_error' );
       }
       return $val;
@@ -115,6 +115,9 @@
         $addr = &$settings;
         foreach($path_segments as $i => $path_segment){
           $addr = &$addr[$path_segment];
+        }
+        if(!$addr['type']){
+          $addr['type'] = 'multi';
         }
         //validate field by type
         $setting[$key] = $this->$addr['type']($key, $val);
