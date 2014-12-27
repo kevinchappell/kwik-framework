@@ -102,8 +102,13 @@
      */
     public function input($attrs) {
       $output = '';
+      $label = '';
       if($attrs['label'] && !is_null($attrs['label'])) {
-        $output = $this->markup('label', $attrs['label'], array( 'for' => $attrs['id']));
+        $label_attrs = array();
+        if($attrs['id']){
+          $label_attrs['for'] = $attrs['id'];
+        }
+        $label = $this->markup('label', $attrs['label'], $label_attrs);
       }
       unset($attrs['label']);
       $output .= '<input ' . $this->attrs($attrs) . ' />';
@@ -113,7 +118,8 @@
       }
 
       if($attrs['type'] !== 'hidden' && !is_null($attrs['type'])){
-        $output = $this->markup('div', $output, array('class'=>KF_PREFIX.'field kf_'.$attrs['type'].'_wrap'));
+        $output = $attrs['type'] !== 'checkbox' ? $label.$output : $output.$label;
+        $output = $this->markup('div', $output, array('class' => KF_PREFIX.'field kf_'.$attrs['type'].'_wrap'));
       }
       return $output;
     }
@@ -325,13 +331,15 @@
       $defaultAttrs = array(
         'type' => 'checkbox',
         'name' => $name,
-        'value' => $val || true,
+        'value' => $val,
         // 'id' => $this->makeID($name),
         'label' => esc_attr($label)
       );
 
-      if(!is_null($val) && $val !== ""){
+      if(!is_null($val) && $val !== "" && $attrs['checked'] !== FALSE){
         $defaultAttrs["checked"] = NULL;
+      } else {
+        unset($attrs['checked']);
       }
 
       $attrs = !is_null($attrs) ? array_merge($defaultAttrs, $attrs) : $defaultAttrs;
