@@ -288,5 +288,17 @@ Class KwikUtils {
   }
 
 
+  /**
+   * Adds a custom post to to the admin dashboard `At a Glance`
+   * @param  [String] $cpt  name of the custom post type to be added
+   * @return [String]       markup for custom at a glance dashboard widgets
+   */
+  public function cpt_at_a_glance($cpt) {
+    $post_type = get_post_type_object( $cpt );
+    $num_posts = wp_count_posts( $post_type->name );
+    $num = number_format_i18n( $num_posts->publish );
+    $text = _n( $post_type->labels->singular_name, $post_type->labels->name , intval( $num_posts->publish ) );
+    echo '<li class="'.$cpt.'-count"><tr><a href="edit.php?post_type='.$cpt.'"><td class="first b b-' . $cpt . '"></td>' . $num . ' <td class="t ' . $cpt . '">' . $text . '</td></a></tr></li>';
+  }
 
 }//---------/ Class KwikUtils
