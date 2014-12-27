@@ -1,11 +1,15 @@
 /*---------------   INPUTS   ---------------*/
 
+
 .kf_field {
   margin-bottom: 1em;
 }
-.kf_field:last-child {
-  margin-bottom: 0;
+.widget-content .kf_field:first-child {
+  margin-top: 1em;
 }
+/*.kf_field:last-child {
+  margin-bottom: 0;
+}*/
 #side-sortables .kf_field input[type="text"], #side-sortables .kf_field select {
   width: 99.3%;
 }
@@ -102,35 +106,32 @@
 /*--------------   BACKGROUND INPUT   ---------------*/
 
 .kf_field_typebackground > div:nth-child(1){
-width:20%;
+  width:20%;
 }
 .kf_field_typebackground > div:nth-child(2){
-width: 12%;
-min-width: 70px;
+  width: 12%;
+  min-width: 70px;
 }
 .kf_field_typebackground > div:nth-child(3){
-min-width: 128px;
-width: 21%;
+  min-width: 128px;
+  width: 21%;
 }
 .kf_field_typebackground > div:nth-child(4){
-width: 16%;
-min-width: 100px;
+  width: 16%;
+  min-width: 100px;
 }
 .kf_field_typebackground > div:nth-child(5){
-width: 14%;
-min-width: 80px;
+  width: 14%;
+  min-width: 80px;
 }
 .kf_field_typebackground > div:nth-child(6){
-width: 12%;
-min-width: 76px;
+  width: 12%;
+  min-width: 76px;
 }
 
 .kf_setting > div:last-child{
     margin-right:0;
 }
-
-
-
 
 
 .kf_settings {
