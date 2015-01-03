@@ -67,6 +67,119 @@ Class KwikUtils {
 
   }
 
+  public function getDomain($url) {
+    $pieces = parse_url($url);
+    $domain = isset($pieces['host']) ? $pieces['host'] : '';
+    if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
+      return $regs['domain'];
+    }
+    return false;
+  }
+
+  public function currentPageURL() {
+    $pageURL = 'http';
+    if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on") {$pageURL .= "s";}
+    $pageURL .= "://";
+    if ($_SERVER["SERVER_PORT"] != "80") {
+      $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+    } else {
+      $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+    }
+    return $pageURL;
+  }
+
+  public function widget_count($sidebar_id, $echo = true) {
+    $the_sidebars = wp_get_sidebars_widgets();
+    if (!isset($the_sidebars[$sidebar_id])) {
+      return __('Invalid sidebar ID');
+    }
+
+    if ($echo) {
+      echo count($the_sidebars[$sidebar_id]);
+    } else {
+
+      return count($the_sidebars[$sidebar_id]);
+    }
+  }
+
+  public function getRealIp() {
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {//check ip from share internet
+      $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {//to check ip is pass from proxy
+      $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+      $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+  }
+
+
+  public function get_taxonomy_parents($id, $taxonomy, $link = false, $separator = '/', $nicename = false, $visited = array()) {
+    $chain = '';
+    $parent = &get_term($id, $taxonomy);
+
+    if (is_wp_error($parent)) {
+      return $parent;
+    }
+
+    if ($nicename) {
+      $name = $parent->slug;
+    } else {
+      $name = $parent->name;
+    }
+
+    if ($parent->parent && ($parent->parent != $parent->term_id) && !in_array($parent->parent, $visited)) {
+      $visited[] = $parent->parent;
+      $chain .= get_taxonomy_parents($parent->parent, $taxonomy, $link, $separator, $nicename, $visited);
+    }
+
+    if ($link) {
+      // nothing, can't get this working :(
+    } else {
+      $chain .= $name . $separator;
+    }
+
+    return $chain;
+  }
+
+
+  /**
+   * Attempts to get the featured image for a given post
+   * if no featured image is set, one will be chosen from
+   * images attached to post, if none are attached it will
+   * randomly choose an image form the media library
+   *
+   * @param  [int]  $post_id  - post->ID to get image for
+   * @param  boolean $echo    - echo the output?
+   * @return [String]         - <img> tag
+   */
+  public function featured_image($post_id, $echo = true) {
+    if (has_post_thumbnail()) {
+      $thumb = get_the_post_thumbnail($post_id, 'thumbnail');
+    } else {
+      $attached_image = get_children("post_parent=" . $post_id . "&post_type=attachment&post_mime_type=image&numberposts=1");
+      if ($attached_image) {
+        var_dump($attached_image[0]);
+        // foreach ($attached_image as $attachment_id => $attachment) {
+        //   set_post_thumbnail($post_id, $attachment_id);
+        //   $thumb = wp_get_attachment_image($attachment_id, 'thumbnail');
+        // }
+      } else {
+        $args = array(
+          'post_type' => 'attachment',
+          'post_mime_type' => 'image',
+          'post_status' => 'inherit',
+          'posts_per_page' => 1,
+          'orderby' => 'rand',
+        );
+
+        $query_images = new WP_Query($args);
+        $thumb = wp_get_attachment_image($query_images->posts[0]->ID, 'thumbnail');
+      }
+    }
+    if (!$echo) {return $thumb;} else {echo $thumb;}
+  }
+
   public function __update_meta($post_id, $field_name, $value = ''){
     if (empty($value) OR !$value) {
       delete_post_meta($post_id, $field_name);

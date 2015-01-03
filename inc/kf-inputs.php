@@ -345,7 +345,7 @@
       $attrs = !is_null($attrs) ? array_merge($defaultAttrs, $attrs) : $defaultAttrs;
 
       $output .= $this->input($attrs);
-      $output = $this->markup('div', $output);
+      // $output = $this->markup('div', $output);
 
       return $output;
     }
