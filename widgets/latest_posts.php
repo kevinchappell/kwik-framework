@@ -51,7 +51,7 @@ class Kwik_Latest_Posts_Widget extends WP_Widget {
 
 		/* Our variables from the widget settings. */
 		$title = apply_filters('widget_title', $instance['title'] );
-    $category_id = $instance['category_id'];
+    $category_id = intval($instance['category_id']);
 		$tag_id = $instance['tag_id'];
 		$num_posts = absint( $instance['num_posts'] );
 		$post_offset =  absint( $instance['post_offset'] );
@@ -88,7 +88,6 @@ class Kwik_Latest_Posts_Widget extends WP_Widget {
 
 		/* Display the Latest Items accordingly... */
     $args = array(
-      'cat' => array($category_id),
       'post_type' => $post_type,
       'post_status' => 'publish',
       'posts_per_page' => $num_posts,
@@ -100,7 +99,7 @@ class Kwik_Latest_Posts_Widget extends WP_Widget {
       $args['tag'] = $tag_id;
     }
 
-    if($category_id){
+    if($category_id && $category_id !== 0){
       $args['cat'] = $category_id;
     }
 
