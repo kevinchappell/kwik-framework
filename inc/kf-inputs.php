@@ -137,7 +137,7 @@
       $fields = $args['fields'];
       foreach ($fields as $k => $v) {
         $val = $value[$k] ? $value[$k] : $args['fields'][$k]['value'];
-        $v['options'] = $v['type'] === 'select' ? $v['options'] : NULL;
+        // $v['options'] = $v['type'] === 'select' ? $v['options'] : NULL;
 
         $output .= $this->$v['type'](
           $name.'['.$k.']', // name
@@ -337,6 +337,7 @@
       );
 
       if(!is_null($val) && $val !== "" && $attrs['checked'] !== FALSE){
+        var_dump("is checked");
         $defaultAttrs["checked"] = NULL;
       } else {
         unset($attrs['checked']);
@@ -346,6 +347,30 @@
 
       $output .= $this->input($attrs);
       // $output = $this->markup('div', $output);
+
+      return $output;
+    }
+
+    public function cbGroup($name, $val, $label = NULL, $attrs = NULL, $options) {
+      $output = '';
+      $defaultAttrs = array(
+        'class' => KF_PREFIX.'checkbox-group '.$this->makeID($name),
+        'id' => $this->makeID($name)
+      );
+
+      $attrs = !is_null($attrs) ? array_merge($defaultAttrs, $attrs) : $defaultAttrs;
+
+      if($label) {
+        $output .= $this->markup('label', esc_attr($label), array( 'for' => $attrs['id']));
+      }
+
+      foreach ($options as $k => $v) {
+        $attrs['checked'] = $val[$k] ? TRUE : FALSE;
+        $attrs['id'] = $defaultAttrs['id'].'-'.$v;
+        $output .= $this->cb($name.'['.$k.']', $v, $k, $attrs);
+      }
+
+      $output = $this->markup('div', $output, array('class' => KF_PREFIX.'field '.KF_PREFIX.'checkbox-group-wrap'));
 
       return $output;
     }

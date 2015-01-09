@@ -54,12 +54,29 @@
       return $headers;
     }
 
+    private function hasHTML($val){
+      return (preg_match("/<[^<]+>/",$val,$m) !== 0);
+    }
 
     public function text($key, $val){
-      if(preg_match("/<[^<]+>/",$val,$m) !== 0){
+      if($this->hasHTML($val)){
         add_settings_error( $key, 'text', __('HTML is not allowed in this field.', 'kwik'), 'kf_error' );
       }
       return wp_filter_nohtml_kses($val);
+    }
+
+    public function cb($key, $val){
+      if($this->hasHTML($val)){
+        add_settings_error( $key, 'cb', __('Checkbox value should be true or false but contains invalid characters', 'kwik'), 'kf_error' );
+      }
+      return wp_filter_nohtml_kses($val);
+    }
+
+    public function cbGroup($key, $val){
+      foreach ($val as $k => $v) {
+        $val['$k'] = $this->cb($k, $v);
+      }
+      return $val;
     }
 
     public function color($key, $val) {
@@ -111,7 +128,7 @@
     public function validateSettings($setting){
       $settings = $this->settings;
       foreach ($setting as $key => $val) {
-        $path_segments = $this->find_key($key, $this->settings);
+        $path_segments = $this->findKey($key, $this->settings);
         $addr = &$settings;
         foreach($path_segments as $i => $path_segment){
           $addr = &$addr[$path_segment];
@@ -126,13 +143,13 @@
       return $setting;
     }
 
-    public function find_key( $name, $settings, $strict=false, $path=array() ){
+    public function findKey( $name, $settings, $strict=false, $path=array() ){
       if( !is_array($settings) ) {
         return false;
       }
 
       foreach( $settings as $key => $val ) {
-        if( is_array($val) && $subPath = $this->find_key($name, $val, $strict, $path) ) {
+        if( is_array($val) && $subPath = $this->findKey($name, $val, $strict, $path) ) {
           $path = array_merge($path, array($key), $subPath);
           return $path;
         } elseif( (!$strict && $key == $name) || ($strict && $key === $name) ) {
