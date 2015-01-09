@@ -7,29 +7,7 @@
       $this->settings = $settings;
     }
 
-    public function validateFont($val) {
-      $font = array(
-        'color' => $this->color($val['color']),
-        'weight' => wp_filter_nohtml_kses($val['weight']),
-        'size' => wp_filter_nohtml_kses($val['size']),
-        'line-height' => wp_filter_nohtml_kses($val['line-height']),
-        'font-family' => wp_filter_nohtml_kses($val['font-family'])
-      );
-      return $font;
-    }
-
-    public function linkColor($val) {
-      $link_color = array(
-        'default' => $this->color($val['default']),
-        'visited' => $this->color($val['visited']),
-        'hover' => $this->color($val['hover']),
-        'active' => $this->color($val['active'])
-      );
-
-      return $link_color;
-    }
-
-    public function validateHeaders($val) {
+    public function header($val) {
       $headers = array();
       $utils = new KwikUtils();
       $post_types = $utils->get_all_post_types();
@@ -54,10 +32,22 @@
       return $headers;
     }
 
+    /**
+     * Checks for HTML tags
+     * @param  [String]  $val
+     * @return boolean   returns true or false depending on what it finds
+     */
     private function hasHTML($val){
       return (preg_match("/<[^<]+>/",$val,$m) !== 0);
     }
 
+    /**
+     * Validate fields with type of `text`
+     * @param  [String] $key key of the field being validated
+     * @param  [Dynamic] $val Should be string but potenially user could inject some
+     * other type of variable
+     * @return [String]      Returns clean field value to be stored
+     */
     public function text($key, $val){
       if($this->hasHTML($val)){
         add_settings_error( $key, 'text', __('HTML is not allowed in this field.', 'kwik'), 'kf_error' );
@@ -65,6 +55,13 @@
       return wp_filter_nohtml_kses($val);
     }
 
+    /**
+     * Validate fields with type of `cb`
+     * @param  [String] $key key of the field being validated
+     * @param  [Dynamic] $val Should be string but potenially user could inject some
+     * other type of variable
+     * @return [String]      Returns clean field value to be stored
+     */
     public function cb($key, $val){
       if($this->hasHTML($val)){
         add_settings_error( $key, 'cb', __('Checkbox value should be true or false but contains invalid characters', 'kwik'), 'kf_error' );
@@ -72,6 +69,12 @@
       return wp_filter_nohtml_kses($val);
     }
 
+    /**
+     * wraps the `cb` validator
+     * @param  [String] $key
+     * @param  [Dynamic] $val
+     * @return [String]
+     */
     public function cbGroup($key, $val){
       foreach ($val as $k => $v) {
         $val['$k'] = $this->cb($k, $v);
@@ -79,6 +82,12 @@
       return $val;
     }
 
+    /**
+     * Checks that the posted color is a valid hex color
+     * @param  [String] $key
+     * @param  [String] $val
+     * @return [String]         Color or nothing
+     */
     public function color($key, $val) {
       $colorCode = ltrim($val, '#');
 
@@ -92,6 +101,12 @@
       return $color;
     }
 
+    /**
+     * validates fields with type of font
+     * @param  [String] $key key of the field being validator
+     * @param  [Array] $val [description]
+     * @return [Array]      Array with valid indexes
+     */
     public function font($key, $val){
       $font = array(
         'color' => self::color($key, $val['color']),
@@ -100,7 +115,8 @@
         'line-height' => is_numeric($val['line-height']) ? $val['line-height'] : '',
         'font-family' => wp_filter_nohtml_kses($val['font-family'])
       );
-      return $val;
+
+      return $font;
     }
 
     public function select($key, $val){
@@ -125,6 +141,13 @@
       return $val;
     }
 
+    /**
+     * Cycle through the settings `$this->settings` and build a path to
+     * the current field being validated. Once found instantiate the validator method
+     * for that field type
+     * @param  [Array] $setting values to search through
+     * @return [Array]          Validated settings array
+     */
     public function validateSettings($setting){
       $settings = $this->settings;
       foreach ($setting as $key => $val) {
@@ -143,6 +166,14 @@
       return $setting;
     }
 
+    /**
+     * find key in the $settings array
+     * @param  [String]  $name     name of field we are searching for
+     * @param  [Array]  $settings
+     * @param  boolean $strict
+     * @param  array   $path
+     * @return [Array]            returns a path to the setting
+     */
     public function findKey( $name, $settings, $strict=false, $path=array() ){
       if( !is_array($settings) ) {
         return false;

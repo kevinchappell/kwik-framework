@@ -8,7 +8,11 @@ Class KwikUtils {
 
   // static $settings_sections;
 
-  /* returns a result form url */
+  /**
+   * does cURL to the url provided
+   * @param  [String] $url
+   * @return [Dynamic]      data found at address
+   */
   private function curl_get_result($url) {
     $ch = curl_init();
     $timeout = 5;

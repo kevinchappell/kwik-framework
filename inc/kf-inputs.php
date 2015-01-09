@@ -337,7 +337,6 @@
       );
 
       if(!is_null($val) && $val !== "" && $attrs['checked'] !== FALSE){
-        var_dump("is checked");
         $defaultAttrs["checked"] = NULL;
       } else {
         unset($attrs['checked']);
