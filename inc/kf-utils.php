@@ -71,6 +71,11 @@ Class KwikUtils {
 
   }
 
+  /**
+   * parse out the domain name from a url string
+   * @param  [String] $url
+   * @return [String]      'domain.com'
+   */
   public function getDomain($url) {
     $pieces = parse_url($url);
     $domain = isset($pieces['host']) ? $pieces['host'] : '';
@@ -80,6 +85,10 @@ Class KwikUtils {
     return false;
   }
 
+  /**
+   * PHP only way of getting the current page url
+   * @return [String] 'http://example.com/some/page'
+   */
   public function currentPageURL() {
     $pageURL = 'http';
     if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on") {$pageURL .= "s";}
@@ -92,7 +101,13 @@ Class KwikUtils {
     return $pageURL;
   }
 
-  public function widget_count($sidebar_id, $echo = true) {
+  /**
+   * get the number of widgets in a sidebar
+   * @param  [Number]  $sidebar_id - id of the sidebar whose wigets you need a count of
+   * @param  [Boolean] $echo       to echo or not to echo
+   * @return [Number]              3
+   */
+  public function widgetCount($sidebar_id, $echo = true) {
     $the_sidebars = wp_get_sidebars_widgets();
     if (!isset($the_sidebars[$sidebar_id])) {
       return __('Invalid sidebar ID');
@@ -101,11 +116,14 @@ Class KwikUtils {
     if ($echo) {
       echo count($the_sidebars[$sidebar_id]);
     } else {
-
       return count($the_sidebars[$sidebar_id]);
     }
   }
 
+  /**
+   * get the user's IP
+   * @return [String] 127.0.0.1
+   */
   public function getRealIp() {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {//check ip from share internet
       $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -118,6 +136,14 @@ Class KwikUtils {
   }
 
 
+  /**
+   * taxonomies can be hierarchical, find the parent without context
+   * @param  [Number]  $id        current taxonomy ID
+   * @param  [Object]  $taxonomy  wordpress $taxonomy obect
+   * @param  boolean $link        [description]
+   * @param  string  $separator   ','
+   * @return [Object]             parent objects of current taxonomy
+   */
   public function get_taxonomy_parents($id, $taxonomy, $link = false, $separator = '/', $nicename = false, $visited = array()) {
     $chain = '';
     $parent = &get_term($id, $taxonomy);
@@ -184,6 +210,12 @@ Class KwikUtils {
     if (!$echo) {return $thumb;} else {echo $thumb;}
   }
 
+  /**
+   * add, update or delete post meta
+   * @param  [Number] $post_id  eg. 123
+   * @param  [String] $field_name key of the custom field to be updated
+   * @param  string $value
+   */
   public function __update_meta($post_id, $field_name, $value = ''){
     if (empty($value) OR !$value) {
       delete_post_meta($post_id, $field_name);
@@ -194,6 +226,10 @@ Class KwikUtils {
     }
   }
 
+  /**
+   * returns and array of all `_builtin` and custom post types
+   * @return [Array]
+   */
   public function get_all_post_types() {
     $all_post_types = array();
     $args = array(
@@ -227,6 +263,12 @@ Class KwikUtils {
     return $all_post_types;
   }
 
+  /**
+   * convert a number to english
+   * @param  [Number]  $num
+   * @param  Boolean $echo
+   * @return [String]        'zero'
+   */
   public function number_to_string($num, $echo = FALSE){
     $numbers = array('zero','one','two','three','four','five','six','seven', 'eight', 'nine', 'ten');
     if($echo){
@@ -236,6 +278,12 @@ Class KwikUtils {
     }
   }
 
+  /**
+   * number to english fraction
+   * @param  [Number]   $num    2
+   * @param  boolean    $echo
+   * @return [String]           halves
+   */
   public function number_to_class($num, $echo = FALSE){
     $numbers = array('','one','halves','thirds','fourths','fifths','sixths','sevenths');
     if($echo){
@@ -245,6 +293,14 @@ Class KwikUtils {
     }
   }
 
+  /**
+   * text truncation by hard limit or by word
+   * @param  [String]   $str    'Lorem ipsum dolemite'
+   * @param  [Number]   $n      10
+   * @param  string     $delim  '&hellip'
+   * @param  boolean    $neat   trim by word
+   * @return [String]             Lorem ipsum...
+   */
   public function neat_trim($str, $n, $delim = '&hellip;', $neat = true) {
     $len = strlen($str);
     if ($len > $n) {
@@ -260,6 +316,12 @@ Class KwikUtils {
     }
   }
 
+  /**
+   * Starts building the settings page and section for plugin or theme
+   * @param  [String] $name     'my-plugin'
+   * @param  [String] $page     'my-plugin-settings'
+   * @param  [Array] $settings  default settings array
+   */
   public function settings_init($name, $page, $settings) {
     $validate = new KwikValidate($settings);
     wp_enqueue_script('jquery-ui-tabs');
@@ -276,7 +338,14 @@ Class KwikUtils {
     }
   }
 
-  private function add_kf_fields($fields, $section, $page, $settings, $multi = NULL){
+  /**
+   * registers fields to sections of your settings page
+   * @param [Array] $fields     array of fields for current section
+   * @param [String] $section
+   * @param [String] $page
+   * @param [Array] $settings default settings array to iterate through
+   */
+  private function add_kf_fields($fields, $section, $page, $settings){
     foreach ($fields as $k => $v) {
       if(!$v['type'] || $v['type']  === 'multi'){
         $args = array(
