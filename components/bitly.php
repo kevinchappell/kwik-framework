@@ -55,7 +55,7 @@ function social_link() {
   if (!empty($options['bitly'][0])) {
     bitly();
   } else {
-    currentPageURL();
+    current_page_url();
   }
 }
 
@@ -69,7 +69,7 @@ function bitly() {
   } else {
 
     $bitly = new Bitly($options['bitly'][0], $options['bitly'][1]);
-    $bitly_short_url = $bitly->shortenURL(currentPageURL());
+    $bitly_short_url = $bitly->shortenURL(current_page_url());
     if (is_single() && !$bitly_meta) {
       add_post_meta($post->ID, 'bitly_meta', urlencode($bitly_short_url), true);
     }

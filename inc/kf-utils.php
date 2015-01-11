@@ -6,12 +6,10 @@
  */
 Class KwikUtils {
 
-  // static $settings_sections;
-
   /**
    * does cURL to the url provided
    * @param  [String] $url
-   * @return [Dynamic]      data found at address
+   * @return [Dynamic]      data found at $url
    */
   private function curl_get_result($url) {
     $ch = curl_init();
@@ -31,7 +29,7 @@ Class KwikUtils {
    * @param  [String] $type   - type of resource to be fetched (fonts, tweets, etc)
    * @return [JSON]
    */
-  private function fetchCachedResource($url, $type, $expire) {
+  private function fetch_cached_resource($url, $type, $expire) {
     $cache_file = KF_CACHE . '/' . $type;
     $last = file_exists($cache_file) ? filemtime($cache_file) : false;
     $now = time();
@@ -58,7 +56,7 @@ Class KwikUtils {
 
     if($api_key){
       $feed = "https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&fields=items(category%2Cfamily%2Cvariants)&key=" . $api_key;
-      $fonts = json_decode($this->fetchCachedResource($feed, 'fonts', 1200));
+      $fonts = json_decode($this->fetch_cached_resource($feed, 'fonts', 1200));
 
       if ($fonts) {           // are there any results?
         return $fonts->items;
@@ -73,10 +71,10 @@ Class KwikUtils {
 
   /**
    * parse out the domain name from a url string
-   * @param  [String] $url
+   * @param  [String] $url  'http://sub.domain.com'
    * @return [String]      'domain.com'
    */
-  public function getDomain($url) {
+  public function get_domain($url) {
     $pieces = parse_url($url);
     $domain = isset($pieces['host']) ? $pieces['host'] : '';
     if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
@@ -89,7 +87,7 @@ Class KwikUtils {
    * PHP only way of getting the current page url
    * @return [String] 'http://example.com/some/page'
    */
-  public function currentPageURL() {
+  public function current_page_url() {
     $pageURL = 'http';
     if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on") {$pageURL .= "s";}
     $pageURL .= "://";
@@ -107,7 +105,7 @@ Class KwikUtils {
    * @param  [Boolean] $echo       to echo or not to echo
    * @return [Number]              3
    */
-  public function widgetCount($sidebar_id, $echo = true) {
+  public function widget_count($sidebar_id, $echo = true) {
     $the_sidebars = wp_get_sidebars_widgets();
     if (!isset($the_sidebars[$sidebar_id])) {
       return __('Invalid sidebar ID');
@@ -124,7 +122,7 @@ Class KwikUtils {
    * get the user's IP
    * @return [String] 127.0.0.1
    */
-  public function getRealIp() {
+  public function get_real_ip() {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {//check ip from share internet
       $ip = $_SERVER['HTTP_CLIENT_IP'];
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {//to check ip is pass from proxy
@@ -347,18 +345,19 @@ Class KwikUtils {
    */
   private function add_kf_fields($fields, $section, $page, $settings){
     foreach ($fields as $k => $v) {
+      $current_field = $settings[$section]['settings'][$k];
       if(!$v['type'] || $v['type']  === 'multi'){
         $args = array(
-          'fields' => $settings[$section]['settings'][$k]['fields'],
-          'desc' => $settings[$section]['settings'][$k]['desc']
+          'fields' => $current_field['fields'],
+          'desc' => $current_field['desc']
           );
         $callback = 'multi';
       } else{
         $args = array(
-          'value' => $settings[$section]['settings'][$k]['value'],
-          'options' => $settings[$section]['settings'][$k]['options'],
-          'attrs' => $settings[$section]['settings'][$k]['attrs'],
-          'desc' => $settings[$section]['settings'][$k]['desc']
+          'value' => $current_field['value'],
+          'options' => $current_field['options'],
+          'attrs' => $current_field['attrs'],
+          'desc' => $current_field['desc']
         );
         $callback = $v['type'];
       }
@@ -373,45 +372,48 @@ Class KwikUtils {
     }
   }
 
-  private function section_callback($section){
-    $inputs = new KwikInputs();
-    return $inputs->markup('p', $section['callback']);
-  }
-
-
   public static function settings_sections($page, $settings){
     $inputs = new KwikInputs();
-    global $wp_settings_sections, $wp_settings_fields;
+    global $wp_settings_sections;
 
     if (!isset($wp_settings_sections) || !isset($wp_settings_sections[$page])) {
       return;
     }
+    $settings_sections = $wp_settings_sections[$page];
 
-    $output = '';
-    foreach ((array) $wp_settings_sections[$page] as $section) {
-      $section_nav_li .= $inputs->markup('li', '<a href="#' .KF_PREFIX. $section['id'] . '">' . $section['title'] . '</a>');
+    $output = self::build_section_nav($settings_sections);
+    $output .= self::build_sections($settings_sections, $page, $settings);
+
+    return $inputs->markup('div', $output, array('class' => KF_PREFIX.'settings', 'id' => KF_PREFIX. $section['id']));
+  }
+
+  private function build_section_nav ($sections){
+    $section_nav = '';
+    $inputs = new KwikInputs();
+    foreach ((array) $sections as $section) {
+      $nav_link = $inputs->markup('a', $section['title'], array('href'=> '#'.KF_PREFIX. $section['id']));
+      $section_nav .= $inputs->markup('li', $nav_link);
     }
-    $save_btn = $inputs->markup('li', get_submit_button(__('Save', 'kwik')), array("class" => 'kf_submit'));
-    $output .= $inputs->markup('ul', $section_nav_li.$save_btn, array("class" => KF_PREFIX.'settings_index'));
+    $section_nav .= $inputs->markup('li', get_submit_button(__('Save', 'kwik')), array("class" => 'kf_submit'));
+    return $inputs->markup('ul', $section_nav, array('class' => KF_PREFIX.'settings_index'));
+  }
 
-    foreach ((array) $wp_settings_sections[$page] as $section) {
+   private function build_sections ($settings_sections, $page, $settings){
+    global $wp_settings_fields;
+    $inputs = new KwikInputs();
+    $sections = '';
+    foreach ((array) $settings_sections as $section) {
       $cur_section = !empty($section['title']) ? $inputs->markup('h3', $section['title']) : "";
-      $cur_section .= self::section_callback($section);
-
+      $cur_section .= $inputs->markup('p', $section['callback']);
       if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][$section['id']])) {
         continue;
       }
       $settings_fields = self::settings_fields($page, $section['id'], $settings);
-      $cur_section .= $inputs->markup('table', $settings_fields, array("class" => "form-table"));
-      $output .= $inputs->markup('div', $cur_section, array("class" => KF_PREFIX."options_panel", "id" => KF_PREFIX. $section['id']));
-
+      $cur_section .= $inputs->markup('table', $settings_fields, array('class' => 'form-table'));
+      $sections .= $inputs->markup('div', $cur_section, array('class' => KF_PREFIX.'options_panel', 'id' => KF_PREFIX. $section['id']));
     }
-
-    $output = $inputs->markup('div', $output, array("class" => KF_PREFIX."settings", "id" => KF_PREFIX. $section['id']));
-
-    return $output;
+    return $sections;
   }
-
 
   private function settings_fields($page, $section, $settings) {
     $inputs = new KwikInputs();
