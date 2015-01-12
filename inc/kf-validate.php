@@ -75,7 +75,7 @@
      * @param  [Dynamic] $val
      * @return [String]
      */
-    public function cbGroup($key, $val){
+    public function cb_group($key, $val){
       foreach ($val as $k => $v) {
         $val['$k'] = $this->cb($k, $v);
       }
@@ -110,8 +110,8 @@
     public function font($key, $val){
       $font = array(
         'color' => self::color($key, $val['color']),
-        'weight' => self::select($key, $val['weight']),
-        'size' => is_numeric($val['size']) ? $val['size'] : '',
+        'font-weight' => self::select($key, $val['font-weight']),
+        'font-size' => is_numeric($val['font-size']) ? $val['font-size'] : '',
         'line-height' => is_numeric($val['line-height']) ? $val['line-height'] : '',
         'font-family' => wp_filter_nohtml_kses($val['font-family'])
       );

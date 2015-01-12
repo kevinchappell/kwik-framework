@@ -349,7 +349,7 @@
       return $output;
     }
 
-    public function cbGroup($name, $val, $label = NULL, $attrs = NULL, $options) {
+    public function cb_group($name, $val, $label = NULL, $attrs = NULL, $options) {
       $output = '';
       $defaultAttrs = array(
         'class' => KF_PREFIX.'checkbox-group '.$this->makeID($name),
@@ -413,16 +413,16 @@
             'title'=> 'Color:',
             'value'=> $val['color']
             ),
-          'weight' => array(
+          'font-weight' => array(
             'type' => 'select',
             'title' => __('Weight', 'kwik'),
-            'value' => $val['weight'],
+            'value' => $val['font-weight'],
             'options' => $this->fontWeights()
             ),
-          'size' => array(
+          'font-size' => array(
             'type' => 'spinner',
             'title'=> __('Size', 'kwik'),
-            'value'=> $val['size']
+            'value'=> $val['font-size']
             ),
           'line-height' => array(
             'type' => 'spinner',
@@ -430,7 +430,7 @@
             'value' => $val['line-height']
             ),
           'font-family' => array(
-            'type' => 'fontFamily',
+            'type' => 'font_family',
             'title'=> __('Font-Family', 'kwik'),
             'value' => $val['font-family']
             )
@@ -446,7 +446,7 @@
       return $output;
     }
 
-    public function fontFamily($name, $val, $label = NULL) {
+    public function font_family($name, $val, $label = NULL) {
       $utils = new KwikUtils();
       $fonts = $utils->get_google_fonts();
       $options = array();

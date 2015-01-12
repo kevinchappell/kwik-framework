@@ -177,22 +177,19 @@ Class KwikUtils {
    * images attached to post, if none are attached it will
    * randomly choose an image form the media library
    *
-   * @param  [int]  $post_id  - post->ID to get image for
-   * @param  boolean $echo    - echo the output?
-   * @return [String]         - <img> tag
+   * @param  [boolean] $random_fallback   - use random image from library if non available for current post
+   * @param  [boolean] $echo              - echo the output?
+   * @return [String]                     - <img> tag
    */
-  public function featured_image($post_id, $echo = true) {
+  public function featured_image($random_fallback = false, $echo = true) {
+    $post_id = get_the_id();
     if (has_post_thumbnail()) {
       $thumb = get_the_post_thumbnail($post_id, 'thumbnail');
     } else {
       $attached_image = get_children("post_parent=" . $post_id . "&post_type=attachment&post_mime_type=image&numberposts=1");
       if ($attached_image) {
-        var_dump($attached_image[0]);
-        // foreach ($attached_image as $attachment_id => $attachment) {
-        //   set_post_thumbnail($post_id, $attachment_id);
-        //   $thumb = wp_get_attachment_image($attachment_id, 'thumbnail');
-        // }
-      } else {
+        $thumb = wp_get_attachment_image(key((array)$attached_image), 'thumbnail');
+      } else if($random_fallback) {
         $args = array(
           'post_type' => 'attachment',
           'post_mime_type' => 'image',
@@ -200,7 +197,6 @@ Class KwikUtils {
           'posts_per_page' => 1,
           'orderby' => 'rand',
         );
-
         $query_images = new WP_Query($args);
         $thumb = wp_get_attachment_image($query_images->posts[0]->ID, 'thumbnail');
       }
@@ -369,6 +365,7 @@ Class KwikUtils {
         $section, // section
         $args
       );
+      $current_field['desc'] = '';
     }
   }
 
@@ -398,6 +395,13 @@ Class KwikUtils {
     return $inputs->markup('ul', $section_nav, array('class' => KF_PREFIX.'settings_index'));
   }
 
+   /**
+    * build markup for each section of our settings page
+    * @param  [Array] $settings_sections    array of sections containing title, description
+    * @param  [String] $page
+    * @param  [Array] $settings
+    * @return [String]                      markup for each section and its fields
+    */
    private function build_sections ($settings_sections, $page, $settings){
     global $wp_settings_fields;
     $inputs = new KwikInputs();
@@ -487,6 +491,36 @@ Class KwikUtils {
     $num = number_format_i18n( $num_posts->publish );
     $text = _n( $post_type->labels->singular_name, $post_type->labels->name , intval( $num_posts->publish ) );
     echo '<li class="'.$cpt.'-count"><tr><a href="edit.php?post_type='.$cpt.'"><td class="first b b-' . $cpt . '"></td>' . $num . ' <td class="t ' . $cpt . '">' . $text . '</td></a></tr></li>';
+  }
+
+
+  /**
+   * generate text styles
+   * @param  [Array] $option  array('color' => #333333, 'style' => array('Bold'=>'bold'))
+   * @return [String]         css
+   */
+  public function text_style($option){
+    $css = $option['color'] !== '' ? 'color:'.$option['color'].';' : '';
+    $css .= $option['style']['Bold'] ? 'font-weight:'.$option['style']['Bold'].';' : '';
+    $css .= $option['style']['Underlined'] ? 'text-decoration:'.$option['style']['Underlined'].';' : '';
+    $css .= $option['style']['Italic'] ? 'font-style:'.$option['style']['Italic'].';' : '';
+    return $css;
+  }
+
+  public function font_css($option){
+    $css = '';
+    // TODO add setting to let user choose between pixel and em for font sizing
+    $suffix_px = array('font-size', 'line-height');
+    foreach ($option as $key => $value) {
+      $suffix = '';
+      if($key === 'font-family'){
+        $value = '"'.str_replace('+', ' ', $value).'"';
+      } else if(in_array($key, $suffix_px)){
+        $suffix = 'px';
+      }
+      $css .= $option[$key] ? $key.':'.$value.$suffix.';' : '';
+    }
+    return $css;
   }
 
 }//---------/ Class KwikUtils

@@ -1,6 +1,5 @@
 /*---------------   INPUTS   ---------------*/
 
-
 .kf_field {
   margin-bottom: 1em;
 }
@@ -10,24 +9,16 @@
 /*.kf_field:last-child {
   margin-bottom: 0;
 }*/
+
 #side-sortables .kf_field input[type="text"], #side-sortables .kf_field select {
   width: 99.3%;
 }
-#side-sortables .kf_field .cpicker input[type="text"]{
-  width:auto;
+#side-sortables .kf_field .cpicker input[type="text"] {
+  width: auto;
 }
-
-
-
-
-
-
-
-
 /*---------------   IMG INPUT   ---------------*/
 
-.kf_img_wrap {}
-.kf_field .img_prev {
+.kf_img_wrap {} .kf_field .img_prev {
   float: left;
   background: url("../images/cpicker.png") repeat scroll -80px 0 transparent;
   border: 1px solid #CCCCCC;
@@ -75,183 +66,162 @@
 .kf_img_wrap:hover .clear_img {
   display: inline-block;
 }
-
-
-
 /*--------------   LINK INPUT   ---------------*/
 
-.kf_link_wrap .kf_text_wrap{
-    width: 49%;
-    float: left;
-    margin-right: 2%;
+.kf_link_wrap .kf_text_wrap {
+  width: 49%;
+  float: left;
+  margin-right: 2%;
 }
-
-.kf_link_wrap .kf_select_wrap{
-    width: 49%;
-    float: left;
+.kf_link_wrap .kf_select_wrap {
+  width: 49%;
+  float: left;
 }
-
-
-
-
-
 /*--------------   COLOR INPUT   ---------------*/
 
 .kf_field_color {
-  position:relative;
+  position: relative;
 }
-
-
-
 /*--------------   BACKGROUND INPUT   ---------------*/
 
-.kf_field_typebackground > div:nth-child(1){
-  width:20%;
+.kf_field_typebackground > div:nth-child(1) {
+  width: 20%;
 }
-.kf_field_typebackground > div:nth-child(2){
+.kf_field_typebackground > div:nth-child(2) {
   width: 12%;
   min-width: 70px;
 }
-.kf_field_typebackground > div:nth-child(3){
+.kf_field_typebackground > div:nth-child(3) {
   min-width: 128px;
   width: 21%;
 }
-.kf_field_typebackground > div:nth-child(4){
+.kf_field_typebackground > div:nth-child(4) {
   width: 16%;
   min-width: 100px;
 }
-.kf_field_typebackground > div:nth-child(5){
+.kf_field_typebackground > div:nth-child(5) {
   width: 14%;
   min-width: 80px;
 }
-.kf_field_typebackground > div:nth-child(6){
+.kf_field_typebackground > div:nth-child(6) {
   width: 12%;
   min-width: 76px;
 }
-
-.kf_setting > div:last-child{
-    margin-right:0;
+.kf_setting > div:last-child {
+  margin-right: 0;
 }
-
-
 .kf_settings {
-    -webkit-transition: height 250ms;
-    -moz-transition: height 250ms;
-    transition: height 250ms;
-    display: block;
+  -webkit-transition: height 250ms;
+  -moz-transition: height 250ms;
+  transition: height 250ms;
+  display: block;
 }
-
 .kf_settings .kf_options_panel {
-    padding: 2%;
-    background: #fff;
-    filter: alpha(opacity=0);
-    -moz-opacity: 0;
-    -khtml-opacity: 0;
-    border-radius: 5px;
-    width: 76%;
-    margin-right: 2%;
-    min-height: 215px;
-    color: #333333;
-    border: 1px solid #ccc;
-    position:absolute;
-    right:0;
-
+  padding: 2%;
+  background: #fff;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  border-radius: 5px;
+  width: 76%;
+  margin-right: 2%;
+  min-height: 215px;
+  color: #333333;
+  border: 1px solid #ccc;
+  position: absolute;
+  right: 0;
+  max-height: 750px;
+  overflow-y: auto;
 }
-.kf_settings .kf_options_panel h3{
-    display:none;
+.kf_settings .kf_options_panel h3 {
+  display: none;
 }
 .kf_settings .kf_options_panel .form-table th {
-    width: 150px;
-    position:relative;
+  width: 150px;
+  position: relative;
 }
-
-
-
 .kf_settings_index {
-    width: 18%;
-    float: left;
+  width: 18%;
+  float: left;
 }
 .kf_settings_index a {
-    display: block;
-    cursor: pointer;
-    padding: 10px 5px;
-    font: 1.5em "Trebuchet MS", Arial, Helvetica, sans-serif;
-    background: #efefef;
-    border-color: #ccc #FFFFFF #ccc #ccc;
-    border-style: solid solid solid solid;
-    border-width: 1px;
+  display: block;
+  cursor: pointer;
+  padding: 10px 5px;
+  font: 1.5em "Trebuchet MS", Arial, Helvetica, sans-serif;
+  background: #efefef;
+  border-color: #ccc #FFFFFF #ccc #ccc;
+  border-style: solid solid solid solid;
+  border-width: 1px;
 }
-.kf_settings_index a:focus{outline:0 none;}
+.kf_settings_index a:focus {
+  outline: 0 none;
+}
 .kf_settings_index li.ui-state-active a {
-    background:#fff;
-    border-right: 1px solid #fff;
-    margin-right: -1px;
-    z-index: 10;
-    position: relative;
+  background: #fff;
+  border-right: 1px solid #fff;
+  margin-right: -1px;
+  z-index: 10;
+  position: relative;
 }
 .kf_settings_index li:first-child a {
-    border-radius: 5px 0 0 0;
+  border-radius: 5px 0 0 0;
 }
 .kf_settings_index li:last-child a {
-    border-radius:0 0 0 5px;
+  border-radius: 0 0 0 5px;
 }
 .kf_settings_index li {
-    margin-bottom: -1px;
+  margin-bottom: -1px;
 }
 .kf_settings_index li a {
-    color: #333;
-    text-decoration:none;
+  color: #333;
+  text-decoration: none;
 }
 .kf_settings_index li.kf_submit p {
-  margin-top:0;
+  margin-top: 0;
 }
-
 .kf_settings h2 {
-    text-align: center;
-    font: 2em "Trebuchet MS", Arial, Helvetica, sans-serif;
-    margin: 0 0 0.5em;
-    color: #000;
+  text-align: center;
+  font: 2em "Trebuchet MS", Arial, Helvetica, sans-serif;
+  margin: 0 0 0.5em;
+  color: #000;
 }
 .kf_settings h2.button-primary {
-    display:block;
-    height:auto;
-    padding: 10px 0;
-    margin: 0 0 -3px 0;
+  display: block;
+  height: auto;
+  padding: 10px 0;
+  margin: 0 0 -3px 0;
 }
-
 .kf_map_settings input[type="text"], .kf_map_settings select {
-    width: 30%;
-    float: left;
+  width: 30%;
+  float: left;
 }
 .kf_map_settings textarea {
-    width: 79%;
-    float: left;
+  width: 79%;
+  float: left;
 }
-
-
 .kf_multi_field > div {
-  display:inline-block;
-  margin-right:10px;
+  display: inline-block;
+  margin-right: 10px;
 }
 .kf_multi_field > div.kf_field_color {
-  margin-right:20px;
+  margin-right: 20px;
 }
-
-.kf_multi_field > div label{
-  margin-right:5px;
+.kf_multi_field > div label {
+  margin-right: 5px;
 }
-.kf_option td{
-  background-color:#fff;
+.kf_option td {
+  background-color: #fff;
   -webkit-transition: background-color 500ms linear;
   -moz-transition: background-color 500ms linear;
   -ms-transition: background-color 500ms linear;
   -o-transition: background-color 500ms linear;
   transition: background-color 500ms linear;
 }
-.kf_option.error td{
+.kf_option.error td {
   background-color: #FFC2C2;
 }
-.kf_option th .error_icon{
+.kf_option th .error_icon {
   position: absolute;
   right: 10px;
   top: 50%;
@@ -266,62 +236,53 @@
   font-family: dashicons;
   background: #990000;
 }
-.kf_error{
-  display:none;
+.kf_error {
+  display: none;
 }
-
-.kf_option.type-font .kf_field label{
-  display:block;
+.kf_option.type-font .kf_field label {
+  display: block;
 }
-
-
 /*   ------------   TOOLTIP   ------------   */
+
 *[tooltip] {
-    position: relative;
+  position: relative;
 }
 *[tooltip]:hover:after {
-    background: #333;
-    background: rgba(0, 0, 0, .9);
-    border-radius: 5px;
-    bottom: 26px;
-    color: #fff;
-    content: attr(tooltip);
-    left: 20%;
-    padding: 10px 5px;
-    position: absolute;
-    z-index: 98;
-    width: 230px;
-    text-shadow: none;
-    font-size:10px;
-    line-height:1.5em;
+  background: #333;
+  background: rgba(0, 0, 0, .9);
+  border-radius: 5px;
+  bottom: 26px;
+  color: #fff;
+  content: attr(tooltip);
+  left: 20%;
+  padding: 10px 5px;
+  position: absolute;
+  z-index: 98;
+  width: 230px;
+  text-shadow: none;
+  font-size: 10px;
+  line-height: 1.5em;
 }
 *[tooltip]:hover:before {
-    border: solid;
-    border-color: #222 transparent;
-    border-width: 6px 6px 0 6px;
-    bottom: 20px;
-    content:"";
-    left: 50%;
-    position: absolute;
-    z-index: 99;
+  border: solid;
+  border-color: #222 transparent;
+  border-width: 6px 6px 0 6px;
+  bottom: 20px;
+  content: "";
+  left: 50%;
+  position: absolute;
+  z-index: 99;
 }
-
-
-.ks_info_tip{
-  cursor:default;
+.ks_info_tip {
+  cursor: default;
 }
-
-
-
-
 /*-----------   UTILS   -----------*/
-
-
 /* Clearing floats */
- .clear:after, .wrapper:after, .format-status .entry-header:after {
-    clear: both;
+
+.clear:after, .wrapper:after, .format-status .entry-header:after {
+  clear: both;
 }
 .clear:before, .clear:after, .wrapper:before, .wrapper:after, .format-status .entry-header:before, .format-status .entry-header:after {
-    display: table;
-    content:"";
+  display: table;
+  content: "";
 }
