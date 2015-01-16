@@ -46,7 +46,7 @@ class Kwik_Latest_Posts_Widget extends WP_Widget {
 	 * How to display the widget on the screen.
 	 */
 	function widget( $args, $instance ) {
-
+    $inputs = new KwikInputs;
 		extract( $args );
 
 		/* Our variables from the widget settings. */
@@ -76,7 +76,7 @@ class Kwik_Latest_Posts_Widget extends WP_Widget {
 			} else{
 				$views_posts_link =  get_bloginfo('url');
 			}
-			$views_posts_link = KwikInputs::markup('a', $show_all_text, array("class" => "view_all", "href" => $views_posts_link, "title" => __("View All", "kwik")));
+			$views_posts_link = $inputs->markup('a', $show_all_text, array("class" => "view_all", "href" => $views_posts_link, "title" => __("View All", "kwik")));
 		}
 
 

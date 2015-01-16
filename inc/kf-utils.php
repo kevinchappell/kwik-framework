@@ -342,19 +342,22 @@ Class KwikUtils {
   private function add_kf_fields($fields, $section, $page, $settings){
     foreach ($fields as $k => $v) {
       $current_field = $settings[$section]['settings'][$k];
-      if(!$v['type'] || $v['type']  === 'multi'){
+      $desc = isset($current_field['desc']) ? $current_field['desc'] : NULL;
+      if(!isset($v['type']) || (isset($v['type']) && $v['type']  === 'multi')){
+        $v['type']  = 'multi';
         $args = array(
           'fields' => $current_field['fields'],
-          'desc' => $current_field['desc']
+          'desc' => $desc
           );
         $callback = 'multi';
       } else{
         $args = array(
-          'value' => $current_field['value'],
-          'options' => $current_field['options'],
-          'attrs' => $current_field['attrs'],
-          'desc' => $current_field['desc']
+          'value' =>  isset($current_field['value']) ? $current_field['value'] : NULL,
+          'options' => isset($current_field['options']) ? $current_field['options'] : NULL,
+          'attrs' => isset($current_field['attrs']) ? $current_field['attrs'] : NULL,
+          'desc' => $desc
         );
+
         $callback = $v['type'];
       }
       add_settings_field(
@@ -381,10 +384,10 @@ Class KwikUtils {
     $output = self::build_section_nav($settings_sections);
     $output .= self::build_sections($settings_sections, $page, $settings);
 
-    return $inputs->markup('div', $output, array('class' => KF_PREFIX.'settings', 'id' => KF_PREFIX. $section['id']));
+    return $inputs->markup('div', $output, array('class' => KF_PREFIX.'settings'));
   }
 
-  private function build_section_nav ($sections){
+  private static function build_section_nav ($sections){
     $section_nav = '';
     $inputs = new KwikInputs();
     foreach ((array) $sections as $section) {
@@ -402,7 +405,7 @@ Class KwikUtils {
     * @param  [Array] $settings
     * @return [String]                      markup for each section and its fields
     */
-   private function build_sections ($settings_sections, $page, $settings){
+   private static function build_sections ($settings_sections, $page, $settings){
     global $wp_settings_fields;
     $inputs = new KwikInputs();
     $sections = '';
@@ -419,9 +422,10 @@ Class KwikUtils {
     return $sections;
   }
 
-  private function settings_fields($page, $section, $settings) {
+  private static function settings_fields($page, $section, $settings) {
     $inputs = new KwikInputs();
     $errors = get_settings_errors();
+    $output = '';
 
     global $wp_settings_fields;
     if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][$section])) {
@@ -435,15 +439,16 @@ Class KwikUtils {
       $id = esc_attr($field['id']);
       $type = $field['callback'];
 
+      $title = $field['title'];
+
       if($field['args']['desc']){
         $desc = $inputs->markup('span', '', array('class'=>'dashicons ks_info_tip', 'tooltip' => $field['args']['desc']));
+        $title .= ' '.$desc;
       }
-
-      $title = $field['title'].' '.$desc;
 
       $setting_error = get_settings_errors($id);
 
-      if($setting_error[0]){
+      if(isset($setting_error[0])){
         $error_icon = $inputs->markup('span', '!', array('class'=>'error_icon', 'tooltip' => $setting_error[0]['message']));
         $title = $title.$error_icon;
         $error_class = 'error';
@@ -499,15 +504,15 @@ Class KwikUtils {
    * @param  [Array] $option  array('color' => #333333, 'style' => array('Bold'=>'bold'))
    * @return [String]         css
    */
-  public function text_style($option){
+  public static function text_style($option){
     $css = $option['color'] !== '' ? 'color:'.$option['color'].';' : '';
-    $css .= $option['style']['Bold'] ? 'font-weight:'.$option['style']['Bold'].';' : '';
-    $css .= $option['style']['Underlined'] ? 'text-decoration:'.$option['style']['Underlined'].';' : '';
-    $css .= $option['style']['Italic'] ? 'font-style:'.$option['style']['Italic'].';' : '';
+    $css .= isset($option['style']['Bold']) ? 'font-weight:'.$option['style']['Bold'].';' : '';
+    $css .= isset($option['style']['Underlined']) ? 'text-decoration:'.$option['style']['Underlined'].';' : '';
+    $css .= isset($option['style']['Italic']) ? 'font-style:'.$option['style']['Italic'].';' : '';
     return $css;
   }
 
-  public function font_css($option){
+  public static function font_css($option){
     $css = '';
     // TODO add setting to let user choose between pixel and em for font sizing
     $suffix_px = array('font-size', 'line-height');

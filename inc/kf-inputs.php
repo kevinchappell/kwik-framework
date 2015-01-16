@@ -105,7 +105,7 @@
       $label = '';
       if($attrs['label'] && !is_null($attrs['label'])) {
         $label_attrs = array();
-        if($attrs['id']){
+        if(isset($attrs['id'])){
           $label_attrs['for'] = $attrs['id'];
         }
         $label = $this->markup('label', $attrs['label'], $label_attrs);
@@ -136,12 +136,13 @@
       $output = '';
       $fields = $args['fields'];
       foreach ($fields as $k => $v) {
-        $val = $value[$k] ? $value[$k] : $args['fields'][$k]['value'];
-        // $v['options'] = $v['type'] === 'select' ? $v['options'] : NULL;
+        $val = isset($value[$k]) ? $value[$k] : $args['fields'][$k]['value'];
+        $v['options'] = isset($v['options']) ? $v['options'] : NULL;
+        $v['attrs'] = isset($v['attrs']) ? $v['attrs'] : NULL;
 
         $output .= $this->$v['type'](
           $name.'['.$k.']', // name
-          $value[$k], // value
+          isset($value[$k]) ? $value[$k] : NULL, // value
           $v['title'], // label
           $v['attrs'], // array or attributes
           $v['options'] // array of `<options>` if this is a `<select>`
@@ -466,7 +467,7 @@
     private function attrs($attrs) {
       $output = '';
       if (is_array($attrs)) {
-        if($attrs['label']) {
+        if(isset($attrs['label'])) {
           unset($attrs['label']);
         }
         foreach ($attrs as $key => $val) {
@@ -488,7 +489,7 @@
     }
 
     public function markup($tag, $content = NULL, $attrs = NULL){
-      $no_close_tags = array('img', 'hr', 'br'); $no_close = in_array($tag, $no_close_tags);
+      $no_close_tags = array('img', 'hr', 'br', 'link'); $no_close = in_array($tag, $no_close_tags);
 
       $markup = '<'.$tag.' '.self::attrs($attrs).' '.($no_close ? '/' : '').'>';
       if($content){

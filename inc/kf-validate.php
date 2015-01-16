@@ -48,7 +48,7 @@
      * other type of variable
      * @return [String]      Returns clean field value to be stored
      */
-    public function text($key, $val){
+    public function text($key, $val, $label = NULL, $attrs = NULL){
       if($this->hasHTML($val)){
         add_settings_error( $key, 'text', __('HTML is not allowed in this field.', 'kwik'), 'kf_error' );
       }
@@ -62,7 +62,7 @@
      * other type of variable
      * @return [String]      Returns clean field value to be stored
      */
-    public function cb($key, $val){
+    public function cb($key, $val, $label = NULL, $attrs = NULL){
       if($this->hasHTML($val)){
         add_settings_error( $key, 'cb', __('Checkbox value should be true or false but contains invalid characters', 'kwik'), 'kf_error' );
       }
@@ -75,7 +75,7 @@
      * @param  [Dynamic] $val
      * @return [String]
      */
-    public function cb_group($key, $val){
+    public function cb_group($key, $val, $label, $attrs, $options){
       foreach ($val as $k => $v) {
         $val['$k'] = $this->cb($k, $v);
       }
@@ -88,7 +88,7 @@
      * @param  [String] $val
      * @return [String]         Color or nothing
      */
-    public function color($key, $val) {
+    public function color($key, $val, $label = NULL) {
       $colorCode = ltrim($val, '#');
 
       if (ctype_xdigit($colorCode) && (strlen($colorCode) == 6 || strlen($colorCode) == 3)){
@@ -107,7 +107,7 @@
      * @param  [Array] $val [description]
      * @return [Array]      Array with valid indexes
      */
-    public function font($key, $val){
+    public function font($key, $val, $label = NULL){
       $font = array(
         'color' => self::color($key, $val['color']),
         'font-weight' => self::select($key, $val['font-weight']),
@@ -119,25 +119,26 @@
       return $font;
     }
 
-    public function select($key, $val){
+    // TODO write this validator
+    public function select($key, $val, $label = NULL, $attrs = NULL, $optionsArray = NULL){
       return $val;
     }
 
-    public function spinner($key, $val){
+    public function spinner($key, $val, $label = NULL, $attrs = NULL){
       if(!is_numeric($val)){
         add_settings_error( $key, 'spinner', __('Only numbers are allowed', 'kwik'), 'kf_error' );
       }
       return $val;
     }
 
-    public function img($key, $val){
+    public function img($key, $val, $label = NULL, $attrs = NULL){
       if(!is_numeric($val['line-height']) && !empty($val)){
         add_settings_error( $key, 'img', __('Invalid Selection', 'kwik'), 'kf_error' );
       }
       return $val;
     }
 
-    public function multi($key, $val){
+    public function multi($key, $val, $args){
       return $val;
     }
 
