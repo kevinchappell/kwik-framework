@@ -12,7 +12,7 @@ Class KwikColors{
     return $rgb;
   }
 
-  public function ImageColorAllocate_from_hex($img, $hexstr) {
+  public function image_color_allocate_from_hex($img, $hexstr) {
     $int = hexdec($hexstr);
 
     return ImageColorAllocate($img,

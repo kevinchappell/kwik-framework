@@ -31,7 +31,7 @@ function my_plugin_add_admin_menu() {
 function my_plugin_settings_init() {
   $utils = new KwikUtils();
   $defaultSettings = my_plugin_default_options();
-  $utils->settings_init(MyPlugin, 'my-plugin', $defaultSettings);
+  $utils->settingsInit(MyPlugin, 'my-plugin', $defaultSettings);
 }
 
 function kwik_framework_settings() {
