@@ -10,7 +10,6 @@
  */
 
 if (!class_exists('KwikUtils')) {
-
     define('KF_BASENAME', basename(dirname(__FILE__)));
     define('KF_FUNC', preg_replace('/-/', '_', KF_BASENAME));
     define('KF_URL', untrailingslashit(plugins_url('', __FILE__)));
@@ -33,7 +32,7 @@ if (!class_exists('KwikUtils')) {
 
     /**
      * Enqueues scripts and styles for admin screens
-     *
+     * @category scripts_and_styles
      * @since KwikFramework .1
      */
     function kf_admin_js_css($hook)

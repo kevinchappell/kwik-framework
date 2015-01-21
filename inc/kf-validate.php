@@ -170,7 +170,7 @@ class KwikValidate extends KwikInputs
             foreach ($path_segments as $i => $path_segment) {
                 $addr = &$addr[$path_segment];
             }
-            if (!$addr['type']) {
+            if (!isset($addr['type'])) {
                 $addr['type'] = 'multi';
             }
             //validate field by type

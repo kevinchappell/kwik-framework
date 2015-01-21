@@ -53,59 +53,59 @@ class Bitly
 
 }
 
-function social_link()
-{
-    $options = KwikThemeOptions::kt_get_options();
-    if (!empty($options['bitly'][0])) {
-        bitly();
-    } else {
-        current_page_url();
-    }
-}
+// function social_link()
+// {
+//     $options = KwikThemeOptions::kt_get_options();
+//     if (!empty($options['bitly'][0])) {
+//         bitly();
+//     } else {
+//         current_page_url();
+//     }
+// }
 
-function bitly()
-{
-    global $post;
-    $options = KwikThemeOptions::kt_get_options();
-    $bitly_meta = get_post_meta($post->ID, 'bitly_meta', true);
+// function bitly()
+// {
+//     global $post;
+//     $options = KwikThemeOptions::kt_get_options();
+//     $bitly_meta = get_post_meta($post->ID, 'bitly_meta', true);
 
-    if (is_single() && $bitly_meta) {
-        return urldecode($bitly_meta);
-    } else {
+//     if (is_single() && $bitly_meta) {
+//         return urldecode($bitly_meta);
+//     } else {
 
-        $bitly = new Bitly($options['bitly'][0], $options['bitly'][1]);
-        $bitly_short_url = $bitly->shortenURL(current_page_url());
-        if (is_single() && !$bitly_meta) {
-            add_post_meta($post->ID, 'bitly_meta', urlencode($bitly_short_url), true);
-        }
+//         $bitly = new Bitly($options['bitly'][0], $options['bitly'][1]);
+//         $bitly_short_url = $bitly->shortenURL(current_page_url());
+//         if (is_single() && !$bitly_meta) {
+//             add_post_meta($post->ID, 'bitly_meta', urlencode($bitly_short_url), true);
+//         }
 
-        return $bitly_short_url;
-    }
+//         return $bitly_short_url;
+//     }
 
-}
+// }
 
-// Save Bitly meta data
-function save_bitly_urls($post_id, $post)
-{
+// // Save Bitly meta data
+// function save_bitly_urls($post_id, $post)
+// {
 
-    // Is the user allowed to edit the post or page?
-    if (!current_user_can('edit_post', $post->ID)) {
-        return $post->ID;
-    }
+//     // Is the user allowed to edit the post or page?
+//     if (!current_user_can('edit_post', $post->ID)) {
+//         return $post->ID;
+//     }
 
-    $options = KwikThemeOptions::kt_get_options();
-    if (!empty($options['bitly'][0]) && !empty($options['bitly'][1])) {
-        $bitly = new Bitly($options['bitly'][0], $options['bitly'][1]);
-        $bitly_short_url = $bitly->shortenURL(get_permalink($post_id));
+//     $options = KwikThemeOptions::kt_get_options();
+//     if (!empty($options['bitly'][0]) && !empty($options['bitly'][1])) {
+//         $bitly = new Bitly($options['bitly'][0], $options['bitly'][1]);
+//         $bitly_short_url = $bitly->shortenURL(get_permalink($post_id));
 
-        if ($post->post_type == 'revision') {
-            return;
-        }
+//         if ($post->post_type == 'revision') {
+//             return;
+//         }
 
-        __update_post_meta($post->ID, 'bitly_meta', urlencode($bitly_short_url));
-    } else {
-        return;
-    }
+//         __update_post_meta($post->ID, 'bitly_meta', urlencode($bitly_short_url));
+//     } else {
+//         return;
+//     }
 
-}
+// }
 //add_action('save_post', 'save_bitly_urls', 1, 2);

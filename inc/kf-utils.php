@@ -11,7 +11,7 @@ class KwikUtils
      * @param  [String] $url
      * @return [Dynamic]      data found at $url
      */
-    private function curlGetResult($url)
+    private function curl_get_result($url)
     {
         $ch = curl_init();
         $timeout = 5;
@@ -38,7 +38,7 @@ class KwikUtils
 
         // check the cache file
         if (!$last || (($now - $last) || !file_exists($cache_file) > $expire)) {
-            $cache_rss = $this->curlGetResult($url);
+            $cache_rss = $this->curl_get_result($url);
 
             if ($cache_rss) {
                 $cache_static = fopen($cache_file, 'wb');
@@ -487,7 +487,7 @@ class KwikUtils
             }
 
             $th = $inputs->markup('th', $title, array('scope' => 'row'));
-            $value = $settings[$field['id']] ? $settings[$field['id']] : $field['args']['value'];
+            $value = isset($settings[$field['id']]) ? $settings[$field['id']] : $field['args']['value'];
 
             if ($field['callback'] === 'multi') {
                 $field = $inputs->$field['callback'](
