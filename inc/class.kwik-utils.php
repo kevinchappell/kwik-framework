@@ -54,7 +54,7 @@ class KwikUtils
     {
         $kf_options = get_option(KF_FUNC);
         $api_key = $kf_options['fonts_key'];
-        $defaults_fonts = KwikInputs::default_fonts();
+        $defaults_fonts = KwikHelpers::default_fonts();
 
         if ($api_key) {
             $feed = "https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&fields=items(category%2Cfamily%2Cvariants)&key=" . $api_key;
@@ -222,23 +222,6 @@ class KwikUtils
     }
 
     /**
-     * add, update or delete post meta
-     * @param  [Number] $post_id  eg. 123
-     * @param  [String] $field_name key of the custom field to be updated
-     * @param  string $value
-     */
-    public function update_meta($post_id, $field_name, $value = '')
-    {
-        if (empty($value) or !$value) {
-            delete_post_meta($post_id, $field_name);
-        } elseif (!get_post_meta($post_id, $field_name)) {
-            add_post_meta($post_id, $field_name, $value);
-        } else {
-            update_post_meta($post_id, $field_name, $value);
-        }
-    }
-
-    /**
      * returns and array of all `_builtin` and custom post types
      * @return [Array]
      */
@@ -336,7 +319,7 @@ class KwikUtils
      * Starts building the settings page and section for plugin or theme
      * @param  [String] $name     'my-plugin'
      * @param  [String] $page     'my-plugin-settings'
-     * @param  [Array] $settings  default settings array
+     * @param  [Array]  $settings default settings array
      */
     public function settings_init($name, $page, $settings)
     {
@@ -356,19 +339,33 @@ class KwikUtils
     }
 
     /**
-     * registers fields to sections of your settings page
-     * @param [Array] $fields     array of fields for current section
-     * @param [String] $section
-     * @param [String] $page
-     * @param [Array] $settings default settings array to iterate through
+     * Registers fields to sections of your settings page
+     * @param [Array]  $fields   array of fields for current section
+     * @param [String] $section  section fields are being added to
+     * @param [String] $page     setting namespace the field is being added to
+     * @param [Array]  $settings default settings array to iterate through
      */
     private function add_kf_fields($fields, $section, $page, $settings)
     {
         foreach ($fields as $k => $v) {
             $current_field = $settings[$section]['settings'][$k];
-            $desc = isset($current_field['desc']) ? $current_field['desc'] : null;
-            if (!isset($v['type']) || (isset($v['type']) && $v['type'] === 'multi')) {
-                $v['type'] = 'multi';
+            $formatted_field = $this->format_fields_vars($current_field, $v);
+            add_settings_field(
+                $k, // id
+                $formatted_field['title'], // title
+                $formatted_field['callback'], //callback, type or multi to insert multiple fields in single settings
+                $page,
+                $section, // section
+                $formatted_field['args']
+            );
+            $current_field['desc'] = '';
+        }
+    }
+
+    private function format_fields_vars($current_field, $val){
+        $desc = isset($current_field['desc']) ? $current_field['desc'] : null;
+            if (!isset($val['type']) || (isset($val['type']) && $val['type'] === 'multi')) {
+                $val['type'] = 'multi';
                 $args = array(
                     'fields' => $current_field['fields'],
                     'desc' => $desc,
@@ -382,18 +379,14 @@ class KwikUtils
                     'desc' => $desc,
                 );
 
-                $callback = $v['type'];
+                $callback = $val['type'];
             }
-            add_settings_field(
-                $k, // id
-                $v['title'], // title
-                $callback, //callback, type or multi to insert multiple fields in single settings
-                $page,
-                $section, // section
-                $args
+        return array(
+            'type'      => $val['type'],
+            'title'     => $val['title'],
+            'args'      => $args,
+            'callback'  => $callback
             );
-            $current_field['desc'] = '';
-        }
     }
 
     public static function settings_sections($page, $settings)
@@ -487,7 +480,8 @@ class KwikUtils
             }
 
             $th = $inputs->markup('th', $title, array('scope' => 'row'));
-            $value = isset($settings[$field['id']]) ? $settings[$field['id']] : $field['args']['value'];
+            $val = isset($field['args']['value']) ? $field['args']['value'] : '';
+            $value = isset($settings[$field['id']]) ? $settings[$field['id']] : $val;
 
             if ($field['callback'] === 'multi') {
                 $field = $inputs->$field['callback'](
