@@ -3,23 +3,23 @@ jQuery(document).ready(function($) {
   // yes I am aware that binding events on document is lame
   // but sort of needed for this usage.
   $(document).on('click', '.upload_img, .img_prev', function() {
-    var button = $(this);
-    var _orig_send_attachment = wp.media.editor.send.attachment,
-        _custom_media = true;
+    var button = $(this),
+      field = button.parent('.kf_img_wrap'),
+      originSendAttachment = wp.media.editor.send.attachment,
+      customMedia = true;
+
+    $('.add_media').on('click', function() {
+      customMedia = false;
+    });
 
     wp.media.editor.send.attachment = function(props, attachment) {
-      if (_custom_media) {
-        var img_id = button.siblings('.img_id');
-        button.siblings('.img_title').html(attachment.title + '<span class="clear_img tooltip" title="Remove Image"></span>');
-        img_id.val(attachment.id);
-        img_id.trigger('change');
-        if (button.hasClass('img_prev')) {
-          button.attr('src', attachment.url);
-        } else {
-          button.siblings('.img_prev').attr('src', attachment.url);
-        }
+      if (customMedia) {
+        var imgID = $('.img-id', field);
+        $('.img_title', field).html(attachment.title + '<span class="clear_img tooltip" title="Remove Image"></span>');
+        imgID.val(attachment.id).trigger('change');
+        $('.img_prev', field).css('background-image', 'url(' + attachment.url + ')').removeClass('no-image');
       } else {
-        return _orig_send_attachment.apply(this, [props, attachment]);
+        return originSendAttachment.apply(this, [props, attachment]);
       }
     };
 
@@ -27,15 +27,11 @@ jQuery(document).ready(function($) {
     return false;
   });
 
-  $('.add_media').on('click', function() {
-    _custom_media = false;
-  });
-
-  $('.clear_img').live("click", function() {
-    var img_ttl = $(this).parent('.img_title');
-    img_ttl.empty();
-    img_ttl.siblings('.img_id').val('');
-    img_ttl.siblings('.img_prev').attr('src', '');
+  $('.clear_img').on('click', function() {
+    var field = $(this).parents('.kf_field:eq(0)');
+    $('.img_title', field).empty();
+    $('.img-id', field).val('');
+    $('.img_prev', field).css('background-image', 'none').addClass('no-image');
   });
 
   $('.kf_settings').tabs({
@@ -44,13 +40,13 @@ jQuery(document).ready(function($) {
     }
   });
 
-  $( "input, select, textarea", '.kf_option.error' ).keydown(function() {
-    var option_row = $(this).parents('tr');
-    if(!option_row.hasClass('error')) {
+  $('input, select, textarea', '.kf_option.error').keydown(function() {
+    var optionRow = $(this).parents('tr');
+    if (!optionRow.hasClass('error')) {
       return;
     }
-    option_row.removeClass('error');
-    $('.error_icon', option_row).fadeOut(500);
+    optionRow.removeClass('error');
+    $('.error_icon', optionRow).fadeOut(500);
   });
 
 });

@@ -18,11 +18,16 @@
 }
 /*---------------   IMG INPUT   ---------------*/
 
-.kf_img_wrap {} .kf_field .img_prev {
+.kf_img_wrap {}
+
+.kf_field .img_prev {
   float: left;
   background: url("../images/cpicker.png") repeat scroll -80px 0 transparent;
   border: 1px solid #CCCCCC;
   margin-right: -1px;
+  min-width: 25px;
+  min-height: 25px;
+  text-align: center;
 }
 .img_prev.transparent {
   display: block;

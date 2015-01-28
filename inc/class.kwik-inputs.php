@@ -3,108 +3,6 @@
 class KwikInputs
 {
 
-    public function positions()
-    {
-        $t = 'Top';
-        $r = 'Right';
-        $b = 'Bottom';
-        $l = 'Left';
-        $m = 'Middle';
-        $c = 'Center';
-        $z = '0';
-        $s = ' ';
-        $f = '50%';
-        $o = '100%';
-        $positions = array(
-            $z . $s . $z => $t . $s . $l, $z . $s . $f => $t . $s . $c, $z . $s . $o => $t . $s . $r, $f . $s . $z => $m . $s . $l,
-            $f . $s . $f => $m . $s . $c, $f . $s . $o => $m . $s . $r, $o . $s . $z => $b . $s . $l, $o . $s . $f => $b . $s . $c,
-            $o . $s . $o => $b . $s . $r,
-        );
-        return $positions;
-    }
-
-    public function repeat()
-    {
-        $R = 'Repeat';
-        $r = strtolower($R);
-        return array(
-            'no-' . $r => 'No ' . $R,
-            $r => $R,
-            $r . '-x' => $R . '-X',
-            $r . '-y' => $R . '-Y',
-        );
-    }
-
-    public function target()
-    {
-        $target = array(
-            '_blank' => __('New Window/Tab', 'kwik'),
-            '_self' => __('Same Window', 'kwik'),
-        );
-        return $target;
-    }
-
-    public function bg_size()
-    {
-        $bg_size = array(
-            'auto' => __('Default', 'kwik'),
-            '100% 100%' => __('Stretch', 'kwik'),
-            'cover' => __('Cover', 'kwik'),
-        );
-        return $bg_size;
-    }
-
-    public function bg_attachment()
-    {
-        $bg_attachment = array(
-            'scroll' => __('Scroll', 'kwik'),
-            'fixed' => __('Fixed', 'kwik'),
-        );
-        return $bg_attachment;
-    }
-
-    public function font_weights()
-    {
-        $font_weights = array(
-            'normal' => __('Normal', 'kwik'),
-            'bold' => __('Bold', 'kwik'),
-            'bolder' => __('Bolder', 'kwik'),
-            'lighter' => __('Lighter', 'kwik'),
-        );
-        return $font_weights;
-    }
-
-    public static function default_fonts()
-    {
-        $font_weights = array(
-            (object) array('family' => '“Helvetica Neue”'),
-            (object) array('family' => '“Baskerville Old Face”'),
-            (object) array('family' => '“Trebuchet MS”'),
-            (object) array('family' => '"Century Gothic"'),
-            (object) array('family' => '“Courier Bold"'),
-        );
-        return $font_weights;
-    }
-
-    public function order_by()
-    {
-        $order_by = array(
-            'menu_order' => __('Menu Order', 'kwik'),
-            'post_title' => __('Alphabetical', 'kwik'),
-            'post_date' => __('Post Date', 'kwik'),
-        );
-        return $order_by;
-    }
-
-    public function order()
-    {
-        $order = array(
-            'ASC' => __('Ascending', 'kwik'),
-            'DESC' => __('Descending', 'kwik'),
-        );
-        return $order;
-    }
-
     /**
      *****************************************
      * INPUTS --------------------------------
@@ -120,6 +18,11 @@ class KwikInputs
     {
         $output = '';
         $label = '';
+        $classes = array(
+            KF_PREFIX . 'field',
+            KF_PREFIX . 'wrap',
+            $attrs['name']
+        );
         if (isset($attrs['label']) && !is_null($attrs['label'])) {
             $label_attrs = array();
             if (isset($attrs['id'])) {
@@ -136,7 +39,7 @@ class KwikInputs
 
         if ($attrs['type'] !== 'hidden' && !is_null($attrs['type'])) {
             $output = $attrs['type'] !== 'checkbox' ? $label . $output : $output . $label;
-            $output = $this->markup('div', $output, array('class' => KF_PREFIX . 'field kf_' . $attrs['type'] . '_wrap'));
+            $output = $this->markup('div', $output, array('class' => $classes ));
         }
         return $output;
     }
@@ -173,55 +76,66 @@ class KwikInputs
     /**
      * Custom image input that uses the wordpress media library for uploading and storage
      * @param  [string] $name  name of input
-     * @param  [string] $val   id of stored image
+     * @param  [string] $value   id of stored image
      * @param  [string] $label
      * @param  [array]  $attrs additional attributes. Can customize size of image.
      * @return [string] returns markup for image input field
      */
-    public function img($name, $val, $label, $attrs = null)
+    public function img($name, $value, $label, $attrs = null)
     {
         if (!$attrs) {
             $attrs = array();
         }
         wp_enqueue_media();
         $output = '';
-        if ($val && !empty($val)) {
+
+        $img_attrs = array('class' => array('img_prev'));
+        if ($value && !empty($value)) {
             if (isset($attrs['img_size'])) {
                 $img_size = $attrs['img_size'];
                 unset($attrs['img_size']);
             } else {
                 $img_size = 'thumbnail';
             }
-            $thumb = wp_get_attachment_image_src($val, $img_size);
+            $thumb = wp_get_attachment_image_src($value, $img_size);
             $thumb = $thumb['0'];
-            $img_title = get_the_title($val);
             $remove_img = $this->markup('span', null, array('title' => __('Remove Image', 'kwik'), 'class' => 'clear_img tooltip'));
+            $img_attrs['title'] = get_the_title($value);
+            $img_attrs['style'] = "background-image:url({$thumb})";
+        } else {
+          array_push($img_attrs['class'], 'no-image');
         }
         $defaultAttrs = array(
             'type' => 'hidden',
             'name' => $name,
-            'class' => 'img_id',
-            'value' => $val,
+            'class' => 'img-id',
+            'value' => $value,
             'id' => $this->make_id($name),
+            'button-text' => '+ ' . __('IMG', 'kwik')
         );
         $attrs = array_merge($defaultAttrs, $attrs);
+        $classes = array(
+                    KF_PREFIX . 'field',
+                    KF_PREFIX . 'img_wrap',
+                    $attrs['name']
+                );
 
-        $img_attrs = array("src" => $thumb, "class" => "img_prev", "width" => "23", "height" => "23", "title" => $img_title);
-
+        $button_text = $attrs['button-text'];
+        unset($attrs['button-text']);
         $output .= $this->input($attrs);
         if ($label) {
             $output .= $this->markup('label', esc_attr($label));
         }
-        $output .= $this->markup('img', null, $img_attrs);
-        if ($thumb) {
-            $img_ttl = get_the_title($val);
-            $img_ttl = $img_ttl . $this->markup('span', null, array("class" => "clear_img", "tooltip" => __('Remove Image', 'kwik')));
+        $output .= $this->markup('div', null, $img_attrs);
+        if (isset($thumb)) {
+            $img_ttl = get_the_title($value);
+            $img_ttl = $img_ttl . $this->markup('span', null, array('class' => 'clear_img', 'tooltip' => __('Remove Image', 'kwik')));
         } else {
             $img_ttl = null;
         }
-        $output .= $this->markup('span', $img_ttl, array('class' => "img_title"));
-        $output .= $this->markup('button', '+ ' . __('IMG', 'kwik'), array('class' => "upload_img", "type" => "button"));
-        $output = $this->markup('div', $output, array('class' => KF_PREFIX . 'field kf_img_wrap'));
+        $output .= $this->markup('span', $img_ttl, array('class' => 'img_title'));
+        $output .= $this->markup('button', $button_text, array('class' => 'upload_img', 'type' => 'button'));
+        $output = $this->markup('div', $output, array('class' => $classes));
         return $output;
     }
 
@@ -265,7 +179,7 @@ class KwikInputs
         }
 
         $output .= $this->input($attrs);
-        $output .= $this->select($name . "[target]", $val['target'], null, null, $this->target());
+        $output .= $this->select($name . "[target]", $val['target'], null, null, KwikHelpers::target());
         $output = $this->markup('div', $output, array('class' => KF_PREFIX . 'link_wrap'));
 
         return $output;
@@ -362,7 +276,7 @@ class KwikInputs
             'label' => esc_attr($label),
         );
 
-        if (!is_null($val) && $val !== '' && $attrs['checked'] !== false) {
+        if (!is_null($val) && $val !== '' && (isset($attrs['checked']) && $attrs['checked'] === true)) {
             $defaultAttrs['checked'] = null;
         } else {
             unset($attrs['checked']);
@@ -445,7 +359,7 @@ class KwikInputs
                     'type' => 'select',
                     'title' => __('Weight', 'kwik'),
                     'value' => $val['font-weight'],
-                    'options' => $this->font_weights(),
+                    'options' => KwikHelpers::font_weights(),
                 ),
                 'font-size' => array(
                     'type' => 'spinner',
