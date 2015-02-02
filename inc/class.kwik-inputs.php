@@ -317,7 +317,7 @@ class KwikInputs
         }
 
         foreach ($options as $k => $v) {
-            $attrs['checked'] = $val[$k] ? true : false;
+            $attrs['checked'] = isset($val[$k]) ? true : false;
             $attrs['id'] = $defaultAttrs['id'] . '-' . $v;
             $output .= $this->cb($name . '[' . $k . ']', $v, $k, $attrs);
         }

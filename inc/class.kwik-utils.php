@@ -13,14 +13,14 @@ class KwikUtils
      */
     private function curl_get_result($url)
     {
-        $ch = curl_init();
+        $curl = curl_init();
         $timeout = 5;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-        $data = curl_exec($ch);
-        curl_close($ch);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
+        $data = curl_exec($curl);
+        curl_close($curl);
         return $data;
     }
 
@@ -134,30 +134,33 @@ class KwikUtils
      */
     public function get_real_ip()
     {
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-//check ip from share internet
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-//to check ip is pass from proxy
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $http_client_ip = filter_input(INPUT_SERVER, 'HTTP_CLIENT_IP', FILTER_SANITIZE_STRING);
+        $http_x_forwarded_for = filter_input(INPUT_SERVER, 'HTTP_X_FORWARDED_FOR', FILTER_SANITIZE_STRING);
+        $http_client_ip = filter_input(INPUT_SERVER, 'REMOTE_ADDR', FILTER_SANITIZE_STRING);
+        if (!empty($server['HTTP_CLIENT_IP'])) {
+            //check ip from share internet
+            $ip_addr = $server['HTTP_CLIENT_IP'];
+        } elseif (!empty($server['HTTP_X_FORWARDED_FOR'])) {
+            //to check ip is pass from proxy
+            $ip_addr = $server['HTTP_X_FORWARDED_FOR'];
         } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
+            $ip_addr = $server['REMOTE_ADDR'];
         }
-        return $ip;
+        return $ip_addr;
     }
 
     /**
      * taxonomies can be hierarchical, find the parent without context
-     * @param  [Number]  $id        current taxonomy ID
-     * @param  [Object]  $taxonomy  wordpress $taxonomy obect
-     * @param  boolean $link        [description]
-     * @param  string  $separator   ','
-     * @return [Object]             parent objects of current taxonomy
+     * @param  [number]  $tax_id    current taxonomy ID
+     * @param  [object]  $taxonomy  wordpress $taxonomy obect
+     * @param  [boolean] $link      [description]
+     * @param  [string]  $separator ','
+     * @return [object]             parent objects of current taxonomy
      */
-    public function get_taxonomy_parents($id, $taxonomy, $link = false, $separator = '/', $nicename = false, $visited = array())
+    public function get_taxonomy_parents($tax_id, $taxonomy, $link = false, $separator = '/', $nicename = false, $visited = array())
     {
         $chain = '';
-        $parent = &get_term($id, $taxonomy);
+        $parent = &get_term($tax_id, $taxonomy);
 
         if (is_wp_error($parent)) {
             return $parent;
@@ -184,45 +187,7 @@ class KwikUtils
     }
 
     /**
-     * Attempts to get the featured image for a given post
-     * if no featured image is set, one will be chosen from
-     * images attached to post, if none are attached it will
-     * randomly choose an image form the media library
-     *
-     * @param  [boolean] $random_fallback   - use random image from library if non available for current post
-     * @param  [boolean] $echo              - echo the output?
-     * @return [String]                     - <img> tag
-     */
-    public function featured_image($random_fallback = false, $echo = true)
-    {
-        $post_id = get_the_id();
-        if (has_post_thumbnail()) {
-            $thumb = get_the_post_thumbnail($post_id, 'thumbnail');
-        } else {
-            $attached_image = get_children("post_parent=" . $post_id . "&post_type=attachment&post_mime_type=image&numberposts=1");
-            if ($attached_image) {
-                $thumb = wp_get_attachment_image(key((array) $attached_image), 'thumbnail');
-            } else if ($random_fallback) {
-                $args = array(
-                    'post_type' => 'attachment',
-                    'post_mime_type' => 'image',
-                    'post_status' => 'inherit',
-                    'posts_per_page' => 1,
-                    'orderby' => 'rand',
-                );
-                $query_images = new WP_Query($args);
-                $thumb = wp_get_attachment_image($query_images->posts[0]->ID, 'thumbnail');
-            }
-        }
-        if (!$echo) {
-            return $thumb;
-        } else {
-            echo $thumb;
-        }
-    }
-
-    /**
-     * returns and array of all `_builtin` and custom post types
+     * returns an array of all `_builtin` and custom post types
      * @return [Array]
      */
     public function get_all_post_types()
@@ -230,28 +195,20 @@ class KwikUtils
         $all_post_types = array();
         $args = array(
             'public' => true,
-            '_builtin' => true,
+            '_builtin' => true
         );
         $output = 'objects'; // names or objects, note names is the default
         $operator = 'and'; // 'and' or 'or'
 
         $default_post_types = get_post_types($args, $output, $operator);
-
-        foreach ($default_post_types as $k => $v) {
-            $all_post_types[$k]['label'] = $v->labels->name;
-            $all_post_types[$k]['name'] = $v->name;
-        }
-
-        $args = array(
-            'public' => true,
-            '_builtin' => false,
-        );
-
+        $arg['_builtin'] = false;
         $custom_post_types = get_post_types($args, $output, $operator);
-
-        foreach ($custom_post_types as $k => $v) {
-            $all_post_types[$k]['label'] = $v->labels->name;
-            $all_post_types[$k]['name'] = $v->name;
+        $post_types = array_merge($default_post_types, $custom_post_types);
+        foreach ($post_types as $k => $v) {
+            $all_post_types[$k] = array(
+                'label' => $v->labels->name,
+                'name' => $v->name
+                );
         }
 
         array_push($all_post_types, array('name' => '404', 'label' => __('404 Not Found', 'kwik')));
@@ -313,197 +270,6 @@ class KwikUtils
         } else {
             return $str;
         }
-    }
-
-    /**
-     * Starts building the settings page and section for plugin or theme
-     * @param  [String] $name     'my-plugin'
-     * @param  [String] $page     'my-plugin-settings'
-     * @param  [Array]  $settings default settings array
-     */
-    public function settings_init($name, $page, $settings)
-    {
-        $validate = new KwikValidate($settings);
-        wp_enqueue_script('jquery-ui-tabs');
-        $options = get_option($page);
-        foreach ($settings as $section => $val) {
-            register_setting($page, $page, array($validate, 'validate_settings'));
-            add_settings_section(
-                $section, // section id
-                $val['section_title'],
-                $val['section_desc'], // callback for section
-                $page
-            );
-            $this->add_kf_fields($val['settings'], $section, $page, $settings);
-        }
-    }
-
-    /**
-     * Registers fields to sections of your settings page
-     * @param [Array]  $fields   array of fields for current section
-     * @param [String] $section  section fields are being added to
-     * @param [String] $page     setting namespace the field is being added to
-     * @param [Array]  $settings default settings array to iterate through
-     */
-    private function add_kf_fields($fields, $section, $page, $settings)
-    {
-        foreach ($fields as $k => $v) {
-            $current_field = $settings[$section]['settings'][$k];
-            $formatted_field = $this->format_fields_vars($current_field, $v);
-            add_settings_field(
-                $k, // id
-                $formatted_field['title'], // title
-                $formatted_field['callback'], //callback, type or multi to insert multiple fields in single settings
-                $page,
-                $section, // section
-                $formatted_field['args']
-            );
-            $current_field['desc'] = '';
-        }
-    }
-
-    /**
-     * Formats the properties of a field array
-     * @param  [array]   $current_field the current field in our iteration
-     * @param  [dynamic] $val           value of the current field
-     * @return [array]               formatted field array
-     * @todo cleanup
-     */
-    private function format_fields_vars($current_field, $val){
-        $desc = isset($current_field['desc']) ? $current_field['desc'] : null;
-        if (!isset($val['type']) || (isset($val['type']) && $val['type'] === 'multi')) {
-            $val['type'] = 'multi';
-            $args = array(
-                'desc' => $desc,
-                'attrs' => array('fields' => $current_field['fields']),
-                'options' => null,
-            );
-            $callback = 'multi';
-        } else {
-            $args = array(
-                'value' => isset($current_field['value']) ? $current_field['value'] : null,
-                'desc' => $desc,
-                'attrs' => isset($current_field['attrs']) ? $current_field['attrs'] : null,
-                'options' => isset($current_field['options']) ? $current_field['options'] : null
-            );
-
-            $callback = $val['type'];
-        }
-        return array(
-            'type'      => $val['type'],
-            'title'     => $val['title'],
-            'args'      => $args,
-            'callback'  => $callback
-            );
-    }
-
-    public static function settings_sections($page, $settings)
-    {
-        $inputs = new KwikInputs();
-        global $wp_settings_sections;
-
-        if (!isset($wp_settings_sections) || !isset($wp_settings_sections[$page])) {
-            return;
-        }
-        $settings_sections = $wp_settings_sections[$page];
-
-        $output = self::build_section_nav($settings_sections);
-        $output .= self::build_sections($settings_sections, $page, $settings);
-
-        return $inputs->markup('div', $output, array('class' => KF_PREFIX . 'settings'));
-    }
-
-    private static function build_section_nav($sections)
-    {
-        $section_nav = '';
-        $inputs = new KwikInputs();
-        foreach ((array) $sections as $section) {
-            $nav_link = $inputs->markup('a', $section['title'], array('href' => '#' . KF_PREFIX . $section['id']));
-            $section_nav .= $inputs->markup('li', $nav_link);
-        }
-        $section_nav .= $inputs->markup('li', get_submit_button(__('Save', 'kwik')), array("class" => 'kf_submit'));
-        return $inputs->markup('ul', $section_nav, array('class' => KF_PREFIX . 'settings_index'));
-    }
-
-    /**
-     * build markup for each section of our settings page
-     * @param  [Array] $settings_sections    array of sections containing title, description
-     * @param  [String] $page
-     * @param  [Array] $settings
-     * @return [String]                      markup for each section and its fields
-     */
-    private static function build_sections($settings_sections, $page, $settings)
-    {
-        global $wp_settings_fields;
-        $inputs = new KwikInputs();
-        $sections = '';
-        foreach ((array) $settings_sections as $section) {
-            $cur_section = !empty($section['title']) ? $inputs->markup('h3', $section['title']) : "";
-            $cur_section .= $inputs->markup('p', $section['callback']);
-            if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][$section['id']])) {
-                continue;
-            }
-            $settings_fields = self::settings_fields($page, $section['id'], $settings);
-            $cur_section .= $inputs->markup('table', $settings_fields, array('class' => 'form-table'));
-            $sections .= $inputs->markup('div', $cur_section, array('class' => KF_PREFIX . 'options_panel', 'id' => KF_PREFIX . $section['id']));
-        }
-        return $sections;
-    }
-
-    private static function settings_fields($page, $section, $settings)
-    {
-        $inputs = new KwikInputs();
-        $errors = get_settings_errors();
-        $output = '';
-
-        global $wp_settings_fields;
-        if (!isset($wp_settings_fields) || !isset($wp_settings_fields[$page]) || !isset($wp_settings_fields[$page][$section])) {
-            return;
-        }
-
-        $sectionFields = (array) $wp_settings_fields[$page][$section];
-
-        foreach ($sectionFields as $field) {
-            $error_class = '';
-            $id = esc_attr($field['id']);
-            $type = $field['callback'];
-
-            $title = $field['title'];
-
-            if ($field['args']['desc']) {
-                $desc = $inputs->markup('span', '', array('class' => 'dashicons ks_info_tip', 'tooltip' => $field['args']['desc']));
-                $title .= ' ' . $desc;
-            }
-
-            $setting_error = get_settings_errors($id);
-
-            if (isset($setting_error[0])) {
-                $error_icon = $inputs->markup('span', '!', array('class' => 'error_icon', 'tooltip' => $setting_error[0]['message']));
-                $title = $title . $error_icon;
-                $error_class = 'error';
-            }
-
-            if (!empty($field['args']['label_for'])) {
-                $field['title'] = $inputs->markup('label', $title, array('for' => $field['args']['label_for']));
-            }
-
-            $th = $inputs->markup('th', $title, array('scope' => 'row'));
-            $val = isset($field['args']['value']) ? $field['args']['value'] : '';
-            $value = isset($settings[$id]) ? $settings[$id] : $val;
-
-            $field = $inputs->$field['callback'](
-                $page . '[' . $id . ']', // name
-                $value, // value
-                null, // label
-                $field['args']['attrs'],
-                $field['args']['options']// options
-            );
-
-            $td = $inputs->markup('td', $field);
-            $output .= $inputs->markup('tr', $th . $td, array('valign' => 'top', 'class' => array($id, KF_PREFIX . 'option', 'type-' . $type, $error_class)));
-
-        }
-        return $output;
     }
 
     /**

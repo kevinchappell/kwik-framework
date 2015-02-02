@@ -29,9 +29,9 @@ function my_plugin_add_admin_menu() {
 }
 
 function my_plugin_settings_init() {
-  $utils = new KwikUtils();
+  $kwik_settings = new KwikSettings();
   $defaultSettings = my_plugin_default_options();
-  $utils->settingsInit(MyPlugin, 'my-plugin', $defaultSettings);
+  $kwik_settings->settings_init(MyPlugin, 'my-plugin', $defaultSettings);
 }
 
 function kwik_framework_settings() {
@@ -41,10 +41,9 @@ function kwik_framework_settings() {
     echo KwikInputs::markup('p', __('Set the API keys and other options for your website. Kwik Framework needs these settings to connect to Google fonts and other APIs.','kwik'));
     echo '<form action="options.php" method="post">';
       settings_fields('my-plugin');
-      echo KwikUtils::settings_sections('my-plugin', $settings);
+      echo KwikSettings::settings_sections('my-plugin', $settings);
     echo '</form>';
   echo '</div>';
-  echo KwikInputs::markup('div', $output, array('class'=>'wrap'));
 }
 
 function my_plugin_get_options() {
