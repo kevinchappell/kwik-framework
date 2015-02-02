@@ -18,7 +18,6 @@ Class KwikSettings{
 
     public static function get_meta_array($post_id, $key) {
         $meta_array = get_post_meta($post_id, $key, false);
-        var_dump($meta_array);
         return $meta_array[0];
     }
 

@@ -149,9 +149,19 @@ class KwikValidate extends KwikInputs
         return $val;
     }
 
-    public function multi($key, $val, $args)
+    /**
+     * Validate each field in a `multi` input.
+     * @param  [string]  $name    name/key of the field
+     * @param  [dynamic] $value   string, array or boolean
+     * @param  [string]  $label   title of the field
+     * @param  [array]   $attrs   fields attributes
+     * @param  [array]   $options key value pairs for select input
+     * @return [array]            validated inputs
+     * @todo  actually validate each input...
+     */
+    public function multi($name, $value, $label, $attrs = null, $options = null)
     {
-        return $val;
+        return $value;
     }
 
     /**
@@ -173,8 +183,13 @@ class KwikValidate extends KwikInputs
             if (!isset($addr['type'])) {
                 $addr['type'] = 'multi';
             }
+
+            $attrs = isset($addr['attrs']) ? : null;
+            $options = isset($addr['options']) ? : null;
+            $label = isset($addr['title']) ? : null;
+
             //validate field by type
-            $setting[$key] = $this->$addr['type']($key, $val);
+            $setting[$key] = $this->$addr['type']($key, $val, $label, $attrs, $options);
             unset($addr);
         }
         return $setting;

@@ -21,7 +21,7 @@ class KwikInputs
         $classes = array(
             KF_PREFIX . 'field',
             KF_PREFIX . 'wrap',
-            $attrs['name']
+            $this->make_id($attrs['name'])
         );
         if (isset($attrs['label']) && !is_null($attrs['label'])) {
             $label_attrs = array();
@@ -46,27 +46,36 @@ class KwikInputs
 
     /**
      * Use multiple fields for a single option. Useful for generating
-     * width/height or geocoordinates array.
+     * width/height or geocoordinates array. Can be called recursively
      * @param  [String]   $name   name of the field or option
      * @param  [Dynamic]  $value  [description]
      * @param  [Array]    $args   Holds the Array of inputs to be generated
      * @return [String]           Genearated markup of inputs sharing a single name
      */
-    public function multi($name, $value, $args)
+    public function multi($name, $value, $label, $attrs = null, $options = null)
     {
         $output = '';
-        $fields = $args['fields'];
+        if(!isset($attrs['fields'])){
+          return ;
+        }
+        $fields = $attrs['fields'];
+        unset($attrs['fields']);
         foreach ($fields as $k => $v) {
-            $val = isset($value[$k]) ? $value[$k] : $args['fields'][$k]['value'];
-            $v['options'] = isset($v['options']) ? $v['options'] : null;
-            $v['attrs'] = isset($v['attrs']) ? $v['attrs'] : null;
+            $type       = isset($v['type']) ? $v['type'] : 'multi';
+            $val        = isset($value[$k]) ? $value[$k] : null;
+            $attrs      = isset($v['attrs']) ? $v['attrs'] : array();
+            $options    = isset($v['options']) ? $v['options'] : null;
+            $title      = isset($v['title']) ? $v['title'] : null;
 
-            $output .= $this->$v['type'](
+            if(isset($fields[$k]['fields'])){
+                $attrs['fields'] = $fields[$k]['fields'];
+            }
+            $output .= $this->$type(
                 $name . '[' . $k . ']', // name
-                isset($value[$k]) ? $value[$k] : null, // value
-                $v['title'], // label
-                $v['attrs'], // array or attributes
-                $v['options']// array of `<options>` if this is a `<select>`
+                $val, // value
+                $title, // label
+                $attrs, // array or attributes
+                $options// array of `<options>` if this is a `<select>`
             );
         }
 
@@ -162,6 +171,10 @@ class KwikInputs
     {
         $output = '';
 
+        // @todo clean this up.
+        $val['url'] = isset($val['url']) ? $val['url'] : null;
+        $val['target'] = isset($val['target']) ? $val['target'] : null;
+
         $defaultAttrs = array(
             'type' => 'text',
             'name' => $name . "[url]",
@@ -252,7 +265,7 @@ class KwikInputs
             'kcToggle' => null,
         );
 
-        if (!is_null($val) && $val !== "") {
+        if (!is_null($val) && $val !== '' && (isset($attrs['checked']) && $attrs['checked'] === true) || $val === '1') {
             $defaultAttrs["checked"] = "checked";
         }
 
@@ -276,7 +289,7 @@ class KwikInputs
             'label' => esc_attr($label),
         );
 
-        if (!is_null($val) && $val !== '' && (isset($attrs['checked']) && $attrs['checked'] === true)) {
+        if (!is_null($val) && $val !== '' && (isset($attrs['checked']) && $attrs['checked'] === true) || $val === '1') {
             $defaultAttrs['checked'] = null;
         } else {
             unset($attrs['checked']);
@@ -348,7 +361,7 @@ class KwikInputs
     public function font($name, $val, $label = null)
     {
         $output = '';
-        $fields = array(
+        $attrs = array(
             'fields' => array(
                 'color' => array(
                     'type' => 'color',
@@ -383,7 +396,7 @@ class KwikInputs
             $output .= $this->markup('label', esc_attr($label));
         }
 
-        $output .= $this->multi($name, $val, $fields);
+        $output .= $this->multi($name, $val, $label, $attrs);
 
         return $output;
     }

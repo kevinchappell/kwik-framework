@@ -362,25 +362,33 @@ class KwikUtils
         }
     }
 
+    /**
+     * Formats the properties of a field array
+     * @param  [array]   $current_field the current field in our iteration
+     * @param  [dynamic] $val           value of the current field
+     * @return [array]               formatted field array
+     * @todo cleanup
+     */
     private function format_fields_vars($current_field, $val){
         $desc = isset($current_field['desc']) ? $current_field['desc'] : null;
-            if (!isset($val['type']) || (isset($val['type']) && $val['type'] === 'multi')) {
-                $val['type'] = 'multi';
-                $args = array(
-                    'fields' => $current_field['fields'],
-                    'desc' => $desc,
-                );
-                $callback = 'multi';
-            } else {
-                $args = array(
-                    'value' => isset($current_field['value']) ? $current_field['value'] : null,
-                    'options' => isset($current_field['options']) ? $current_field['options'] : null,
-                    'attrs' => isset($current_field['attrs']) ? $current_field['attrs'] : null,
-                    'desc' => $desc,
-                );
+        if (!isset($val['type']) || (isset($val['type']) && $val['type'] === 'multi')) {
+            $val['type'] = 'multi';
+            $args = array(
+                'desc' => $desc,
+                'attrs' => array('fields' => $current_field['fields']),
+                'options' => null,
+            );
+            $callback = 'multi';
+        } else {
+            $args = array(
+                'value' => isset($current_field['value']) ? $current_field['value'] : null,
+                'desc' => $desc,
+                'attrs' => isset($current_field['attrs']) ? $current_field['attrs'] : null,
+                'options' => isset($current_field['options']) ? $current_field['options'] : null
+            );
 
-                $callback = $val['type'];
-            }
+            $callback = $val['type'];
+        }
         return array(
             'type'      => $val['type'],
             'title'     => $val['title'],
@@ -481,23 +489,15 @@ class KwikUtils
 
             $th = $inputs->markup('th', $title, array('scope' => 'row'));
             $val = isset($field['args']['value']) ? $field['args']['value'] : '';
-            $value = isset($settings[$field['id']]) ? $settings[$field['id']] : $val;
+            $value = isset($settings[$id]) ? $settings[$id] : $val;
 
-            if ($field['callback'] === 'multi') {
-                $field = $inputs->$field['callback'](
-                    $page . '[' . $id . ']', // name
-                    $value, // value`
-                    $field['args']
-                );
-            } else {
-                $field = $inputs->$field['callback'](
-                    $page . '[' . $id . ']', // name
-                    $value, // value
-                    null, // label
-                    $field['args']['attrs'],
-                    $field['args']['options']// options
-                );
-            }
+            $field = $inputs->$field['callback'](
+                $page . '[' . $id . ']', // name
+                $value, // value
+                null, // label
+                $field['args']['attrs'],
+                $field['args']['options']// options
+            );
 
             $td = $inputs->markup('td', $field);
             $output .= $inputs->markup('tr', $th . $td, array('valign' => 'top', 'class' => array($id, KF_PREFIX . 'option', 'type-' . $type, $error_class)));
