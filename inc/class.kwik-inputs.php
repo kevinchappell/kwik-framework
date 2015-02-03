@@ -126,7 +126,7 @@ class KwikInputs
         $classes = array(
                     KF_PREFIX . 'field',
                     KF_PREFIX . 'img_wrap',
-                    $attrs['name']
+                    $this->make_id($attrs['name'])
                 );
 
         $button_text = $attrs['button-text'];

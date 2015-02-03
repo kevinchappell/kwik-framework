@@ -4,7 +4,6 @@ add_action('admin_init', 'kf_settings_init');
 
 function kf_add_admin_menu()
 {
-    // add_submenu_page( 'edit.php?post_type=kwik-framework', __('Kwik Framework Settings', 'kwik'), __('Settings', 'kwik'), 'manage_options', 'kwik_framework', KF_FUNC );
     add_options_page('Kwik Framework Settings', 'Kwik Framework', 'manage_options', KF_FUNC, KF_FUNC . '_settings');
 }
 

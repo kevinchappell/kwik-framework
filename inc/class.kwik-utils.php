@@ -265,7 +265,6 @@ class KwikUtils
                 return rtrim($matches[1]) . $delim;
             } else {
                 return substr($str, 0, $n) . $delim;
-
             }
         } else {
             return $str;
