@@ -11,14 +11,18 @@ Class KwikMeta{
 
     public static function get_meta_array($post_id, $key) {
         $meta_array = get_post_meta($post_id, $key, false);
-        return ( is_array($meta_array) && isset($meta_array[0]) ) ? $meta_array[0] : $meta_array;
+        return (is_array($meta_array) && isset($meta_array[0]) ) ? $meta_array[0] : $meta_array;
     }
 
-    public function get_fields($post, $field_group)
+    public function get_fields($post, $field_group, $fields = null)
     {
-        $field_vals = self::get_meta_array($post->ID, $field_group);
-        $fields = get_transient($field_group);
+        if($fields){
+            set_transient($field_group, $fields, WEEK_IN_SECONDS );
+        } else {
+            $fields = get_transient($field_group);
+        }
         $flat_fields = $this->flattened_field_array($fields);
+        $field_vals = self::get_meta_array($post->ID, $field_group);
         $flat_field_vals = $this->merge_vals($flat_fields, $field_vals);
 
         return $this->generate_fields($flat_field_vals, $field_group);
@@ -46,7 +50,7 @@ Class KwikMeta{
     public function generate_fields($fields, $field_group)
     {
         $inputs = new KwikInputs();
-        $output = $inputs->nonce($field_group . '_nonce', wp_create_nonce(plugin_basename(__FILE__)));
+        $output = $inputs->nonce($field_group . '_nonce', wp_create_nonce($field_group));
 
         foreach ($fields as $key => $value) {
             $name = $field_group.'['.$key.']';
@@ -71,8 +75,7 @@ Class KwikMeta{
         foreach ($fields as $key => $value) {
             $field_vals[$key] = isset($post[$field_group][$key]) ? $post[$field_group][$key] : $fields[$key]['value'];
         }
-
-        if (!wp_verify_nonce($post[$field_group.'_nonce'], plugin_basename(__FILE__))) {
+        if (!wp_verify_nonce($post[$field_group.'_nonce'], $field_group)) {
             return $the_post->ID;
         }
 

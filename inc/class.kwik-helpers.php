@@ -5,43 +5,35 @@ class KwikHelpers
 
     public static function positions()
     {
-        $t = 'Top';
-        $r = 'Right';
-        $b = 'Bottom';
-        $l = 'Left';
-        $m = 'Middle';
-        $c = 'Center';
-        $z = '0';
-        $s = ' ';
-        $f = '50%';
-        $o = '100%';
-        $positions = array(
-            $z . $s . $z => $t . $s . $l, $z . $s . $f => $t . $s . $c, $z . $s . $o => $t . $s . $r, $f . $s . $z => $m . $s . $l,
-            $f . $s . $f => $m . $s . $c, $f . $s . $o => $m . $s . $r, $o . $s . $z => $b . $s . $l, $o . $s . $f => $b . $s . $c,
-            $o . $s . $o => $b . $s . $r,
+        return array(
+            '0 0' => 'Top Left',
+            '0 50%' => 'Top Center',
+            '0 100%' => 'Top Right',
+            '50% 0' => 'Middle Left',
+            '50% 50%' => 'Middle Center',
+            '50% 100%' => 'Middle Right',
+            '100% 0' => 'Bottom Left',
+            '100% 50%' => 'Bottom Center',
+            '100% 100%' => 'Bottom Right'
         );
-        return $positions;
     }
 
     public static function repeat()
     {
-        $R = 'Repeat';
-        $r = strtolower($R);
         return array(
-            'no-' . $r => 'No ' . $R,
-            $r => $R,
-            $r . '-x' => $R . '-X',
-            $r . '-y' => $R . '-Y',
+            'no-repeat' => 'No Repeat',
+            'repeat' => 'Repeat',
+            'repeat-x' => 'Repeat-X',
+            'repeat-y' => 'Repeat-Y'
         );
     }
 
     public static function target()
     {
-        $target = array(
+        return array(
             '_blank' => __('New Window/Tab', 'kwik'),
             '_self' => __('Same Window', 'kwik'),
         );
-        return $target;
     }
 
     public static function bg_size()

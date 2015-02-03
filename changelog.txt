@@ -1,0 +1,28 @@
+== Changelog ==
+
+= .5.6 =
+* KwikSettings bug fix and add changelog
+= .5.5 =
+* Refactored KwikSettings and KwikUtils
+* KwikSettings is now its own class- shortening KwikUtils and improving code quality
+* Version increase to more appropriate number.
+= .1.6 =
+* Added KwikMeta, a class for creating custom fields, handles saving, creation and authentication of fields.
+= .1.5.7 =
+* added annotation, refactor and cleanup code
+= .1.5.6 =
+* KwikUtils is now `strict` mode compliant
+= .1.5.5 =
+* more annotations added
+= .1.5.4 =
+* added checkbox custom field types and accompanying validators
+= .1.5.3 =
+* Latest Posts widget category filter fix
+= .1.5.2 =
+* added URL utilities
+* added KwikColors class
+= .1.5 =
+* added cpt_at_a_glance
+* bitly class (unused)
+= .1 =
+* initial commit
