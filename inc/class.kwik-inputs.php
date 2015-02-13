@@ -4,15 +4,15 @@ class KwikInputs
 {
 
     /**
-     *****************************************
+     * ****************************************
      * INPUTS --------------------------------
-     *****************************************
+     * ****************************************
      */
 
     /**
      * Generate markup for input field
      * @param  [Object] $attrs Object with properties for field attributes
-     * @return [String]        markup for desired input field
+     * @return [String] markup for desired input field
      */
     public function input($attrs)
     {
@@ -21,7 +21,7 @@ class KwikInputs
         $classes = array(
             KF_PREFIX . 'field',
             KF_PREFIX . 'wrap',
-            $this->make_id($attrs['name'])
+            $this->make_id($attrs['name']),
         );
         if (isset($attrs['label']) && !is_null($attrs['label'])) {
             $label_attrs = array();
@@ -39,7 +39,7 @@ class KwikInputs
 
         if ($attrs['type'] !== 'hidden' && !is_null($attrs['type'])) {
             $output = $attrs['type'] !== 'checkbox' ? $label . $output : $output . $label;
-            $output = $this->markup('div', $output, array('class' => $classes ));
+            $output = $this->markup('div', $output, array('class' => $classes));
         }
         return $output;
     }
@@ -47,27 +47,27 @@ class KwikInputs
     /**
      * Use multiple fields for a single option. Useful for generating
      * width/height or geocoordinates array. Can be called recursively
-     * @param  [String]   $name   name of the field or option
-     * @param  [Dynamic]  $value  [description]
-     * @param  [Array]    $args   Holds the Array of inputs to be generated
-     * @return [String]           Genearated markup of inputs sharing a single name
+     * @param  [String]  $name      name of the field or option
+     * @param  [Dynamic] $value     [description]
+     * @param  [Array]   $args      Holds the Array of inputs to be generated
+     * @return [String]  Genearated markup of inputs sharing a single name
      */
     public function multi($name, $value, $label, $attrs = null, $options = null)
     {
         $output = '';
-        if(!isset($attrs['fields'])){
-          return ;
+        if (!isset($attrs['fields'])) {
+            return;
         }
         $fields = $attrs['fields'];
         unset($attrs['fields']);
         foreach ($fields as $k => $v) {
-            $type       = isset($v['type']) ? $v['type'] : 'multi';
-            $val        = isset($value[$k]) ? $value[$k] : null;
-            $attrs      = isset($v['attrs']) ? $v['attrs'] : array();
-            $options    = isset($v['options']) ? $v['options'] : null;
-            $title      = isset($v['title']) ? $v['title'] : null;
+            $type = isset($v['type']) ? $v['type'] : 'multi';
+            $val = isset($value[$k]) ? $value[$k] : null;
+            $attrs = isset($v['attrs']) ? $v['attrs'] : array();
+            $options = isset($v['options']) ? $v['options'] : null;
+            $title = isset($v['title']) ? $v['title'] : null;
 
-            if(isset($fields[$k]['fields'])){
+            if (isset($fields[$k]['fields'])) {
                 $attrs['fields'] = $fields[$k]['fields'];
             }
             $output .= $this->$type(
@@ -75,7 +75,7 @@ class KwikInputs
                 $val, // value
                 $title, // label
                 $attrs, // array or attributes
-                $options// array of `<options>` if this is a `<select>`
+                $options // array of `<options>` if this is a `<select>`
             );
         }
 
@@ -84,10 +84,10 @@ class KwikInputs
 
     /**
      * Custom image input that uses the wordpress media library for uploading and storage
-     * @param  [string] $name  name of input
+     * @param  [string] $name    name of input
      * @param  [string] $value   id of stored image
      * @param  [string] $label
-     * @param  [array]  $attrs additional attributes. Can customize size of image.
+     * @param  [array]  $attrs   additional attributes. Can customize size of image.
      * @return [string] returns markup for image input field
      */
     public function img($name, $value, $label, $attrs = null)
@@ -112,7 +112,7 @@ class KwikInputs
             $img_attrs['title'] = get_the_title($value);
             $img_attrs['style'] = "background-image:url({$thumb})";
         } else {
-          array_push($img_attrs['class'], 'no-image');
+            array_push($img_attrs['class'], 'no-image');
         }
         $defaultAttrs = array(
             'type' => 'hidden',
@@ -120,14 +120,14 @@ class KwikInputs
             'class' => 'img-id',
             'value' => $value,
             'id' => $this->make_id($name),
-            'button-text' => '+ ' . __('IMG', 'kwik')
+            'button-text' => '+ ' . __('IMG', 'kwik'),
         );
         $attrs = array_merge($defaultAttrs, $attrs);
         $classes = array(
-                    KF_PREFIX . 'field',
-                    KF_PREFIX . 'img_wrap',
-                    $this->make_id($attrs['name'])
-                );
+            KF_PREFIX . 'field',
+            KF_PREFIX . 'img_wrap',
+            $this->make_id($attrs['name']),
+        );
 
         $button_text = $attrs['button-text'];
         unset($attrs['button-text']);
@@ -415,8 +415,8 @@ class KwikInputs
 
     /**
      * Takes an array of attributes and expands and returns them formatted for markup
-     * @param  [Array] $attrs Array of attributes
-     * @return [String]       attributes as strings ie. `name="the_name" class="the_class"`
+     * @param  [Array]  $attrs     Array of attributes
+     * @return [String] attributes as strings ie. `name="the_name" class="the_class"`
      */
     private static function attrs($attrs)
     {
@@ -454,19 +454,19 @@ class KwikInputs
 
         $markup = '<' . $tag . ' ' . self::attrs($attrs) . ' ' . ($no_close ? '/' : '') . '>';
         if ($content) {
-            $c = '';
+            $contents = '';
             if (is_array($content)) {
                 foreach ($content as $key => $value) {
                     if (is_array($value)) {
-                        $c .= implode($value);
+                        $contents .= implode($value);
                     } elseif (is_string($value)) {
-                        $c .= $value;
+                        $contents .= $value;
                     }
                 }
             } else {
-                $c = $content;
+                $contents = $content;
             }
-            $markup .= $c;
+            $markup .= $contents;
         }
         if (!$no_close) {
             $markup .= '</' . $tag . '>';

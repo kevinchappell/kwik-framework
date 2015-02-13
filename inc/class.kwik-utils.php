@@ -8,8 +8,8 @@ class KwikUtils
 
     /**
      * does cURL to the url provided
-     * @param  [String] $url
-     * @return [Dynamic]      data found at $url
+     * @param  [String]  $url
+     * @return [Dynamic] data found at $url
      */
     private function curl_get_result($url)
     {
@@ -26,8 +26,8 @@ class KwikUtils
 
     /**
      * fetch a resource using cURL then cache for next use.
-     * @param  [String] $url    - url of the resource to be fetched
-     * @param  [String] $type   - type of resource to be fetched (fonts, tweets, etc)
+     * @param  [String] $url  - url of the resource to be fetched
+     * @param  [String] $type - type of resource to be fetched (fonts, tweets, etc)
      * @return [JSON]
      */
     private function fetch_cached_resource($url, $type, $expire)
@@ -75,8 +75,8 @@ class KwikUtils
 
     /**
      * parse out the domain name from a url string
-     * @param  [String] $url  'http://sub.domain.com'
-     * @return [String]      'domain.com'
+     * @param  [String] $url           'http://sub.domain.com'
+     * @return [String] 'domain.com'
      */
     public function get_domain($url)
     {
@@ -112,7 +112,7 @@ class KwikUtils
      * get the number of widgets in a sidebar
      * @param  [Number]  $sidebar_id - id of the sidebar whose wigets you need a count of
      * @param  [Boolean] $echo       to echo or not to echo
-     * @return [Number]              3
+     * @return [Number]  3
      */
     public function widget_count($sidebar_id, $echo = true)
     {
@@ -155,7 +155,7 @@ class KwikUtils
      * @param  [object]  $taxonomy  wordpress $taxonomy obect
      * @param  [boolean] $link      [description]
      * @param  [string]  $separator ','
-     * @return [object]             parent objects of current taxonomy
+     * @return [object]  parent objects of current taxonomy
      */
     public function get_taxonomy_parents($tax_id, $taxonomy, $link = false, $separator = '/', $nicename = false, $visited = array())
     {
@@ -195,7 +195,7 @@ class KwikUtils
         $all_post_types = array();
         $args = array(
             'public' => true,
-            '_builtin' => true
+            '_builtin' => true,
         );
         $output = 'objects'; // names or objects, note names is the default
         $operator = 'and'; // 'and' or 'or'
@@ -207,8 +207,8 @@ class KwikUtils
         foreach ($post_types as $k => $v) {
             $all_post_types[$k] = array(
                 'label' => $v->labels->name,
-                'name' => $v->name
-                );
+                'name' => $v->name,
+            );
         }
 
         array_push($all_post_types, array('name' => '404', 'label' => __('404 Not Found', 'kwik')));
@@ -217,10 +217,10 @@ class KwikUtils
     }
 
     /**
-     * convert a number to english
-     * @param  [Number]  $num
-     * @param  Boolean $echo
-     * @return [String]        'zero'
+     * Convert a number to english
+     * @param  [int]      $num  number to convert
+     * @param  [boolean[] $echo echo or return
+     * @return [string] 'zero' string that is returned
      */
     public function number_to_string($num, $echo = false)
     {
@@ -233,10 +233,10 @@ class KwikUtils
     }
 
     /**
-     * number to english fraction
-     * @param  [Number]   $num    2
-     * @param  boolean    $echo
-     * @return [String]           halves
+     * Number to english fraction
+     * @param  [Number] $num 2
+     * @param  boolean  $echo
+     * @return [String] halves
      */
     public function number_to_class($num, $echo = false)
     {
@@ -249,12 +249,12 @@ class KwikUtils
     }
 
     /**
-     * text truncation by hard limit or by word
-     * @param  [String]   $str    'Lorem ipsum dolemite'
-     * @param  [Number]   $n      10
-     * @param  string     $delim  '&hellip'
-     * @param  boolean    $neat   trim by word
-     * @return [String]             Lorem ipsum...
+     * Text truncation by hard limit or by word
+     * @param  [String] $str   'Lorem ipsum dolemite'
+     * @param  [Number] $n     10
+     * @param  string   $delim '&hellip'
+     * @param  boolean  $neat  trim by word
+     * @return [String] Lorem ipsum...
      */
     public static function neat_trim($str, $n, $delim = '&hellip;', $neat = true)
     {
@@ -273,8 +273,8 @@ class KwikUtils
 
     /**
      * Adds a custom post to to the admin dashboard `At a Glance`
-     * @param  [String] $cpt  name of the custom post type to be added
-     * @return [String]       markup for custom at a glance dashboard widgets
+     * @param  [String] $cpt name of the custom post type to be added
+     * @return [String] markup for custom at a glance dashboard widgets
      */
     public static function cpt_at_a_glance($cpt)
     {
@@ -286,16 +286,20 @@ class KwikUtils
     }
 
     /**
-     * generate text styles
-     * @param  [Array] $option  array('color' => #333333, 'style' => array('Bold'=>'bold'))
-     * @return [String]         css
+     * Generate text styles
+     * @param  [Array] $option array('color' => #333333, 'style' => array('Bold'=>'bold'))
+     * @return [String] css
      */
     public static function text_style($option)
     {
-        $css = $option['color'] !== '' ? 'color:' . $option['color'] . ';' : '';
-        $css .= isset($option['style']['Bold']) ? 'font-weight:' . $option['style']['Bold'] . ';' : '';
-        $css .= isset($option['style']['Underlined']) ? 'text-decoration:' . $option['style']['Underlined'] . ';' : '';
-        $css .= isset($option['style']['Italic']) ? 'font-style:' . $option['style']['Italic'] . ';' : '';
+        $option = array_filter($option);
+        $css = '';
+        array_walk($option, array('KwikHelpers', 'css_map'));
+
+        foreach ($option as $key => $value) {
+            $css .= $key.':'.$value.";\n";
+        }
+
         return $css;
     }
 
@@ -311,7 +315,7 @@ class KwikUtils
             } else if (in_array($key, $suffix_px)) {
                 $suffix = 'px';
             }
-            $css .= $option[$key] ? $key . ':' . $value . $suffix . ';' : '';
+            $css .= $option[$key] ? '    '.$key . ':' . $value . $suffix . ";\n" : '';
         }
         return $css;
     }

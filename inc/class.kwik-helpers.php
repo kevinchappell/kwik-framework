@@ -69,11 +69,11 @@ class KwikHelpers
     public static function default_fonts()
     {
         $font_weights = array(
-            (object) array('family' => '“Helvetica Neue”'),
-            (object) array('family' => '“Baskerville Old Face”'),
-            (object) array('family' => '“Trebuchet MS”'),
+            (object) array('family' => '"Helvetica Neue"'),
+            (object) array('family' => '"Baskerville Old Face"'),
+            (object) array('family' => '"Trebuchet MS"'),
             (object) array('family' => '"Century Gothic"'),
-            (object) array('family' => '“Courier Bold"'),
+            (object) array('family' => '"Courier Bold"'),
         );
         return $font_weights;
     }
@@ -96,4 +96,28 @@ class KwikHelpers
         );
         return $order;
     }
+
+    public static function css_map($val, $key)
+    {
+
+        switch ($key) {
+        case 'Underlined':
+            $key = 'text-decoration';
+            break;
+
+        case 'Bold':
+            $key = 'font-weight';
+            break;
+
+        case 'Italic':
+            $key = 'font-style';
+            break;
+
+        default:
+            $key = $key;
+            break;
+        }
+    }
+
+
 }
