@@ -143,7 +143,7 @@ class KwikValidate extends KwikInputs
 
     public function img($key, $val, $label = null, $attrs = null)
     {
-        if (!is_numeric($val['line-height']) && !empty($val)) {
+        if (!is_numeric($val) && !empty($val)) {
             add_settings_error($key, 'img', __('Invalid Selection', 'kwik'), 'kf_error');
         }
         return $val;
