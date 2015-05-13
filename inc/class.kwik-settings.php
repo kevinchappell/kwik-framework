@@ -80,8 +80,8 @@ class KwikSettings {
 	        $callback = $val['type'];
 	    }
 	    return array(
-	        'type'      => $val['type'],
-	        'title'     => $val['title'],
+	        'type'      => isset( $val['type'] ) ? $val['type'] : '',
+	        'title'     => isset( $val['title'] ) ? $val['title'] : '',
 	        'args'      => $args,
 	        'callback'  => $callback
 	        );

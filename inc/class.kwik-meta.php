@@ -28,31 +28,33 @@ Class KwikMeta {
 
 	private function merge_vals( $fields, $field_vals ) {
 		foreach ( $fields as $key => $value ) {
-			$fields[$key]['value'] = isset( $field_vals[$key] ) ? $field_vals[$key] : $fields[$key]['value'];
+			$default_val = isset( $fields[ $key ]['value'] ) ? $fields[ $key ]['value'] : '';
+			$fields[ $key ]['value'] = isset( $field_vals[ $key ] ) ? $field_vals[ $key ] : $default_val;
 		}
 		return $fields;
 	}
 
 	public function flattened_field_array($fields, &$fields_array = array()) {
 		foreach ( $fields as $key => $value ) {
-			if ( isset( $fields[$key]['fields'] ) ) {
-				$this->flattened_field_array( $fields[$key]['fields'], $fields_array );
+			if ( isset( $fields[ $key ]['fields'] ) ) {
+				$this->flattened_field_array( $fields[ $key ]['fields'], $fields_array );
 			} else {
-				$fields_array[$key] = $fields[$key];
+				$fields_array[ $key ] = $fields[ $key ];
 			}
 		}
 		return $fields_array;
 	}
 
-	public function generate_fields($fields, $field_group) {
+	public function generate_fields( $fields, $field_group ) {
 		$inputs = new KwikInputs();
 		$output = $inputs->nonce( $field_group . '_nonce', wp_create_nonce( $field_group ) );
 
 		foreach ( $fields as $key => $value ) {
 			$name = $field_group . '[' . $key . ']';
-			$field_options = isset($fields[$key]['options']) ? $fields[$key]['options'] : null;
-			$field_attrs = isset($fields[$key]['attrs']) ? $fields[$key]['attrs'] : null;
-			$output .= $inputs->$fields[$key]['type']($name, $fields[$key]['value'], $fields[$key]['title'], $field_attrs, $field_options);
+			$field_options = isset($fields[ $key ]['options']) ? $fields[ $key ]['options'] : null;
+			$field_attrs = isset($fields[ $key ]['attrs']) ? $fields[ $key ]['attrs'] : null;
+			$field_title = isset($fields[ $key ]['title']) ? $fields[ $key ]['title'] : null;
+			$output .= $inputs->$fields[ $key ]['type']($name, $fields[ $key ]['value'], $field_title, $field_attrs, $field_options);
 		}
 
 		return $output;
@@ -65,16 +67,17 @@ Class KwikMeta {
 	 */
 	public function save_meta($the_post, $field_group) {
 		$post = filter_input_array( INPUT_POST, FILTER_SANITIZE_STRING );
-		if ( ! isset( $post[$field_group] ) ) {
+		if ( isset( $post[ $field_group . '_nonce'] ) && ! wp_verify_nonce($post[ $field_group . '_nonce'], $field_group)) {
+			return $the_post->ID;
+		}
+		if ( ! isset( $post[ $field_group] ) ) {
 			return $the_post;
 		}
 		$field_vals = array();
 		$fields = get_transient( $field_group );
 		foreach ( $fields as $key => $value ) {
-			$field_vals[$key] = isset($post[$field_group][$key]) ? $post[$field_group][$key] : $fields[$key]['value'];
-		}
-		if (!wp_verify_nonce($post[$field_group . '_nonce'], $field_group)) {
-			return $the_post->ID;
+			$default_val = isset( $fields[ $key ]['value'] ) ? $fields[ $key ]['value'] : '';
+			$field_vals[ $key ] = isset( $post[ $field_group ][ $key ] ) ? $post[ $field_group ][ $key ] : $default_val;
 		}
 
 		$this->update_meta($the_post->ID, $field_group, $field_vals);

@@ -77,6 +77,19 @@
   width: 49%;
   float: left;
   margin-right: 2%;
+  position:relative;
+}
+.kf_link_wrap .kf_text_wrap input[type="text"]{
+  width:100%;
+  padding-right: 24px;
+}
+.kf_link_wrap .kf_text_wrap:before {
+  content: "\f103";
+  font: normal 15px/1 'dashicons';
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  padding: 2px 0 2px 4px;
 }
 .kf_link_wrap .kf_select_wrap {
   width: 49%;
@@ -290,4 +303,11 @@
 .clear:before, .clear:after, .wrapper:before, .wrapper:after, .format-status .entry-header:before, .format-status .entry-header:after {
   display: table;
   content: "";
+}
+
+
+.kf_prev_img {
+	float:left;
+	max-width:28px;
+	height:auto;
 }
