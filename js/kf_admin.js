@@ -111,6 +111,9 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	kfAutocomplete();
+	if (typeof $.fn.autocomplete !== 'undefined'){
+		kfAutocomplete();
+	}
+
 
 });
