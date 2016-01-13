@@ -21,6 +21,10 @@ if (!class_exists('KwikUtils')) {
         include $inc_filename;
     }
 
+    foreach (glob(KF_PATH . "/components/*.php") as $component_filename) {
+        include $component_filename;
+    }
+
     // Load Widgets
     foreach (glob(KF_PATH . "/widgets/*.php") as $widget_filename) {
         include $widget_filename;
