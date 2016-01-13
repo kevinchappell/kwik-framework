@@ -5,7 +5,7 @@
  * Plugin URI: http://kevinchappell.github.io/kwik-framework/
  * Description: Reusable utilities and inputs to aid in WordPress theme and plugin creation
  * Author: Kevin Chappell
- * Version: .5.6
+ * Version: 0.5.7
  * Author URI: http://kevin-chappell.com
  */
 

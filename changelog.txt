@@ -1,5 +1,7 @@
 == Changelog ==
 
+= .5.7 =
+* Add output for Analytics setting, update widget constructor
 = .5.6 =
 * KwikSettings bug fix and add changelog
 = .5.5 =

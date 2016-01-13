@@ -1,10 +1,11 @@
 === Kwik Framework ===
 
+Version: 0.5.7
 Contributors:  kevinchappell
 Tags: framework, options, settings, widgets, common
 Requires at least: 3.8
-Tested up to: 4.1
-Stable tag: 4.1
+Tested up to: 4.4
+Stable tag: 4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
