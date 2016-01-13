@@ -8,7 +8,7 @@ namespace Kwik\Google;
  */
 function analytics() {
 	$kf_options = get_option( KF_FUNC );
-	$tracking_id = $kf_options['analytics_id'];
+	$tracking_id = esc_js( $kf_options['analytics_id'] );
 	if ( empty( $tracking_id ) ) {
 		return;
 	}
