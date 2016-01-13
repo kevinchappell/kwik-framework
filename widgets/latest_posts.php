@@ -39,7 +39,7 @@ class Kwik_Latest_Posts_Widget extends WP_Widget {
 		$control_ops = array( 'width' => 150, 'height' => 350, 'id_base' => 'latest-posts-widget' );
 
 		/* Create the widget. */
-		$this->WP_Widget( 'latest-posts-widget', esc_html__( 'Kwik Latest Posts', 'kwik' ), $widget_ops, $control_ops );
+		parent::__construct( 'latest-posts-widget', esc_html__( 'Kwik Latest Posts', 'kwik' ), $widget_ops, $control_ops );
 	}
 
 	/**
