@@ -13,7 +13,7 @@ class KwikInputs {
 	 * @param  [Object] $attrs Object with properties for field attributes
 	 * @return [String] markup for desired input field
 	 */
-	public function input( $attrs ){
+	public function input( $attrs ) {
 		$output = '';
 		$label = '';
 		$classes = array(
@@ -33,7 +33,7 @@ class KwikInputs {
 			}
 			$label = $this->markup( 'label', $attrs['label'], $label_attrs );
 		}
-		unset( $attrs['label']);
+		unset( $attrs['label'] );
 		$output .= '<input ' . $this->attrs( $attrs ) . ' />';
 
 		if ( isset( $attrs['value'] ) && ( isset( $attrs['class'] ) && 'cpicker' === $attrs['class'] ) ) {
@@ -43,7 +43,7 @@ class KwikInputs {
 		if ( 'hidden' !== $attrs['type'] && ! is_null( $attrs['type'] ) ) {
 			$classes[] = KF_PREFIX . $attrs['type'] . '_wrap';
 			$output = $attrs['type'] !== 'checkbox' ? $label . $output : $output . $label;
-			$output = $this->markup( 'div', $output, array( 'class' => $classes ));
+			$output = $this->markup( 'div', $output, array( 'class' => $classes ) );
 		}
 		return $output;
 	}
@@ -56,33 +56,37 @@ class KwikInputs {
 	 * @param  [Array]   $args      Holds the Array of inputs to be generated
 	 * @return [String]  Genearated markup of inputs sharing a single name
 	 */
-	public function multi( $name, $value, $label, $attrs = null, $options = null){
+	public function multi( $name, $value, $label, $attrs = null, $options = null ) {
 		$output = '';
-		if (!isset( $attrs['fields'])) {
+		if ( ! isset( $attrs['fields'] ) ) {
 			return;
 		}
 		$fields = $attrs['fields'];
-		unset( $attrs['fields']);
-		foreach ( $fields as $k => $v) {
-			$type = isset( $v['type']) ? $v['type'] : 'multi';
-			$val = isset( $value[$k]) ? $value[$k] : null;
-			$attrs = isset( $v['attrs']) ? $v['attrs'] : array();
-			$options = isset( $v['options']) ? $v['options'] : null;
-			$title = isset( $v['title']) ? $v['title'] : null;
+		unset( $attrs['fields'] );
+		foreach ( $fields as $k => $v ) {
+			$type = isset( $v['type'] ) ? $v['type'] : 'multi';
+			$val = isset( $value[ $k ] ) ? $value[ $k ] : null;
+			$field_attrs = isset( $v['attrs'] ) ? $v['attrs'] : array();
+			$options = isset( $v['options'] ) ? $v['options'] : null;
+			$title = isset( $v['title'] ) ? $v['title'] : null;
 
-			if (isset( $fields[$k]['fields'])) {
-				$attrs['fields'] = $fields[$k]['fields'];
+			if ( isset( $fields[ $k ]['fields'] ) ) {
+				$field_attrs['fields'] = $fields[ $k ]['fields'];
 			}
 			$output .= $this->$type(
 				$name . '[' . $k . ']', // name
 				$val, // value
 				$title, // label
-				$attrs, // array or attributes
+				$field_attrs, // array or attributes
 				$options // array of `<options>` if this is a `<select>`
 			);
 		}
 
-		return self::markup( 'div', $output, array( 'class' => 'kf_field kf_multi_field' ));
+		if ( ! isset( $attrs['class'] ) ) {
+			$attrs['class'] = 'kf_field kf_multi_field';
+		}
+
+		return self::markup( 'div', $output, $attrs );
 	}
 
 	/**
@@ -93,24 +97,24 @@ class KwikInputs {
 	 * @param  [array]  $attrs   additional attributes. Can customize size of image.
 	 * @return [string] returns markup for image input field
 	 */
-	public function img( $name, $value, $label, $attrs = null){
-		if (!$attrs ) {
+	public function img( $name, $value, $label, $attrs = null ) {
+		if ( ! $attrs ) {
 			$attrs = array();
 		}
 		wp_enqueue_media();
 		$output = '';
 
-		$img_attrs = array( 'class' => array( 'img_prev' ));
-		if ( $value && !empty( $value )) {
-			if (isset( $attrs['img_size'])) {
+		$img_attrs = array( 'class' => array( 'img_prev' ) );
+		if ( $value && ! empty( $value ) ) {
+			if ( isset( $attrs['img_size'] ) ) {
 				$img_size = $attrs['img_size'];
-				unset( $attrs['img_size']);
+				unset( $attrs['img_size'] );
 			} else {
 				$img_size = 'thumbnail';
 			}
 			$thumb = wp_get_attachment_image_src( $value, $img_size );
 			$thumb = $thumb['0'];
-			$remove_img = $this->markup( 'span', null, array( 'title' => __( 'Remove Image', 'kwik' ), 'class' => 'clear_img tooltip' ));
+			$remove_img = $this->markup( 'span', null, array( 'title' => __( 'Remove Image', 'kwik' ), 'class' => 'clear_img tooltip' ) );
 			$img_attrs['title'] = get_the_title( $value );
 			$img_attrs['style'] = "background-image:url({$thumb})";
 		} else {
@@ -128,25 +132,25 @@ class KwikInputs {
 		$classes = array(
 			KF_PREFIX . 'field',
 			KF_PREFIX . 'img_wrap',
-			$this->make_id( $attrs['name']),
+			$this->make_id( $attrs['name'] ),
 		);
 
 		$button_text = $attrs['button-text'];
-		unset( $attrs['button-text']);
+		unset( $attrs['button-text'] );
 		$output .= $this->input( $attrs );
 		if ( $label ) {
 			$output .= $this->markup( 'label', esc_attr( $label ) );
 		}
 		$output .= $this->markup( 'div', null, $img_attrs );
-		if (isset( $thumb)) {
+		if ( isset( $thumb ) ) {
 			$img_ttl = get_the_title( $value );
-			$img_ttl = $img_ttl . $this->markup( 'span', null, array( 'class' => 'clear_img', 'tooltip' => __( 'Remove Image', 'kwik' )));
+			$img_ttl = $img_ttl . $this->markup( 'span', null, array( 'class' => 'clear_img', 'tooltip' => __( 'Remove Image', 'kwik' ) ) );
 		} else {
 			$img_ttl = null;
 		}
-		$output .= $this->markup( 'span', $img_ttl, array( 'class' => 'img_title' ));
-		$output .= $this->markup( 'button', $button_text, array( 'class' => 'upload_img', 'type' => 'button' ));
-		$output = $this->markup( 'div', $output, array( 'class' => $classes ));
+		$output .= $this->markup( 'span', $img_ttl, array( 'class' => 'img_title' ) );
+		$output .= $this->markup( 'button', $button_text, array( 'class' => 'upload_img', 'type' => 'button' ) );
+		$output = $this->markup( 'div', $output, array( 'class' => $classes ) );
 		return $output;
 	}
 
@@ -158,25 +162,25 @@ class KwikInputs {
 	 * @param  [string] $attrs     array of attributes this element should have
 	 * @return [type]        [description]
 	 */
-	public function element( $type, $content = null, $label = null, $attrs = null){
+	public function element( $type, $content = null, $label = null, $attrs = null ) {
 		$output = '';
-		preg_match_all("/\[([^\]]*)\]/", $type, $matches );
-		$index = count( $matches[1] )-1;
-		$type = $matches[1][$index];
-		if (is_array( $attrs )){
-			$attrs = array_map(function( $elem ){ return esc_attr( $elem ); }, $attrs );
+		preg_match_all( '/\[([^\]]*)\]/', $type, $matches );
+		$index = count( $matches[1] ) -1;
+		$type = $matches[1][ $index ];
+		if ( is_array( $attrs ) ) {
+			$attrs = array_map( function( $elem ) { return esc_attr( $elem ); }, $attrs );
 		}
 		$defaultAttrs = array(
 			'class' => KF_PREFIX . 'element ',
 		);
 
-		$attrs = !is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
+		$attrs = ! is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
 		$output .= $this->markup( esc_attr( $type ), esc_html( $content ), $attrs );
 
 		return $output;
 	}
 
-	public function autocomplete( $name, $val, $label = null, $attrs = null) {
+	public function autocomplete( $name, $val, $label = null, $attrs = null ) {
 		$output = '';
 		$defaultAttrs = array(
 			'type' => 'text',
@@ -188,7 +192,7 @@ class KwikInputs {
 		);
 
 		$attrs = ! is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
-		if ( isset( $val['id'] ) && ! empty( $val['id'] ) ){
+		if ( isset( $val['id'] ) && ! empty( $val['id'] ) ) {
 			$attrs['prev_img'] = get_post_thumbnail_id( $val['id'] );
 		}
 		$output .= $this->input( $attrs );
@@ -204,7 +208,7 @@ class KwikInputs {
 		return $output;
 	}
 
-	public function text( $name, $val, $label = null, $attrs = null){
+	public function text( $name, $val, $label = null, $attrs = null ) {
 		$defaultAttrs = array(
 			'type' => 'text',
 			'name' => $name,
@@ -214,21 +218,21 @@ class KwikInputs {
 			'label' => esc_attr( $label ),
 		);
 
-		$attrs = !is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
+		$attrs = ! is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
 
 		return $this->input( $attrs );
 	}
 
-	public function link( $name, $val, $label = null, $attrs = null){
+	public function link( $name, $val, $label = null, $attrs = null ) {
 		$output = '';
 
 		// @todo clean this up.
-		$val['url'] = isset( $val['url']) ? $val['url'] : null;
-		$val['target'] = isset( $val['target']) ? $val['target'] : null;
+		$val['url'] = isset( $val['url'] ) ? $val['url'] : null;
+		$val['target'] = isset( $val['target'] ) ? $val['target'] : null;
 
 		$defaultAttrs = array(
 			'type' => 'text',
-			'name' => $name . "[url]",
+			'name' => $name . '[url]',
 			'class' => KF_PREFIX . 'link ' . $this->make_id( $name ),
 			'value' => $val['url'],
 			// 'id' => $this->make_id( $name )
@@ -243,13 +247,13 @@ class KwikInputs {
 		}
 
 		$output .= $this->input( $attrs );
-		$output .= $this->select( $name . "[target]", $val['target'], __('Target:','kwik'), null, KwikHelpers::target() );
+		$output .= $this->select( $name . '[target]', $val['target'], __( 'Target:','kwik' ), null, KwikHelpers::target() );
 		$output = $this->markup( 'div', $output, array( 'class' => KF_PREFIX . 'link_wrap' ) );
 
 		return $output;
 	}
 
-	public function nonce( $name, $val){
+	public function nonce( $name, $val ) {
 		$attrs = array(
 			'type' => 'hidden',
 			'name' => $name,
@@ -258,7 +262,7 @@ class KwikInputs {
 		return $this->input( $attrs );
 	}
 
-	public function spinner( $name, $val, $label = null, $attrs = null){
+	public function spinner( $name, $val, $label = null, $attrs = null ) {
 		$output = '';
 		$defaultAttrs = array(
 			'type' => 'number',
@@ -267,17 +271,17 @@ class KwikInputs {
 			'max' => '50',
 			'min' => '1',
 			'value' => $val,
-			'label' => esc_attr( $label),
+			'label' => esc_attr( $label ),
 		);
 
-		$attrs = !is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
+		$attrs = ! is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
 
 		$output .= $this->input( $attrs );
 
 		return $output;
 	}
 
-	public function color( $name, $val, $label = null){
+	public function color( $name, $val, $label = null ) {
 		$output = '';
 		wp_enqueue_script( 'cpicker', KF_URL . '/js/cpicker.min.js' );
 
@@ -287,19 +291,19 @@ class KwikInputs {
 			'class' => 'cpicker',
 			'value' => $val,
 			'id' => $this->make_id( $name ),
-			'label' => esc_attr( $label),
+			'label' => esc_attr( $label ),
 		);
 		$output .= $this->input( $attrs );
 
-		$output = $this->markup( 'div', $output, array( 'class' => array(KF_PREFIX . 'field_color', KF_PREFIX . 'field' )));
+		$output = $this->markup( 'div', $output, array( 'class' => array( KF_PREFIX . 'field_color', KF_PREFIX . 'field' ) ) );
 
 		return $output;
 	}
 
-	public function toggle( $name, $val, $label = null, $attrs = null){
+	public function toggle( $name, $val, $label = null, $attrs = null ) {
 		$output = '';
 
-		wp_enqueue_script( 'kcToggle-js', 'http://kevinchappell.github.io/kcToggle/kcToggle.js', array( 'jquery' ));
+		wp_enqueue_script( 'kcToggle-js', 'http://kevinchappell.github.io/kcToggle/kcToggle.js', array( 'jquery' ) );
 		wp_enqueue_style( 'kcToggle-css', 'http://kevinchappell.github.io/kcToggle/kcToggle.css', false );
 
 		$defaultAttrs = array(
@@ -308,23 +312,23 @@ class KwikInputs {
 			'class' => 'kcToggle',
 			'value' => $val || true,
 			'id' => $this->make_id( $name ),
-			'label' => esc_attr( $label),
+			'label' => esc_attr( $label ),
 			'kcToggle' => null,
 		);
 
-		if (!is_null( $val) && $val !== '' && (isset( $attrs['checked']) && $attrs['checked'] === true ) || $val === '1' ) {
-			$defaultAttrs["checked"] = "checked";
+		if ( ! is_null( $val ) && $val !== '' && (isset( $attrs['checked'] ) && $attrs['checked'] === true ) || $val === '1' ) {
+			$defaultAttrs['checked'] = 'checked';
 		}
 
-		$attrs = !is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
+		$attrs = ! is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
 
 		$output .= $this->input( $attrs );
-		$output = $this->markup( 'div', $output, array( 'class' => 'kf_field_toggle' ));
+		$output = $this->markup( 'div', $output, array( 'class' => 'kf_field_toggle' ) );
 
 		return $output;
 	}
 
-	public function cb( $name, $val, $label = null, $attrs = null){
+	public function cb( $name, $val, $label = null, $attrs = null ) {
 		$output = '';
 
 		$defaultAttrs = array(
@@ -332,77 +336,77 @@ class KwikInputs {
 			'name' => $name,
 			'value' => $val,
 			// 'id' => $this->make_id( $name ),
-			'label' => esc_attr( $label),
+			'label' => esc_attr( $label ),
 		);
 
-		if (!is_null( $val) && $val !== '' && (isset( $attrs['checked']) && $attrs['checked'] === true ) || $val === '1' ) {
+		if ( ! is_null( $val ) && $val !== '' && (isset( $attrs['checked'] ) && $attrs['checked'] === true ) || $val === '1' ) {
 			$defaultAttrs['checked'] = null;
 		} else {
-			unset( $attrs['checked']);
+			unset( $attrs['checked'] );
 		}
 
-		$attrs = !is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
+		$attrs = ! is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
 
 		$output .= $this->input( $attrs );
 
 		return $output;
 	}
 
-	public function cb_group( $name, $val, $label = null, $attrs = null, $options ){
+	public function cb_group( $name, $val, $label = null, $attrs = null, $options ) {
 		$output = '';
 		$defaultAttrs = array(
 			'class' => KF_PREFIX . 'checkbox-group ' . $this->make_id( $name ),
 			'id' => $this->make_id( $name ),
 		);
 
-		$attrs = !is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
+		$attrs = ! is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
 
-		if ( $label) {
-			$output .= $this->markup( 'label', esc_attr( $label), array( 'for' => $attrs['id']));
+		if ( $label ) {
+			$output .= $this->markup( 'label', esc_attr( $label ), array( 'for' => $attrs['id'] ) );
 		}
 
-		foreach ( $options as $k => $v) {
-			$attrs['checked'] = isset( $val[$k]) ? true : false;
+		foreach ( $options as $k => $v ) {
+			$attrs['checked'] = isset( $val[ $k ] ) ? true : false;
 			$attrs['id'] = $defaultAttrs['id'] . '-' . $v;
 			$output .= $this->cb( $name . '[' . $k . ']', $v, $k, $attrs );
 		}
 
-		$output = $this->markup( 'div', $output, array( 'class' => KF_PREFIX . 'field ' . KF_PREFIX . 'checkbox-group-wrap' ));
+		$output = $this->markup( 'div', $output, array( 'class' => KF_PREFIX . 'field ' . KF_PREFIX . 'checkbox-group-wrap' ) );
 
 		return $output;
 	}
 
-	public function select( $name, $val, $label = null, $attrs = null, $optionsArray){
+	public function select( $name, $val, $label = null, $attrs = null, $optionsArray ) {
 		$defaultAttrs = array(
 			'name' => $name,
 			'class' => KF_PREFIX . 'select ' . $this->make_id( $name ),
 			'id' => $this->make_id( $name ),
 		);
 
-		$attrs = !is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
+		$attrs = ! is_null( $attrs ) ? array_merge( $defaultAttrs, $attrs ) : $defaultAttrs;
 
 		$output = '';
 
-		if ( $label) {
-			$output .= $this->markup( 'label', esc_attr( $label), array( 'for' => $attrs['id']));
+		if ( $label ) {
+			$output .= $this->markup( 'label', esc_attr( $label ), array( 'for' => $attrs['id'] ) );
 		}
 		$options = '';
 
-		foreach ( $optionsArray as $k => $v) {
-			$oAttrs = array( 'value' => $k);
-			if ( $val === $k) {
+		foreach ( $optionsArray as $k => $v ) {
+			$oAttrs = array( 'value' => $k );
+			if ( $val === $k ) {
 				$oAttrs['selected'] = 'selected';
 			}
 			$options .= $this->markup( 'option', $v, $oAttrs );
 		}
 
 		$output .= $this->markup( 'select', $options, $attrs );
-		$output = $this->markup( 'div', $output, array( 'class' => KF_PREFIX . 'field ' . KF_PREFIX . 'select_wrap' ));
+		$output = $this->markup( 'div', $output, array( 'class' => KF_PREFIX . 'field ' . KF_PREFIX . 'select_wrap' ) );
 
 		return $output;
 	}
 
-	public function font( $name, $val, $label = null){
+	public function font( $name, $val, $label = null ) {
 		$output = '';
 		$attrs = array(
 			'fields' => array(
@@ -435,8 +439,8 @@ class KwikInputs {
 			),
 		);
 
-		if ( $label) {
-			$output .= $this->markup( 'label', esc_attr( $label));
+		if ( $label ) {
+			$output .= $this->markup( 'label', esc_attr( $label ) );
 		}
 
 		$output .= $this->multi( $name, $val, $label, $attrs );
@@ -444,13 +448,13 @@ class KwikInputs {
 		return $output;
 	}
 
-	public function font_family( $name, $val, $label = null){
+	public function font_family( $name, $val, $label = null ) {
 		$utils = new KwikUtils();
 		$fonts = $utils->get_google_fonts();
 		$options = array();
-		foreach ( $fonts as $font) {
-			$key = str_replace( ' ', '+', $font->family);
-			$options[$key] = $font->family;
+		foreach ( $fonts as $font ) {
+			$key = str_replace( ' ', '+', $font->family );
+			$options[ $key ] = $font->family;
 		}
 		return $this->select( $name, $val, $label, null, $options );
 	}
@@ -460,11 +464,11 @@ class KwikInputs {
 	 * @param  [Array]  $attrs     Array of attributes
 	 * @return [String] attributes as strings ie. `name="the_name" class="the_class"`
 	 */
-	private static function attrs( $attrs ){
+	private static function attrs( $attrs ) {
 		$output = '';
 		if ( is_array( $attrs ) ) {
 			if ( isset( $attrs['label'] ) ) {
-				unset( $attrs['label']);
+				unset( $attrs['label'] );
 			}
 			foreach ( $attrs as $key => $val ) {
 				if ( is_array( $val ) ) {
@@ -482,12 +486,12 @@ class KwikInputs {
 		return $output;
 	}
 
-	private function make_id( $string){
-		$string = preg_replace( '/[^A-Za-z0-9-]+/', '-', $string);
-		return trim(preg_replace( '/-+/', '-', $string), '-' );
+	private function make_id( $string ) {
+		$string = preg_replace( '/[^A-Za-z0-9-]+/', '-', $string );
+		return trim( preg_replace( '/-+/', '-', $string ), '-' );
 	}
 
-	public static function markup( $tag, $content = null, $attrs = null){
+	public static function markup( $tag, $content = null, $attrs = null ) {
 		$no_close_tags = array( 'img', 'hr', 'br', 'link' );
 		$no_close = in_array( $tag, $no_close_tags );
 

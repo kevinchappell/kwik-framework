@@ -113,4 +113,3 @@ Displays a list of posts. Features:
 * Filter by category and tag
 * date and read more formatting
 * numerous options
-

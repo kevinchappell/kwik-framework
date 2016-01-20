@@ -51,58 +51,72 @@ jQuery(document).ready(function($) {
 	});
 
 
-	utils.getAjaxSource = function(autocomplete, request, response) {
+	utils.autocompleteSource = function(autocomplete, request, response) {
 		var element = autocomplete.element,
-				searchTerm = request.term;
+			searchTerm = request.term;
+
 
 		var formData = {
-					action: 'kf_query_cpt',
-					post_type: element.data('link-to'),
-					term: searchTerm
-				};
+			action: 'kf_query_posts',
+			post_type: element.data('link-to'),
+			term: searchTerm
+		};
+
+		// check if user has a custom post to link to
+		if (element.data('link-to')) {
+			formData.post_type = element.data('link-to');
+		}
 
 		// check if user has a custom action
 		if (element.data('ajax-action')) {
 			formData.action = element.data('ajax-action');
 		}
 
+		// check if user has a custom action
+		if (element.data('autocomplete-properties')) {
+			formData.props = element.data('autocomplete-properties');
+		}
+
 		$.post(window.ajaxurl, formData, function(data) {
-			 response(data);
+			response(data);
 		}, 'json');
 	};
 
-		// create: function() {
-		// 	$(this).data('ui-autocomplete')._renderItem = function(ul, item) {
-		// 		ul.addClass('magazine-search').toggleClass('no-results', !item.remoteID);
-		// 		return $('<li>')
-		// 			.data('ui-autocomplete-item', item)
-		// 			.append($('<a>').append(utils.searchResult(item)))
-		// 			.appendTo(ul);
-		// 	};
-		// },
+	// create: function() {
+	// 	$(this).data('ui-autocomplete')._renderItem = function(ul, item) {
+	// 		ul.addClass('magazine-search').toggleClass('no-results', !item.remoteID);
+	// 		return $('<li>')
+	// 			.data('ui-autocomplete-item', item)
+	// 			.append($('<a>').append(utils.searchResult(item)))
+	// 			.appendTo(ul);
+	// 	};
+	// },
 	function kfAutocomplete() {
-		$('.kf_autocomplete').autocomplete({
+		var $kfAutocomplete = $('.kf_autocomplete');
+
+		$kfAutocomplete.autocomplete({
 			delay: 333,
-			source: function (request, response) {
-				return utils.getAjaxSource(this, request, response);
+			source: function(request, response) {
+				console.log(request);
+				return utils.autocompleteSource(this, request, response);
 			},
-			change: function( event, ui ) {
+			// change: function(event, ui) {
+			// 	var $cptInputID = $(this).parent().siblings('input.cpt_id'),
+			// 		$cptInputLabel = $(this),
+			// 		$cptImage = $(this).siblings('.kf_prev_img');
+			// 	if ($cptInputLabel.val() === '') {
+			// 		$cptInputID.val('');
+			// 		$cptInputLabel.val('');
+			// 		$cptImage.remove();
+			// 	}
+			// },
+			select: function(event, ui) {
 				var $cptInputID = $(this).parent().siblings('input.cpt_id'),
-						$cptInputLabel = $(this),
-						$cptImage = $(this).siblings('.kf_prev_img');
-						if ($cptInputLabel.val() === '') {
-							$cptInputID.val('');
-							$cptInputLabel.val('');
-							$cptImage.remove();
-						}
-			},
-			select: function( event, ui ) {
-				var $cptInputID = $(this).parent().siblings('input.cpt_id'),
-						$cptInputLabel = $(this),
-						$cptImage = $(this).siblings('.kf_prev_img'),
-						img = ui.item.image;
-						$cptInputID.val(ui.item.id);
-				if (img){
+					$cptInputLabel = $(this),
+					$cptImage = $(this).siblings('.kf_prev_img'),
+					img = ui.item.image;
+				$cptInputID.val(ui.item.id);
+				if (img) {
 					$cptImage.remove();
 					$cptInputLabel.before(img);
 				}
@@ -111,9 +125,66 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	if (typeof $.fn.autocomplete !== 'undefined'){
+	if (typeof $.fn.autocomplete !== 'undefined') {
 		kfAutocomplete();
 	}
 
+	/**
+	 * Admin ajax helper for saving posts. Useful for CPT meta
+	 * @param  {object} post
+	 * @param  {object} meta
+	 * @return {void}
+	 */
+	utils.kfSavePost = function(post, meta, nonce) {
+
+		var formData = {
+			action: 'kf_save_post',
+			post: post,
+			meta: meta,
+			nonceKey: nonce.key,
+			nonceValue: nonce.value
+		};
+
+		return $.ajax({
+				url: window.ajaxurl,
+				type: 'POST',
+				dataType: 'json',
+				data: formData
+			})
+			.always(function(response) {
+				console.log(response);
+			});
+
+	};
+
+	/**
+	 * Admin ajax helper for saving posts. Useful for CPT meta
+	 * @param  {object} post
+	 * @param  {object} meta
+	 * @return {void}
+	 */
+	utils.kfSaveMeta = function(post_id, meta, nonce) {
+
+		var formData = {
+			action: 'kf_save_meta',
+			post_id: post_id,
+			meta: meta,
+			nonceKey: nonce.key,
+			nonceValue: nonce.value
+		};
+
+		return $.ajax({
+				url: window.ajaxurl,
+				type: 'POST',
+				dataType: 'json',
+				data: formData
+			})
+			.always(function(response) {
+				console.log(response);
+			});
+
+	};
+
+	window.kfUtils = utils;
 
 });
