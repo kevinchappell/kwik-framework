@@ -164,8 +164,8 @@ class KwikSettings {
 	        $th_tag = $inputs->markup('th', $setting_meta['title'], array('scope' => 'row'));
 	        $val = isset($field['args']['value']) ? $field['args']['value'] : '';
 	        $value = isset($settings[$setting_meta['id']]) ? $settings[$setting_meta['id']] : $val;
-
-	        $field = $inputs->$field['callback'](
+	        $inputType = $field['callback'];
+	        $fieldCallback = $inputs->$inputType(
 	            $page . '[' . $setting_meta['id'] . ']', // name
 	            $value, // value
 	            null, // label
@@ -173,7 +173,7 @@ class KwikSettings {
 	            $field['args']['options']// options
 	        );
 
-	        $td_tag = $inputs->markup('td', $field);
+	        $td_tag = $inputs->markup('td', $fieldCallback);
 	        $output .= $inputs->markup('tr', $th_tag . $td_tag, array('valign' => 'top', 'class' => array($setting_meta['id'], KF_PREFIX . 'option', 'type-' . $setting_meta['type'], $setting_meta['error_class'])));
 
 	    }

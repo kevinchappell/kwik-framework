@@ -28,10 +28,7 @@ function kwik_latest_posts() {
  */
 class Kwik_Latest_Posts_Widget extends WP_Widget {
 
-	/**
-	 * Widget setup.
-	 */
-	function Kwik_Latest_Posts_Widget() {
+	public function __construct() {
 		/* Widget settings. */
 		$widget_ops = array( 'classname' => 'widget_latest_posts', 'description' => esc_html__( 'The most recent posts with teaser text', 'kwik' ) );
 
@@ -40,7 +37,7 @@ class Kwik_Latest_Posts_Widget extends WP_Widget {
 
 		/* Create the widget. */
 		parent::__construct( 'latest-posts-widget', esc_html__( 'Kwik Latest Posts', 'kwik' ), $widget_ops, $control_ops );
-	}
+  }
 
 	/**
 	 * How to display the widget on the screen.

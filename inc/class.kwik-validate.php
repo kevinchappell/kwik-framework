@@ -186,9 +186,10 @@ class KwikValidate extends KwikInputs {
 			$attrs = isset($addr['attrs']) ? : null;
 			$options = isset($addr['options']) ? : null;
 			$label = isset($addr['title']) ? : null;
+			$addrType = $addr['type'];
 
 			//validate field by type
-			$setting[$key] = $this->$addr['type']($key, $val, $label, $attrs, $options);
+			$setting[$key] = $this->$addrType($key, $val, $label, $attrs, $options);
 			unset($addr);
 		}
 		return $setting;
